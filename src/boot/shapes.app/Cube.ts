@@ -1,0 +1,30 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+import * as joint from '@clientio/rappid'
+
+export class Cube extends joint.dia.Element {
+  defaults () {
+    return {
+      ...super.defaults,
+      type: 'Cube',
+      attrs: {
+        body: {
+          width: 'calc(w)',
+          height: 'calc(h)',
+          fill: 'transparent'
+        },
+        item: {
+          width: 'calc(w)',
+          height: 'calc(h)'
+        }
+      }
+    }
+  }
+
+  preinitialize () {
+    this.markup = joint.util.svg/* xml */`
+    <rect @selector="body"/>
+    <svg @selector="item" t="1690442986288" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2391" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><path d="M526.72 122.88a42.666667 42.666667 0 0 0-30.933333 0l-320 124.586667a42.666667 42.666667 0 0 0-27.306667 39.893333v448a42.666667 42.666667 0 0 0 27.093333 39.893333l321.28 126.08a41.386667 41.386667 0 0 0 31.146667 0l321.28-126.08a42.666667 42.666667 0 0 0 27.093333-39.893333v-448a42.666667 42.666667 0 0 0-27.306666-39.68zM512 162.773333l283.093333 109.866667L512 382.72l-283.733333-110.08zM490.666667 853.333333L192 735.786667V304l298.666667 117.546667z m343.466666-117.546666L533.333333 853.333333V421.546667l298.666667-117.546667z" p-id="2392"></path></svg>
+    `
+  }
+}

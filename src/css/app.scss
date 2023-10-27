@@ -1,0 +1,162 @@
+// app global css in SCSS form
+@import "~@clientio/rappid/rappid.css";
+
+#paper-container {
+  .selection-wrapper[data-selection-length="1"] {
+    display: block;
+
+    ~ .selection-box {
+      display: none;
+    }
+  }
+}
+
+.joint-selection.joint-theme-default .clone {
+  background-image: url('src/assets/plus-circle-outline.png');
+}
+
+.joint-selection.joint-theme-default .group {
+  background-image: url('src/assets/group.png');
+}
+/*  Stencil  */
+.joint-stencil h3,
+.joint-inspector h3 {
+  line-height: normal;
+}
+
+.joint-stencil .joint-element.joint-type-uml rect,
+.joint-stencil .joint-element.joint-type-uml path {
+  stroke: #4a4d6e;
+}
+
+#paper-container input {
+  border: 1px solid
+}
+
+#paper-container select {
+  border: 1px solid
+}
+
+#paper-container button::after, #paper-container label::after, #paper-container th::after, #paper-container td::after {
+  content: attr(data-content);
+}
+
+#paper-container table, th, td {
+  border:1px solid black;
+  text-align: center;
+}
+
+#paper-container select option::before {
+  content: attr(value);
+}
+
+#paper-container .joint-cells-layer {
+  .available-magnet {
+    stroke-width: 2;
+    stroke: blue;
+  }
+}
+
+.border-left {
+  border-left: 1px solid lightgray;
+}
+.joint-inspector.joint-theme-default {
+  border: none;
+}
+
+button.joint-widget.joint-theme-default {
+  position: relative;
+  height: 32px;
+  min-width: 32px;
+  color: #6b6c8a;
+  font-size: 11px;
+  background: 0 0;
+  border: 1px solid #6b6c8a;
+  border-radius: 18px;
+  outline: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 4px 11px;
+  margin: 0;
+}
+
+.joint-toolbar.joint-theme-default{
+  border: none;
+  height: 32px;
+  border-bottom: 1px solid lightgray;
+}
+
+.joint-widget.joint-theme-default[data-name=separator] {
+  line-height: 32px;
+  margin-right: 4px;
+  border-color: lightgray;
+}
+
+.joint-widget.joint-theme-default[data-name="undo"], .joint-widget.joint-theme-default[data-name="redo"], .joint-widget.joint-theme-default[data-name="zoom-to-fit"], 
+.joint-widget.joint-theme-default[data-name="zoom-out"],.joint-widget.joint-theme-default[data-name="zoom-in"], .joint-widget.joint-theme-default[data-name="copy"],
+.joint-widget.joint-theme-default[data-name="paste"]{
+  position: relative;
+  top: -1px;
+  padding: 0;
+  min-width: 24px;
+  min-height: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.joint-widget.joint-theme-default[data-name="undo"]:after, .joint-widget.joint-theme-default[data-name="redo"]:after, .joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after,
+.joint-widget.joint-theme-default[data-name="zoom-out"]:after, .joint-widget.joint-theme-default[data-name="zoom-in"]:after, .joint-widget.joint-theme-default[data-name="copy"]:after,
+.joint-widget.joint-theme-default[data-name="paste"]:after {
+  display: block;
+  content: ' ';
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.joint-widget.joint-theme-default[data-name="undo"]:after {
+  background: url(../assets/toolbar/undo-variant.svg);
+}
+
+.joint-widget.joint-theme-default[data-name="redo"]:after {
+  background: url(../assets/toolbar/redo-variant.svg);
+}
+
+.joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after {
+  background: url(../assets/toolbar/arrow-expand.svg);
+}
+
+.joint-widget.joint-theme-default[data-name="zoom-in"]:after {
+  background: url(../assets/toolbar/plus.svg);
+}
+
+.joint-widget.joint-theme-default[data-name="zoom-out"]:after {
+  background: url(../assets/toolbar/minus.svg);
+}
+
+.joint-widget.joint-theme-default[data-name="copy"]:after {
+  background: url(../assets/toolbar/content-copy.svg);
+  transform: scale(0.75);
+}
+
+.joint-widget.joint-theme-default[data-name="paste"]:after {
+  background: url(../assets/toolbar/content-paste.svg);
+  transform: scale(0.75);
+}
+
+.joint-inspector input[type="file"] {
+  height: auto;
+}
+.joint-inspector.joint-theme-default input[type='file'] {
+  height: auto;
+}
+
+.joint-selection>.selection-wrapper>.box {
+  display: none;
+}
+
+.joint-stencil, .joint-stencil.joint-theme-default {
+  border-left: none;
+}
+
