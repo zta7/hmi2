@@ -105,7 +105,7 @@ export const ButtonView = joint.dia.ElementView.extend({
     if (window.online) {
       const bindTarget = get(this, 'model.attributes.bind.onClick')
       this.paper.ws.send(`${window.prefix}.${bindTarget}`)
-      console.log('Button Click')
+      console.log(`${window.prefix}.${bindTarget}`)
     }
   },
 

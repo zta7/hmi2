@@ -6,7 +6,7 @@ export class Cylinder extends joint.dia.Element {
   defaults () {
     return {
       ...super.defaults,
-      type: 'Cylinder',
+      type: 'app.Cylinder',
       attrs: {
         body: {
           width: 'calc(w)',

@@ -136,7 +136,6 @@ export class LiquidTank extends joint.dia.Element {
           stroke: 'none',
           fillOpacity: 0.1
         }
-
       }
     }
   }
@@ -178,7 +177,10 @@ export const LiquidTankView = joint.dia.ElementView.extend({
   initFlag: [joint.dia.ElementView.Flags.RENDER, LEVEL_FLAG],
 
   confirmUpdate (...args) {
-    let flags = joint.dia.ElementView.prototype.confirmUpdate.call(this, ...args)
+    let flags = joint.dia.ElementView.prototype.confirmUpdate.call(
+      this,
+      ...args
+    )
     if (this.hasFlag(flags, LEVEL_FLAG)) {
       this.updateLevel()
       flags = this.removeFlag(flags, LEVEL_FLAG)

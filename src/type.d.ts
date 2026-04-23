@@ -9,6 +9,9 @@ declare global {
     table?:any
     column?:any
     screenName?:any
+    $?:any
+    go?:any,
+    _language?:any
   }
 }
 

@@ -5,7 +5,7 @@ export class HandValve extends joint.dia.Element {
   defaults () {
     return {
       ...super.defaults,
-      type: 'HandValve',
+      type: 'app.HandValve',
       size: {
         width: 50,
         height: 50

@@ -389,6 +389,7 @@ const inspectorMap = (type: string, bindOptions = {}) => {
           label: 'Color',
           group: 'style'
         },
+        value: inspectorInputs.text,
         fontSize: inspectorInputs.fontSize,
         bind: {
           onChange: {
@@ -401,6 +402,12 @@ const inspectorMap = (type: string, bindOptions = {}) => {
             options: outputEvents,
             group: 'bind'
           }
+          // 'attrs.value': {
+          //   type: 'select',
+          //   options: outputs,
+          //   label: 'Text',
+          //   group: 'bind'
+          // }
         }
       },
       groups: inspectorGroups
@@ -489,6 +496,12 @@ const inspectorMap = (type: string, bindOptions = {}) => {
             options: outputEvents,
             group: 'bind'
           }
+          // 'attrs.value': {
+          //   type: 'select',
+          //   options: outputs,
+          //   label: 'Text',
+          //   group: 'bind'
+          // }
         }
       },
       groups: inspectorGroups
@@ -695,7 +708,7 @@ const inspectorMap = (type: string, bindOptions = {}) => {
         ...CommonInputs,
         attrs: {
           bind: {
-            power: {
+            level: {
               type: 'select',
               options: inputs,
               label: 'Open',
@@ -738,9 +751,12 @@ const inspectorMap = (type: string, bindOptions = {}) => {
   }
 }
 
-export const getInspectorConfig = (collection: Backbone.Collection, bindOptions = {}): joint.ui.Inspector.Options | undefined => {
+export const getInspectorConfig = (
+  collection: Backbone.Collection,
+  bindOptions = {}
+): joint.ui.Inspector.Options | undefined => {
   if (collection.length === 1) {
-    const cell = collection.first()as any
+    const cell = collection.first() as any
     const type = cell.get('type')
     const config = inspectorMap(type, bindOptions)
     if (config) {
@@ -753,7 +769,9 @@ export const getInspectorConfig = (collection: Backbone.Collection, bindOptions 
           const t = options.type
           if (t === 'image-button') {
             const div = $('<div/>')
-            const file = $('<input type="file" accept="image/png, image/jpeg"/>')
+            const file = $(
+              '<input type="file" accept="image/png, image/jpeg"/>'
+            )
             const label = $('<label/>').text(options.label || path)
             div.data('result', value)
             div.append([label, file])

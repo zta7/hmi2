@@ -2,5 +2,6 @@
 // so you can safely delete all default props below
 
 export default {
-  Switch: 'Switch'
+  Switch: 'Switch',
+  a: 'A'
 }

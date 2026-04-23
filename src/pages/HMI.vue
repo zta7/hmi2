@@ -1,22 +1,39 @@
 <template>
   <q-page :style-fn="(offset,height) => ({height: `${height-offset}px`})">
-    <div class="fit row no-wrap no-scroll" @mouseenter="onMouseenter">
-      <div id="stencil-container" class="relative-position" style="width: 210px; flex: 0 0 auto"></div>
-      <div class="col-grow column no-wrap" style="width: 0px">
-        <div id="toolbar-container" class="overflow-hidden" style="flex: 0 0 auto"></div>
-        <div id="paper-container" class="scroll relative-position col-grow" style="height: 0px" tabindex="0"></div>
-      </div>
-      <div style="flex: 0 0 auto;width: 320px;" class="column no-wrap border-left">
-        <div id="inspector-container" class="relative-position col-grow" style="height: 0px"></div>
-      </div>
-    </div>
+    <q-splitter class="fit" @mouseenter="onMouseenter" v-model="splitterModel" :limits="[0, 100]">
+      <template v-slot:before>
+        <div id="stencil-container" class="relative-position fit" ></div>
+      </template>
+
+      <template v-slot:after>
+        <q-splitter class="fit" v-model="splitterModel2" :limits="[0, 100]">
+          <template v-slot:before>
+            <div class="fit col-grow column no-wrap" style="width: 0px">
+              <div id="toolbar-container" class="overflow-hidden" style="flex: 0 0 auto"></div>
+              <div id="paper-container" class="scroll relative-position col-grow" style="height: 0px" tabindex="0"></div>
+            </div>
+          </template>
+          <template v-slot:after>
+            <div class="fit column no-wrap">
+              <div id="inspector-container" class="relative-position col-grow fit" style="height: 0px">
+            </div>
+          </div>
+          </template>
+        </q-splitter>
+      </template>
+
+    </q-splitter>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Paper } from 'src/jointjs/hmi/Paper'
 import { set, get } from 'lodash'
+
+const splitterModel = ref(12) // start at 50%
+const splitterModel2 = ref(80) // start at 50%
+
 window.online = false
 
 const onMouseenter = () => {

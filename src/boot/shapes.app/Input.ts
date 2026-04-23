@@ -159,7 +159,7 @@ export const InputView = joint.dia.ElementView.extend({
     const bindTarget = get(this, 'model.attributes.bind.onChange')
     const bindEvent = get(this, 'model.attributes.bind.event')
     const value = input.value
-    let t = `${window.prefix}.${bindTarget} ${value}`
+    let t = `${window.prefix}.${bindTarget} ${value.replace(/ /g, '+%20+').replace(/,/g, '+%2C+')}`
     if (bindEvent) t += `,${window.prefix}.${bindEvent}`
     this.paper.ws.send(t)
   }

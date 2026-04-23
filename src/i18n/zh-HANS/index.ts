@@ -38,6 +38,8 @@ export default {
   STATIC: '静态组件',
   SHAPES: '形状',
   PROCESS: '过程控制',
-  'POPUP WINDOW': '弹出窗'
+  'POPUP WINDOW': '弹出窗',
+
+  a: 'AAA'
 
 }

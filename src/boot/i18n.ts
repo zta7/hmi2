@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import { createI18n } from 'vue-i18n'
 
 import messages from 'src/i18n'
-
+import { ref, watch } from 'vue'
 export type MessageLanguages = keyof typeof messages;
 // Type-define 'en-US' as the master schema for the resource
 export type MessageSchema = typeof messages['en-us'];
@@ -23,11 +23,21 @@ declare module 'vue-i18n' {
 
 export default boot(({ app }) => {
   const i18n = createI18n<{ message: MessageSchema }, MessageLanguages>({
-    locale: 'en-US',
-    legacy: false,
+    locale: 'zh-hans',
+    legacy: true,
+    globalInjection: true,
     messages
+  })
+
+  window._language = ref('')
+  watch(window._language, (n: string) => {
+    i18n.global.locale = n
   })
 
   // Set i18n instance on app
   app.use(i18n)
 })
+
+// const lang = 'zh'
+
+// /History?={lang=lang}

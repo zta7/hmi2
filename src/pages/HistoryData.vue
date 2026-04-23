@@ -59,10 +59,12 @@ w.onmessage = (evt) => {
   const message = evt.data as string
   const json = JSON.parse(message)
   console.log(json)
-  const r = get(json, '$History', [])
-  columns.value = Object.keys(r[0]).map(e => ({ label: e, field: e, align: 'left', name: e }))
-  rows.value = r
-  pagination.value.rowsNumber = json.totalrow
+  const r = get(json, '$History')
+  if (r) {
+    columns.value = Object.keys(r[0]).map(e => ({ label: e, field: e, align: 'left', name: e }))
+    rows.value = r
+    pagination.value.rowsNumber = json.totalrow
+  }
 }
 
 const onInquire = () => {

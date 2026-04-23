@@ -6,7 +6,7 @@ export class Cube extends joint.dia.Element {
   defaults () {
     return {
       ...super.defaults,
-      type: 'Cube',
+      type: 'app.Cube',
       attrs: {
         body: {
           width: 'calc(w)',

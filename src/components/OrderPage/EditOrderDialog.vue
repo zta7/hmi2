@@ -6,32 +6,22 @@
       </q-card-section>
 
       <q-card-section>
-        <q-input stack-label dense label="工单编号" v-model="clone.order_id"/>
-        <q-input stack-label dense label="流水批号" v-model="clone.serial_id"/>
-        <q-input stack-label dense label="物料编码" v-model="clone.fabric_id"/>
-        <q-input stack-label dense label="产品编码" v-model="clone.product_id"/>
-        <q-input stack-label dense label="产品名称" v-model="clone.product_name"/>
-        <q-input stack-label dense label="产品型号" v-model="clone.product_version"/>
-        <q-input stack-label dense label="计划数量" v-model="clone.plan_number"/>
-        <q-field stack-label dense label="计划时间">
-          <template v-slot:control>
-            <flat-pickr :model-value="clone.time" class='full-height full-width' style="border: none; outline: none" :config="{
-                mode: 'range',
-                enableTime: true,
-                time_24hr: true,
-                onClose: selectedDates => clone.time = selectedDates
-            }"/>
-          </template>
-       </q-field>
-        <q-input stack-label dense label="产线" v-model="clone.production_line"/>
-        <q-input stack-label dense label="车间" v-model="clone.workshop"/>
-        <q-input stack-label dense label="配方号" v-model="clone.recipe_id"/>
-        <q-input stack-label dense label="版本号" v-model="clone.recipe_version"/>
+        <q-select dense outline v-model="clone._recipe" label="配方" :options="r"/>
+        <q-select dense outline v-model="clone._device" label="产线" :options="d"/>
+        <q-input dense outline v-model="clone._deviceNumber" label="产线批次" type="number"/>
+        <div class="q-mt-md" v-if="vars">
+          <div>配方参数</div>
+          <q-input dense outline v-for="(e,i) in vars" :key="i" :label="e" v-model="clone._extras[e]"/>
+        </div>
+        <div class="q-mt-md" v-if="vars2">
+          <div>订单参数</div>
+          <q-input dense outline v-for="(e,i) in vars2" :key="i" :label="e" v-model="clone._extras2[e]"/>
+        </div>
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn color="primary" label="OK" @click="onOKClick" />
         <q-btn color="primary" label="Cancel" @click="onDialogCancel" />
+        <q-btn color="primary" label="OK" @click="onOKClick" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -39,10 +29,26 @@
 
 <script setup>
 import { useDialogPluginComponent } from 'quasar'
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { cloneDeep } from 'lodash'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
+
+const { recipeList, deviceList, recipeVarMap, OrderVarMap } = window
+
+// const m = { 1: ['A', 'B', 'C'] }
+// const r = [1, 2, 3]
+// const d = [4, 5, 6]
+// const m2 = { 1: ['A', 'B', 'C'] }
+
+const r = JSON.parse(recipeList)
+const d = JSON.parse(deviceList)
+const m = JSON.parse(recipeVarMap)
+const m2 = JSON.parse(OrderVarMap)
+
+const vars = computed(() => m[clone._recipe])
+const vars2 = computed(() => m2[clone._orderId])
+
 const props = defineProps({
   row: Object
 })

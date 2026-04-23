@@ -6,7 +6,7 @@ export class Cone extends joint.dia.Element {
   defaults () {
     return {
       ...super.defaults,
-      type: 'Cone',
+      type: 'app.Cone',
       attrs: {
         body: {
           width: 'calc(w)',
