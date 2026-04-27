@@ -1,162 +1,558 @@
 // app global css in SCSS form
 @import "~@clientio/rappid/rappid.css";
 
+// ============================================================
+// Dark Theme Variables
+// ============================================================
+$dark-bg-primary: #1a1a2e;
+$dark-bg-secondary: #1e1e32;
+$dark-bg-tertiary: #252540;
+$dark-border: #2a2a40;
+$dark-border-light: #333350;
+$dark-text-primary: #e0e0e0;
+$dark-text-secondary: #8888a0;
+$dark-text-muted: #6b6b80;
+$dark-accent: #4a9eff;
+$dark-input-bg: #16162a;
+$dark-hover: #2a2a44;
+$dark-selection: rgba(74, 158, 255, 0.15);
+$canvas-bg: #2c2c3a;
+$canvas-grid: #363648;
+
+// ============================================================
+// iframe responsive base
+// ============================================================
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: $dark-bg-primary;
+}
+
+// ============================================================
+// Global Scrollbar
+// ============================================================
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 3px;
+  &:hover { background: rgba(255,255,255,0.2); }
+}
+::-webkit-scrollbar-corner { background: transparent; }
+
+// ============================================================
+// Paper Container
+// ============================================================
 #paper-container {
   .selection-wrapper[data-selection-length="1"] {
     display: block;
+    ~ .selection-box { display: none; }
+  }
+  input {
+    border: 1px solid $dark-border-light;
+    background: $dark-input-bg;
+    color: $dark-text-primary;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  select {
+    border: 1px solid $dark-border-light;
+    background: $dark-input-bg;
+    color: $dark-text-primary;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  button::after, label::after, th::after, td::after {
+    content: attr(data-content);
+  }
+  table, th, td {
+    border: 1px solid $dark-border-light;
+    text-align: center;
+    color: $dark-text-primary;
+  }
+  select option::before { content: attr(value); }
+  .joint-cells-layer .available-magnet {
+    stroke-width: 2;
+    stroke: $dark-accent;
+  }
+}
 
-    ~ .selection-box {
-      display: none;
+// ============================================================
+// Selection
+// ============================================================
+.joint-selection.joint-theme-default {
+  .clone { background-image: url('src/assets/plus-circle-outline.png'); }
+  .group { background-image: url('src/assets/group.png'); }
+  .selection-wrapper > .box { display: none; }
+}
+.joint-selection > .selection-wrapper > .box { display: none; }
+
+// ============================================================
+// Stencil - Webflow-style dark theme
+// ============================================================
+.joint-stencil,
+.joint-stencil.joint-theme-default {
+  background: $dark-bg-secondary !important;
+  border: none !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // Search bar
+  > .search-wrap {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 2;
+    flex-shrink: 0;
+    background: $dark-bg-secondary;
+    border-bottom: 1px solid $dark-border;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto !important;
+
+    input {
+      background: $dark-input-bg;
+      border: 1px solid $dark-border-light;
+      border-radius: 6px;
+      color: $dark-text-primary;
+      padding: 6px 10px 6px 30px;
+      font-size: 12px;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+      &:focus { border-color: $dark-accent; }
+      &::placeholder { color: $dark-text-muted; }
     }
   }
-}
 
-.joint-selection.joint-theme-default .clone {
-  background-image: url('src/assets/plus-circle-outline.png');
-}
+  // Scrollable content — push below search
+  > .content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 0 !important;
+  }
 
-.joint-selection.joint-theme-default .group {
-  background-image: url('src/assets/group.png');
-}
-/*  Stencil  */
-.joint-stencil h3,
-.joint-inspector h3 {
-  line-height: normal;
-}
+  // Also handle case where stencil uses padding-top for search
+  > .groups {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 
-.joint-stencil .joint-element.joint-type-uml rect,
-.joint-stencil .joint-element.joint-type-uml path {
-  stroke: #4a4d6e;
-}
+  // Group headers — Webflow style: larger, bolder
+  h3 {
+    line-height: normal;
+    color: $dark-text-primary;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 12px 14px 8px;
+    margin: 0;
+    background: $dark-bg-secondary;
+    border-bottom: none;
+    border-top: 1px solid $dark-border;
+    cursor: pointer;
+    transition: color 0.15s;
+    &:hover { color: #fff; }
 
-#paper-container input {
-  border: 1px solid
-}
+    // Collapse arrow
+    &::before {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 10px;
+    }
+  }
 
-#paper-container select {
-  border: 1px solid
-}
+  .group {
+    background: $dark-bg-secondary;
+    border-bottom: none;
+    padding-bottom: 4px;
+  }
 
-#paper-container button::after, #paper-container label::after, #paper-container th::after, #paper-container td::after {
-  content: attr(data-content);
-}
+  // Elements grid
+  .elements {
+    background: $dark-bg-secondary;
+    padding: 2px 8px 8px;
+  }
 
-#paper-container table, th, td {
-  border:1px solid black;
-  text-align: center;
-}
+  // Each stencil element — card style
+  .element {
+    border-radius: 6px;
+    transition: background 0.15s;
+    cursor: grab;
+    &:hover {
+      background: $dark-hover;
+    }
+    &:active {
+      cursor: grabbing;
+    }
+  }
 
-#paper-container select option::before {
-  content: attr(value);
-}
+  .joint-paper {
+    overflow: visible !important;
+    svg { overflow: visible; }
+  }
 
-#paper-container .joint-cells-layer {
-  .available-magnet {
-    stroke-width: 2;
-    stroke: blue;
+  // Constrain SVG icon size inside stencil elements
+  .joint-viewport .joint-element image,
+  .joint-cell-layer .joint-element image,
+  .joint-cells-layer .joint-element image {
+    filter: invert(0.85) sepia(0.1) saturate(0.2) hue-rotate(180deg);
+  }
+
+  // Label text styling
+  .joint-viewport text,
+  .joint-cell-layer text,
+  .joint-cells-layer text {
+    fill: $dark-text-muted !important;
+    font-size: 8px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
   }
 }
 
-.border-left {
-  border-left: 1px solid lightgray;
-}
-.joint-inspector.joint-theme-default {
-  border: none;
+// ============================================================
+// Toolbar - Dark Theme
+// ============================================================
+.joint-toolbar,
+.joint-toolbar.joint-theme-default {
+  background: $dark-bg-secondary !important;
+  border: none !important;
+  border-bottom: 1px solid $dark-border !important;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  .joint-widget { color: $dark-text-secondary; }
 }
 
 button.joint-widget.joint-theme-default {
   position: relative;
-  height: 32px;
-  min-width: 32px;
-  color: #6b6c8a;
+  height: 28px;
+  min-width: 28px;
+  color: $dark-text-secondary;
   font-size: 11px;
-  background: 0 0;
-  border: 1px solid #6b6c8a;
-  border-radius: 18px;
+  background: transparent;
+  border: 1px solid $dark-border-light;
+  border-radius: 4px;
   outline: 0;
   cursor: pointer;
   box-sizing: border-box;
-  padding: 4px 11px;
-  margin: 0;
+  padding: 3px 8px;
+  margin: 0 1px;
+  transition: all 0.15s;
+  &:hover {
+    background: $dark-hover;
+    border-color: $dark-accent;
+    color: $dark-text-primary;
+  }
+  &:disabled { opacity: 0.3; cursor: not-allowed; }
 }
 
-.joint-toolbar.joint-theme-default{
-  border: none;
-  height: 32px;
-  border-bottom: 1px solid lightgray;
+.joint-widget.joint-theme-default[data-name="undo"],
+.joint-widget.joint-theme-default[data-name="redo"],
+.joint-widget.joint-theme-default[data-name="zoom-to-fit"],
+.joint-widget.joint-theme-default[data-name="zoom-out"],
+.joint-widget.joint-theme-default[data-name="zoom-in"],
+.joint-widget.joint-theme-default[data-name="copy"],
+.joint-widget.joint-theme-default[data-name="paste"] {
+  position: relative;
+  top: 0;
+  padding: 0;
+  min-width: 26px; min-height: 26px; width: 26px; height: 26px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  &:hover { background: $dark-hover; border-color: $dark-border-light; }
+  &:after {
+    display: block;
+    content: ' ';
+    width: 100%; height: 100%;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(0.7);
+  }
 }
+
+.joint-widget.joint-theme-default[data-name="undo"]:after { background-image: url(../assets/toolbar/undo-variant.svg); }
+.joint-widget.joint-theme-default[data-name="redo"]:after { background-image: url(../assets/toolbar/redo-variant.svg); }
+.joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after { background-image: url(../assets/toolbar/arrow-expand.svg); }
+.joint-widget.joint-theme-default[data-name="zoom-in"]:after { background-image: url(../assets/toolbar/plus.svg); }
+.joint-widget.joint-theme-default[data-name="zoom-out"]:after { background-image: url(../assets/toolbar/minus.svg); }
+.joint-widget.joint-theme-default[data-name="copy"]:after { background-image: url(../assets/toolbar/content-copy.svg); transform: scale(0.8); }
+.joint-widget.joint-theme-default[data-name="paste"]:after { background-image: url(../assets/toolbar/content-paste.svg); transform: scale(0.8); }
 
 .joint-widget.joint-theme-default[data-name=separator] {
-  line-height: 32px;
-  margin-right: 4px;
-  border-color: lightgray;
+  line-height: 36px;
+  margin: 0 4px;
+  border-color: $dark-border;
+  opacity: 0.5;
 }
 
-.joint-widget.joint-theme-default[data-name="undo"], .joint-widget.joint-theme-default[data-name="redo"], .joint-widget.joint-theme-default[data-name="zoom-to-fit"], 
-.joint-widget.joint-theme-default[data-name="zoom-out"],.joint-widget.joint-theme-default[data-name="zoom-in"], .joint-widget.joint-theme-default[data-name="copy"],
-.joint-widget.joint-theme-default[data-name="paste"]{
-  position: relative;
-  top: -1px;
-  padding: 0;
-  min-width: 24px;
-  min-height: 24px;
-  width: 24px;
-  height: 24px;
+.joint-widget.joint-theme-default label,
+label.joint-widget.joint-theme-default {
+  color: $dark-text-muted;
+  font-size: 11px;
+  font-weight: 500;
 }
 
-.joint-widget.joint-theme-default[data-name="undo"]:after, .joint-widget.joint-theme-default[data-name="redo"]:after, .joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after,
-.joint-widget.joint-theme-default[data-name="zoom-out"]:after, .joint-widget.joint-theme-default[data-name="zoom-in"]:after, .joint-widget.joint-theme-default[data-name="copy"]:after,
-.joint-widget.joint-theme-default[data-name="paste"]:after {
-  display: block;
-  content: ' ';
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
+.joint-toolbar .joint-widget input[type="number"],
+.joint-toolbar.joint-theme-default input[type="number"] {
+  background: $dark-input-bg;
+  border: 1px solid $dark-border-light;
+  border-radius: 4px;
+  color: $dark-text-primary;
+  padding: 2px 5px;
+  font-size: 11px;
+  width: 60px;
+  outline: none;
+  transition: border-color 0.2s;
+  &:focus { border-color: $dark-accent; }
 }
 
-.joint-widget.joint-theme-default[data-name="undo"]:after {
-  background: url(../assets/toolbar/undo-variant.svg);
+// ============================================================
+// Inspector - Dark Theme
+// ============================================================
+.joint-inspector,
+.joint-inspector.joint-theme-default {
+  background: $dark-bg-secondary !important;
+  border: none !important;
+  color: $dark-text-primary;
+  overflow-y: auto;
+
+  h3 {
+    line-height: normal;
+    color: $dark-text-secondary;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 14px;
+    margin: 0;
+    background: $dark-bg-tertiary;
+    border-bottom: 1px solid $dark-border;
+    border-top: 1px solid $dark-border;
+    cursor: pointer;
+    transition: background 0.15s;
+    &:hover { background: $dark-hover; }
+  }
+  label { color: $dark-text-muted; font-size: 11px; font-weight: 500; margin-bottom: 4px; }
+  input[type="text"], input[type="number"], input[type="search"] {
+    background: $dark-input-bg;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    color: $dark-text-primary;
+    padding: 4px 8px;
+    font-size: 11px;
+    outline: none;
+    transition: border-color 0.2s;
+    &:focus { border-color: $dark-accent; }
+  }
+  input[type="file"] { height: auto; color: $dark-text-secondary; font-size: 11px; }
+  input[type="range"] { accent-color: $dark-accent; }
+  input[type="color"] {
+    background: $dark-input-bg;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  select {
+    background: $dark-input-bg;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    color: $dark-text-primary;
+    padding: 4px 8px;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+    &:focus { border-color: $dark-accent; }
+    option { background: $dark-bg-tertiary; color: $dark-text-primary; }
+  }
+  button {
+    background: $dark-bg-tertiary;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    color: $dark-text-primary;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    &:hover { background: $dark-hover; border-color: $dark-accent; }
+  }
+  .toggle { accent-color: $dark-accent; }
+  .group { padding: 8px 12px; border-bottom: 1px solid $dark-border; }
+  [contenteditable] {
+    background: $dark-input-bg;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    color: $dark-text-primary;
+    padding: 4px 8px;
+    font-size: 11px;
+    outline: none;
+    min-height: 22px;
+    &:focus { border-color: $dark-accent; }
+  }
+  .select-box {
+    background: $dark-input-bg;
+    border: 1px solid $dark-border-light;
+    border-radius: 4px;
+    color: $dark-text-primary;
+  }
+  .list-item {
+    background: $dark-bg-tertiary;
+    border: 1px solid $dark-border;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    padding: 6px;
+  }
 }
 
-.joint-widget.joint-theme-default[data-name="redo"]:after {
-  background: url(../assets/toolbar/redo-variant.svg);
+// ============================================================
+// Select Box dropdown
+// ============================================================
+.joint-select-box-options, .select-box-options {
+  background: $dark-bg-tertiary !important;
+  border: 1px solid $dark-border-light !important;
+  border-radius: 4px !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4) !important;
+  .select-box-option {
+    color: $dark-text-primary;
+    padding: 5px 10px;
+    font-size: 11px;
+    &:hover { background: $dark-hover; }
+    &.selected { background: $dark-selection; color: $dark-accent; }
+  }
 }
 
-.joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after {
-  background: url(../assets/toolbar/arrow-expand.svg);
+// ============================================================
+// Tooltip
+// ============================================================
+.joint-tooltip, .joint-tooltip.joint-theme-default {
+  background: $dark-bg-tertiary !important;
+  color: $dark-text-primary !important;
+  border: 1px solid $dark-border-light !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+  font-size: 11px;
+  padding: 4px 8px;
 }
 
-.joint-widget.joint-theme-default[data-name="zoom-in"]:after {
-  background: url(../assets/toolbar/plus.svg);
+// ============================================================
+// Canvas — dark background with dot grid
+// ============================================================
+#paper-container {
+  background: $canvas-bg;
+
+  .joint-paper {
+    background: $canvas-bg !important;
+    svg { background: transparent !important; }
+  }
+
+  // foreignObject HTML elements on dark canvas
+  button {
+    background: #3a3a50;
+    color: $dark-text-primary;
+    border: 1px solid #555577;
+    cursor: pointer;
+  }
+
+  input[type="text"], input[type="number"] {
+    background: #2a2a3e;
+    color: $dark-text-primary;
+    border: 1px solid #555577;
+  }
+
+  input[type="range"] {
+    accent-color: $dark-accent;
+  }
+
+  input[type="checkbox"] {
+    accent-color: $dark-accent;
+  }
+
+  select {
+    background: #2a2a3e;
+    color: $dark-text-primary;
+    border: 1px solid #555577;
+  }
+
+  table {
+    color: $dark-text-primary;
+    th, td {
+      border-color: #555577;
+      color: $dark-text-primary;
+    }
+  }
+
+  // SVG text elements (labels) on canvas
+  .joint-cells-layer text {
+    fill: $dark-text-primary;
+  }
+
+  // Standard shapes default stroke/fill for dark canvas
+  .joint-cells-layer {
+    .joint-type-standard-rectangle rect {
+      stroke: #555577;
+    }
+    .joint-type-standard-circle circle {
+      stroke: #555577;
+    }
+  }
 }
 
-.joint-widget.joint-theme-default[data-name="zoom-out"]:after {
-  background: url(../assets/toolbar/minus.svg);
+.joint-paper-scroller {
+  background: $canvas-bg !important;
 }
 
-.joint-widget.joint-theme-default[data-name="copy"]:after {
-  background: url(../assets/toolbar/content-copy.svg);
-  transform: scale(0.75);
+// Grid dots — subtle on dark canvas
+.joint-paper .joint-grid-layer {
+  opacity: 0.6;
 }
 
-.joint-widget.joint-theme-default[data-name="paste"]:after {
-  background: url(../assets/toolbar/content-paste.svg);
-  transform: scale(0.75);
+// ============================================================
+// Snaplines
+// ============================================================
+.joint-snaplines .joint-snapline {
+  stroke: $dark-accent !important;
+  opacity: 0.6;
 }
 
-.joint-inspector input[type="file"] {
-  height: auto;
-}
-.joint-inspector.joint-theme-default input[type='file'] {
-  height: auto;
-}
-
-.joint-selection>.selection-wrapper>.box {
-  display: none;
-}
-
-.joint-stencil, .joint-stencil.joint-theme-default {
-  border-left: none;
+// ============================================================
+// Halo
+// ============================================================
+.joint-halo.joint-theme-default {
+  .handle {
+    background: $dark-bg-tertiary;
+    border: 1px solid $dark-border-light;
+    &:hover { background: $dark-accent; border-color: $dark-accent; }
+  }
 }
 
+// ============================================================
+// FreeTransform
+// ============================================================
+.joint-free-transform.joint-theme-default {
+  border-color: $dark-accent !important;
+  .resize {
+    background: $dark-bg-secondary;
+    border: 2px solid $dark-accent;
+    border-radius: 2px;
+  }
+}
+
+// ============================================================
+// Quasar overrides
+// ============================================================
+.q-page { background: $dark-bg-primary; }
+.q-splitter__separator { background: $dark-border !important; }
+.border-left { border-left: 1px solid $dark-border; }

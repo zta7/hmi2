@@ -27,7 +27,7 @@ export class Link extends joint.shapes.standard.Link {
       labels: [],
       attrs: {
         line: {
-          stroke: '#8f8f8f',
+          stroke: '#8888a0',
           strokeDasharray: '0',
           strokeWidth: 2,
           fill: 'none',

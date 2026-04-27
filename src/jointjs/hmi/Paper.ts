@@ -48,8 +48,14 @@ export class Paper {
         : {
             stopDelegation: false,
           },
-      gridSize: 5,
-      drawGrid: !window.online,
+      gridSize: 10,
+      drawGrid: !window.online ? {
+        name: 'dot',
+        args: {
+          color: '#4a4a5a',
+          thickness: 1
+        }
+      } : false,
       async: true,
       clickThreshold: 10,
       cellViewNamespace: namespace,
@@ -118,6 +124,29 @@ export class Paper {
       console.log(this.bindOptions);
       const stencilLoad = getStencilLoad(lang || "");
       this.stencil.load(stencilLoad);
+
+      // Dynamic stencil columns based on container width (iframe responsive)
+      if (stencilEl) {
+        let resizeTimer: ReturnType<typeof setTimeout>;
+        const colWidth = 58; // ELEM_W(52) + 6 gap
+        const relayoutStencil = () => {
+          const width = stencilEl.clientWidth;
+          const padding = 16;
+          const cols = Math.max(2, Math.floor((width - padding) / colWidth));
+          (this.stencil as any).options.layout = {
+            columns: cols,
+            columnWidth: colWidth,
+            rowHeight: 48,
+            resizeToFit: true
+          };
+          this.stencil.load(stencilLoad);
+        };
+        const resizeObserver = new ResizeObserver(() => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(relayoutStencil, 200);
+        });
+        resizeObserver.observe(stencilEl);
+      }
     }
   }
 
@@ -181,8 +210,7 @@ export class Paper {
             const { x: x2, y: y2 } = cloneArea.topRight();
             link.source({ x: x1, y: y1 });
             link.target({ x: x2, y: y2 });
-            if (shape.attributes.vertice === true)
-              link.vertices([{ x: x1, y: y2 }]);
+            if (shape.attributes.vertice === true) { link.vertices([{ x: x1, y: y2 }]); }
             // link.vertices([{ x: cloneArea.bottomLeft() / 2, y: cloneArea.topRight() / 2}])
             // console.log({ x: cloneArea.bottomLeft() / 2, y: cloneArea.topRight() / 2 })
             link.addTo(this.graph);

@@ -73,7 +73,7 @@ export const TableView = joint.dia.ElementView.extend({
       selector: 'body',
       attributes: {
         stroke: 'transparent',
-        fill: '#ffffff',
+        fill: 'transparent',
         strokeWidth: 2
       }
     },
