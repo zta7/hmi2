@@ -81,15 +81,15 @@ module.exports = configure(function (ctx) {
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack(config) {
-        // config.output.chunkFilename("js/p.[name].[chunkhash:8].js");
-        // config.plugin("mini-css-extract").tap((args) => {
-        //   return [
-        //     {
-        //       filename: "css/[name].[contenthash:8].css",
-        //       chunkFilename: "css/p.[name].[chunkhash:8].css",
-        //     },
-        //   ];
-        // });
+        config.output.chunkFilename("js/p.[name].[chunkhash:8].js");
+        config.plugin("mini-css-extract").tap((args) => {
+          return [
+            {
+              filename: "css/[name].[contenthash:8].css",
+              chunkFilename: "css/p.[name].[chunkhash:8].css",
+            },
+          ];
+        });
       },
     },
 
