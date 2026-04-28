@@ -45,6 +45,13 @@ import * as Panel from './shapes.app/Panel'
 import * as StaticRectangle from './shapes.app/StaticRectangle'
 
 import * as WindowButton from './shapes.app/WindowButton'
+import * as ProgressBar from './shapes.app/ProgressBar'
+import * as Gauge from './shapes.app/Gauge'
+import * as StateDisplay from './shapes.app/StateDisplay'
+import * as MultiStateButton from './shapes.app/MultiStateButton'
+import * as AlarmList from './shapes.app/AlarmList'
+import * as TrendChart from './shapes.app/TrendChart'
+import * as GroupBox from './shapes.app/GroupBox'
 
 // Pump
 
@@ -100,7 +107,14 @@ export const shapes = {
     ...Square,
     ...Sphere,
     ...Panel,
-    ...WindowButton
+    ...WindowButton,
+    ...ProgressBar,
+    ...Gauge,
+    ...StateDisplay,
+    ...MultiStateButton,
+    ...AlarmList,
+    ...TrendChart,
+    ...GroupBox
   }
 }
 

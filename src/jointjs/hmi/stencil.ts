@@ -141,6 +141,29 @@ export const getStencilLoad = (lang: string) => {
       {
         ...stencilElement('./stencil/table.svg', l('Table', 'Table')),
         shape: new app.Table()
+      },
+      {
+        ...stencilElement('./stencil/progress-bar.svg', '进度条'),
+        shape: new app.ProgressBar({ size: { width: 160, height: 30 } })
+      },
+      {
+        ...stencilElement('./stencil/gauge.svg', '仪表盘'),
+        shape: new app.Gauge({ size: { width: 120, height: 120 } })
+      },
+      {
+        ...stencilElement('./stencil/state-display.svg', '状态显示'),
+        shape: new app.StateDisplay({ size: { width: 80, height: 40 } })
+      },
+      {
+        ...stencilElement('./stencil/trend-chart.svg', '趋势图'),
+        shape: new app.TrendChart({
+          size: { width: 300, height: 150 },
+          data: [20, 35, 28, 50, 42, 60, 55, 70, 65, 80]
+        })
+      },
+      {
+        ...stencilElement('./stencil/alarm-list.svg', '报警列表'),
+        shape: new app.AlarmList({ size: { width: 320, height: 200 } })
       }
     ],
     Outputs: [
@@ -177,6 +200,10 @@ export const getStencilLoad = (lang: string) => {
           text: 'Push',
           background: '#e15656'
         })
+      },
+      {
+        ...stencilElement('./stencil/multi-state-btn.svg', '多状态按钮'),
+        shape: new app.MultiStateButton({ size: { width: 90, height: 36 } })
       }
     ],
     Links: [

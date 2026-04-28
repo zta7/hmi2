@@ -741,6 +741,137 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       },
       groups: inspectorGroups
     }
+  } else if (type === 'app.ProgressBar') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        min: inspectorInputs.min,
+        max: inspectorInputs.max,
+        value: { type: 'number', label: 'value', group: 'style' },
+        barColor: { type: 'color', label: 'Bar Color', group: 'style' },
+        bgColor: { type: 'color', label: 'BG Color', group: 'style' },
+        showLabel: { type: 'toggle', label: 'Show Label', group: 'style' },
+        direction: {
+          type: 'select',
+          options: [{ value: 'horizontal', content: 'Horizontal' }, { value: 'vertical', content: 'Vertical' }],
+          label: 'Direction',
+          group: 'style'
+        },
+        bind: {
+          value: { type: 'select', options: inputs, label: 'Value', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Gauge') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        min: inspectorInputs.min,
+        max: inspectorInputs.max,
+        value: { type: 'number', label: 'value', group: 'style' },
+        unit: { type: 'content-editable', label: 'Unit', group: 'style' },
+        label: { type: 'content-editable', label: 'Label', group: 'style' },
+        arcColor: { type: 'color', label: 'Arc Color', group: 'style' },
+        bgColor: { type: 'color', label: 'BG Color', group: 'style' },
+        bind: {
+          value: { type: 'select', options: inputs, label: 'Value', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.StateDisplay') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        value: { type: 'number', label: 'value', group: 'style' },
+        states: {
+          type: 'list',
+          group: 'style',
+          item: {
+            type: 'object',
+            properties: {
+              value: { type: 'number', label: 'value' },
+              label: { type: 'text', label: 'label' },
+              color: { type: 'color', label: 'color' },
+              textColor: { type: 'color', label: 'text color' }
+            }
+          }
+        },
+        bind: {
+          value: { type: 'select', options: inputs, label: 'Value', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.MultiStateButton') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        states: {
+          type: 'list',
+          group: 'style',
+          item: {
+            type: 'object',
+            properties: {
+              value: { type: 'number', label: 'value' },
+              label: { type: 'text', label: 'label' },
+              color: { type: 'color', label: 'color' },
+              textColor: { type: 'color', label: 'text color' }
+            }
+          }
+        },
+        bind: {
+          onChange: { type: 'select', options: outputs, label: 'Output', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.AlarmList') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        bind: {
+          alarms: { type: 'select', options: inputs, label: 'Alarms Data', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.TrendChart') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        min: inspectorInputs.min,
+        max: inspectorInputs.max,
+        maxPoints: { type: 'number', label: 'Max Points', group: 'style' },
+        label: { type: 'content-editable', label: 'Label', group: 'style' },
+        lineColor: { type: 'color', label: 'Line Color', group: 'style' },
+        bind: {
+          data: { type: 'select', options: inputs, label: 'Data', group: 'bind' }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.GroupBox') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text,
+            fontSize: inspectorInputs.fontSize,
+            fill: inspectorInputs.stroke
+          },
+          body: {
+            stroke: inspectorInputs.stroke,
+            strokeWidth: inspectorInputs.strokeWidth,
+            rx: inspectorInputs.rx,
+            ry: inspectorInputs.ry
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
   } else {
     return {
       inputs: {
