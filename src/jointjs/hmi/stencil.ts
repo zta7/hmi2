@@ -302,6 +302,70 @@ export const getStencilLoad = (lang: string) => {
       {
         ...stencilElement('./stencil/pipe.svg', l('Pipe', 'Pipe')),
         shape: new app.Pipe()
+      },
+      {
+        ...stencilElement('./stencil/motor.svg', l('Motor', '电机')),
+        shape: new app.Motor({ attrs: { label: { text: '电机' } } })
+      },
+      {
+        ...stencilElement('./stencil/mixer.svg', l('Mixer', '搅拌器')),
+        shape: new app.Mixer({ attrs: { label: { text: '搅拌器' } } })
+      },
+      {
+        ...stencilElement('./stencil/sensor.svg', l('Sensor', '传感器')),
+        shape: new app.Sensor({ attrs: { label: { text: '传感器' } } })
+      },
+      {
+        ...stencilElement('./stencil/flowMeter.svg', l('FlowMeter', '流量计')),
+        shape: new app.FlowMeter({ attrs: { label: { text: '流量计' } } })
+      },
+      {
+        ...stencilElement('./stencil/checkValve.svg', l('CheckValve', '止回阀')),
+        shape: new app.CheckValve({ attrs: { label: { text: '止回阀' } } })
+      },
+      {
+        ...stencilElement('./stencil/butterflyValve.svg', l('ButterflyValve', '蝶阀')),
+        shape: new app.ButterflyValve({ attrs: { label: { text: '蝶阀' } } })
+      },
+      {
+        ...stencilElement('./stencil/threeWayValve.svg', l('ThreeWayValve', '三通阀')),
+        shape: new app.ThreeWayValve({ attrs: { label: { text: '三通阀' } } })
+      },
+      {
+        ...stencilElement('./stencil/safetyValve.svg', l('SafetyValve', '安全阀')),
+        shape: new app.SafetyValve({ attrs: { label: { text: '安全阀' } } })
+      },
+      {
+        ...stencilElement('./stencil/pipeElbow.svg', l('PipeElbow', '弯头')),
+        shape: new app.PipeElbow({ attrs: { label: { text: '弯头' } } })
+      },
+      {
+        ...stencilElement('./stencil/pipeTee.svg', l('PipeTee', '三通')),
+        shape: new app.PipeTee({ attrs: { label: { text: '三通' } } })
+      },
+      {
+        ...stencilElement('./stencil/pipeFlange.svg', l('PipeFlange', '法兰')),
+        shape: new app.PipeFlange({ attrs: { label: { text: '法兰' } } })
+      },
+      {
+        ...stencilElement('./stencil/horizontalTank.svg', l('HorizontalTank', '卧式罐')),
+        shape: new app.HorizontalTank({ attrs: { label: { text: '卧式罐' } } })
+      },
+      {
+        ...stencilElement('./stencil/reactor.svg', l('Reactor', '反应器')),
+        shape: new app.Reactor({ attrs: { label: { text: '反应器' } } })
+      },
+      {
+        ...stencilElement('./stencil/silo.svg', l('Silo', '料仓')),
+        shape: new app.Silo({ attrs: { label: { text: '料仓' } } })
+      },
+      {
+        ...stencilElement('./stencil/conveyor.svg', l('Conveyor', '传送带')),
+        shape: new app.Conveyor({ attrs: { label: { text: '传送带' } } })
+      },
+      {
+        ...stencilElement('./stencil/heater.svg', l('Heater', '加热器')),
+        shape: new app.Heater({ attrs: { label: { text: '加热器' } } })
       }
     ],
     Window: [

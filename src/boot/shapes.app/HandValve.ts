@@ -22,13 +22,7 @@ export class HandValve extends joint.dia.Element {
           cy: 'calc(h / 2)',
           stroke: 'gray',
           strokeWidth: 2,
-          fill: {
-            type: 'radialGradient',
-            stops: [
-              { offset: '70%', color: 'white' },
-              { offset: '100%', color: 'gray' }
-            ]
-          }
+          fill: 'lightgray'
         },
         stem: {
           width: 10,
@@ -84,21 +78,9 @@ export class HandValve extends joint.dia.Element {
                 width: 'calc(w)',
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                fill: {
-                  type: 'linearGradient',
-                  stops: [
-                    { offset: '0%', color: 'gray' },
-                    { offset: '30%', color: 'white' },
-                    { offset: '70%', color: 'white' },
-                    { offset: '100%', color: 'gray' }
-                  ],
-                  attrs: {
-                    x1: '0%',
-                    y1: '0%',
-                    x2: '0%',
-                    y2: '100%'
-                  }
-                }
+                fill: '#ddd',
+                stroke: 'gray',
+                strokeWidth: 1
               },
               pipeEnd: {
                 magnet: true,

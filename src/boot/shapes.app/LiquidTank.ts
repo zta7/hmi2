@@ -37,15 +37,7 @@ export class LiquidTank extends joint.dia.Element {
           height: 'calc(h)',
           rx: 120,
           ry: 10,
-          fill: {
-            type: 'linearGradient',
-            stops: [
-              { offset: '0%', color: 'gray' },
-              { offset: '30%', color: 'white' },
-              { offset: '70%', color: 'white' },
-              { offset: '100%', color: 'gray' }
-            ]
-          }
+          fill: 'lightgray'
         },
         top: {
           x: 0,

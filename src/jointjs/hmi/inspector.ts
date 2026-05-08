@@ -852,6 +852,322 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       },
       groups: inspectorGroups
     }
+  } else if (type === 'app.Motor') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          bind: {
+            power: {
+              type: 'select',
+              options: inputs,
+              label: 'Power',
+              group: 'bind'
+            }
+          }
+        },
+        power: inspectorInputs.boolean
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Mixer') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          bind: {
+            power: {
+              type: 'select',
+              options: inputs,
+              label: 'Power',
+              group: 'bind'
+            }
+          }
+        },
+        power: inspectorInputs.boolean
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Sensor') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          bind: {
+            value: {
+              type: 'select',
+              options: inputs,
+              label: 'Value',
+              group: 'bind'
+            }
+          }
+        },
+        value: { type: 'number', label: 'Value', group: 'style' },
+        unit: { type: 'content-editable', label: 'Unit', group: 'style' },
+        sensorType: {
+          type: 'select',
+          options: [
+            { value: 'T', content: 'Temperature (T)' },
+            { value: 'P', content: 'Pressure (P)' },
+            { value: 'L', content: 'Level (L)' },
+            { value: 'F', content: 'Flow (F)' },
+            { value: 'H', content: 'Humidity (H)' }
+          ],
+          label: 'Sensor Type',
+          group: 'style'
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.FlowMeter') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          bind: {
+            value: {
+              type: 'select',
+              options: inputs,
+              label: 'Value',
+              group: 'bind'
+            }
+          }
+        },
+        value: { type: 'number', label: 'Value', group: 'style' },
+        unit: { type: 'content-editable', label: 'Unit', group: 'style' }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.CheckValve') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            status: {
+              type: 'select',
+              options: inputs,
+              label: 'Status',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.ButterflyValve') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            open: {
+              type: 'select',
+              options: inputs,
+              label: 'Open',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.ThreeWayValve') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            position: {
+              type: 'select',
+              options: inputs,
+              label: 'Position',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.SafetyValve') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            status: {
+              type: 'select',
+              options: inputs,
+              label: 'Status',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.PipeElbow') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            flow: {
+              type: 'select',
+              options: inputs,
+              label: 'Flow',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.PipeTee') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            flow: {
+              type: 'select',
+              options: inputs,
+              label: 'Flow',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.PipeFlange') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            flow: {
+              type: 'select',
+              options: inputs,
+              label: 'Flow',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.HorizontalTank') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            level: {
+              type: 'select',
+              options: inputs,
+              label: 'Level',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Reactor') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            status: {
+              type: 'select',
+              options: inputs,
+              label: 'Status',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Silo') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            level: {
+              type: 'select',
+              options: inputs,
+              label: 'Level',
+              group: 'bind'
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Conveyor') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            power: {
+              type: 'select',
+              options: inputs,
+              label: 'Power',
+              group: 'bind'
+            }
+          }
+        },
+        power: inspectorInputs.boolean
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.Heater') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: { text: inspectorInputs.text },
+          bind: {
+            power: {
+              type: 'select',
+              options: inputs,
+              label: 'Power',
+              group: 'bind'
+            }
+          }
+        },
+        power: inspectorInputs.boolean
+      },
+      groups: inspectorGroups
+    }
   } else if (type === 'app.GroupBox') {
     return {
       inputs: {

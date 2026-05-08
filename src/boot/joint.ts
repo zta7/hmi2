@@ -52,6 +52,22 @@ import * as MultiStateButton from './shapes.app/MultiStateButton'
 import * as AlarmList from './shapes.app/AlarmList'
 import * as TrendChart from './shapes.app/TrendChart'
 import * as GroupBox from './shapes.app/GroupBox'
+import * as Motor from './shapes.app/Motor'
+import * as Sensor from './shapes.app/Sensor'
+import * as Mixer from './shapes.app/Mixer'
+import * as FlowMeter from './shapes.app/FlowMeter'
+import * as CheckValve from './shapes.app/CheckValve'
+import * as ButterflyValve from './shapes.app/ButterflyValve'
+import * as ThreeWayValve from './shapes.app/ThreeWayValve'
+import * as SafetyValve from './shapes.app/SafetyValve'
+import * as PipeElbow from './shapes.app/PipeElbow'
+import * as PipeTee from './shapes.app/PipeTee'
+import * as PipeFlange from './shapes.app/PipeFlange'
+import * as HorizontalTank from './shapes.app/HorizontalTank'
+import * as Reactor from './shapes.app/Reactor'
+import * as Silo from './shapes.app/Silo'
+import * as Conveyor from './shapes.app/Conveyor'
+import * as Heater from './shapes.app/Heater'
 
 // Pump
 
@@ -114,7 +130,23 @@ export const shapes = {
     ...MultiStateButton,
     ...AlarmList,
     ...TrendChart,
-    ...GroupBox
+    ...GroupBox,
+    ...Motor,
+    ...Sensor,
+    ...Mixer,
+    ...FlowMeter,
+    ...CheckValve,
+    ...ButterflyValve,
+    ...ThreeWayValve,
+    ...SafetyValve,
+    ...PipeElbow,
+    ...PipeTee,
+    ...PipeFlange,
+    ...HorizontalTank,
+    ...Reactor,
+    ...Silo,
+    ...Conveyor,
+    ...Heater
   }
 }
 

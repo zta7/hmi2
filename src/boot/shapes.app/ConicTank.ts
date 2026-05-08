@@ -24,15 +24,7 @@ export class ConicTank extends joint.dia.Element {
           height: 'calc(h)',
           rx: 120,
           ry: 10,
-          fill: {
-            type: 'linearGradient',
-            stops: [
-              { offset: '0%', color: 'gray' },
-              { offset: '30%', color: 'white' },
-              { offset: '70%', color: 'white' },
-              { offset: '100%', color: 'gray' }
-            ]
-          }
+          fill: 'lightgray'
         },
         top: {
           x: 0,
@@ -49,17 +41,7 @@ export class ConicTank extends joint.dia.Element {
           stroke: 'gray',
           strokeLinejoin: 'round',
           strokeWidth: 2,
-          fill: {
-            type: 'linearGradient',
-            stops: [
-              { offset: '10%', color: '#aaa' },
-              { offset: '30%', color: '#fff' },
-              { offset: '90%', color: '#aaa' }
-            ],
-            attrs: {
-              gradientTransform: 'rotate(-10)'
-            }
-          }
+          fill: '#ddd'
         },
         label: {
           text: 'Tank 2',
