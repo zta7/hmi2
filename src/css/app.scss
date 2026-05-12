@@ -460,7 +460,15 @@ label.joint-widget.joint-theme-default {
     svg { background: transparent !important; }
   }
 
-  // foreignObject HTML elements on dark canvas
+  // foreignObject label — text truncation via CSS
+  .hmi-rectangle-label {
+    font-size: inherit;
+    color: inherit;
+    span {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+  }
+
   button {
     background: #3a3a50;
     color: $dark-text-primary;
