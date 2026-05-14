@@ -1,11 +1,21 @@
 import * as joint from "@clientio/rappid";
 
+const toFormatted = (raw: string, format: string): string => {
+  if (!raw && raw !== '0') return raw
+  const num = parseInt(raw, 10)
+  if (isNaN(num) || num.toString() !== raw.toString().trim()) return raw
+  if (format === 'bin') return num.toString(2)
+  if (format === 'hex') return '0x' + num.toString(16).toUpperCase()
+  return raw
+}
+
 export class Rectangle extends joint.shapes.standard.Rectangle {
   defaults() {
     return {
       ...super.defaults,
       fills: [],
       type: "app.Rectangle",
+      format: 'dec',
     };
   }
 
@@ -15,19 +25,49 @@ export class Rectangle extends joint.shapes.standard.Rectangle {
 }
 
 export const RectangleView = joint.dia.ElementView.extend({
-  initFlag: ["RENDER", "RESIZE", "TRANSFORM"],
+  initFlag: ["RENDER", "RESIZE", "TRANSFORM", "UPDATE_TEXT"],
 
   presentationAttributes: {
     size: ["RESIZE"],
     position: ["TRANSFORM"],
     angle: ["TRANSFORM"],
+    attrs: ["UPDATE_TEXT"],
+    format: ["UPDATE_TEXT"],
   },
 
   initialize(..._args: any[]) {
     (joint.dia.ElementView.prototype.initialize as any).apply(this, _args);
-    this.listenTo(this.model, "change:attrs", () => {
-      this.requestUpdate(this.getFlag("RENDER"));
-    });
+  },
+
+  updateText() {
+    const foEl = this.el.querySelector("foreignObject");
+    if (!foEl) return;
+
+    const rawText = this.model.attr("label/text") || "";
+    const format = this.model.get("format") || "dec";
+    const text = toFormatted(rawText, format);
+    const labelFill =
+      this.model.attr("label/fill") ||
+      this.model.attr("label/stroke") ||
+      "#e0e0e0";
+    const fontSize = this.model.attr("label/fontSize");
+    const fontWeight = this.model.attr("label/fontWeight");
+
+    const span = foEl.querySelector("span");
+    if (span) {
+      span.textContent = text;
+      span.style.color = labelFill;
+      if (fontSize != null) {
+        span.style.fontSize = `${fontSize}px`;
+      } else {
+        span.style.fontSize = "";
+      }
+      if (fontWeight != null) {
+        span.style.fontWeight = String(fontWeight);
+      } else {
+        span.style.fontWeight = "";
+      }
+    }
   },
 
   render() {
@@ -35,7 +75,9 @@ export const RectangleView = joint.dia.ElementView.extend({
     const { util } = joint;
 
     const size = model.size();
-    const text = model.attr("label/text") || "";
+    const rawText = model.attr("label/text") || "";
+    const format = model.get("format") || "dec";
+    const text = toFormatted(rawText, format);
     const labelFill =
       model.attr("label/fill") ||
       model.attr("label/stroke") ||
@@ -127,6 +169,7 @@ export const RectangleView = joint.dia.ElementView.extend({
       this.resize(opt);
     }
     if (this.hasFlag(flags, "TRANSFORM")) this.updateTransformation();
+    if (this.hasFlag(flags, "UPDATE_TEXT")) this.updateText();
   },
 
   updateSize() {

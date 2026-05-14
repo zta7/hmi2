@@ -19,10 +19,15 @@ const inspectorGroups = {
     closed: true,
     index: 3
   },
+  format: {
+    label: '格式',
+    closed: true,
+    index: 4
+  },
   window: {
     label: '窗口',
     closed: true,
-    index: 4
+    index: 5
   }
 }
 
@@ -212,7 +217,6 @@ const inspectorMap = (type: string, bindOptions = {}) => {
             'attrs.label.text': {
               type: 'select',
               options: inputs,
-
               label: 'Text',
               group: 'bind'
             },
@@ -223,6 +227,17 @@ const inspectorMap = (type: string, bindOptions = {}) => {
               group: 'bind'
             }
           }
+        },
+        format: {
+          type: 'select',
+          options: [
+            { value: 'bin', content: '二进制' },
+            { value: 'dec', content: '十进制' },
+            { value: 'hex', content: '十六进制' }
+          ],
+          label: '进制',
+          group: 'format',
+          defaultValue: 'dec'
         }
       },
       groups: inspectorGroups
@@ -402,12 +417,6 @@ const inspectorMap = (type: string, bindOptions = {}) => {
             options: outputEvents,
             group: 'bind'
           }
-          // 'attrs.value': {
-          //   type: 'select',
-          //   options: outputs,
-          //   label: 'Text',
-          //   group: 'bind'
-          // }
         }
       },
       groups: inspectorGroups
