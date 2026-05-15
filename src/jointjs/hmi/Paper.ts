@@ -371,7 +371,7 @@ export class Paper {
 
   postWindowTop() {
     const data = this.toJSON();
-    console.log(data);
+    console.log("HMI WEBSOCKET DATA", data);
     if (window.top) {
       window.top.postMessage(
         {

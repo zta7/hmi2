@@ -1,6 +1,7 @@
 import * as joint from "@clientio/rappid";
 
 const toFormatted = (raw: string, format: string): string => {
+  if ((window as any).online) return raw
   if (!raw && raw !== '0') return raw
   const num = parseInt(raw, 10)
   if (isNaN(num) || num.toString() !== raw.toString().trim()) return raw
@@ -46,6 +47,7 @@ export const RectangleView = joint.dia.ElementView.extend({
     const rawText = this.model.attr("label/text") || "";
     const format = this.model.get("format") || "dec";
     const text = toFormatted(rawText, format);
+    console.log('[Rectangle updateText]', { rawText, format, text, modelFormat: this.model.get("format") });
     const labelFill =
       this.model.attr("label/fill") ||
       this.model.attr("label/stroke") ||
@@ -78,6 +80,7 @@ export const RectangleView = joint.dia.ElementView.extend({
     const rawText = model.attr("label/text") || "";
     const format = model.get("format") || "dec";
     const text = toFormatted(rawText, format);
+    console.log('[Rectangle render]', { rawText, format, text, modelFormat: model.get("format"), allKeys: Object.keys(model.attributes) });
     const labelFill =
       model.attr("label/fill") ||
       model.attr("label/stroke") ||
