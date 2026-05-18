@@ -11,7 +11,7 @@ export class Gauge extends joint.dia.Element {
       value: 65,
       unit: '',
       arcColor: '#4a9eff',
-      bgColor: '#2a2a3e',
+      bgColor: '#1e1e32',
       label: 'Gauge'
     }
   }
@@ -111,8 +111,11 @@ export const GaugeView = joint.dia.ElementView.extend({
     // Inject SVG directly for proper rendering
     const fo = this.el.querySelector('foreignObject')
     if (fo) {
-      fo.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      fo.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="filter:drop-shadow(0 4px 10px rgba(0,0,0,0.7));">
         <rect width="${size}" height="${size}" fill="${bgColor}" rx="4"/>
+        <rect width="${size}" height="${size}" fill="none" rx="4" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <rect x="1" y="1" width="${size - 2}" height="${size * 0.45}" fill="url(#topSheen_${size})" rx="3"/>
+        <defs><linearGradient id="topSheen_${size}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="white" stop-opacity="0.04"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         ${bgArc}
         ${valArc}
         <text x="${cx}" y="${cy + 4}" text-anchor="middle" font-size="${Math.round(size * 0.18)}" font-family="sans-serif" fill="#e0e0e0" font-weight="600">${value}${unit}</text>

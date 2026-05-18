@@ -84,37 +84,37 @@ export const getStencilLoad = (lang: string) => {
   return {
     Inputs: [
       {
-        ...stencilElement('./stencil/alarm-light-outline.svg', l('Indicator', 'Indicator')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="#131320" stroke="#4a4a6a" stroke-width="3"/><circle cx="25" cy="25" r="15" fill="#e15656"/></svg>'), l('Indicator', 'Indicator')),
         shape: new app.Light({
           size: { width: 50, height: 50 },
           attrs: {
-            label: { text: '1', fontSize: 14, stroke: '#ffffff', fontWeight: 300 },
-            body: { stroke: '#8f8fc7ff', fill: '#e15656', rx: 9999, ry: 9999 }
+            label: { text: '', fontSize: 11, fill: '#c0c0d0' },
+            body: { stroke: '#4a4a6a', fill: '#e15656', strokeWidth: 2 }
           }
         })
       },
       {
-        ...stencilElement('./stencil/text.svg', l('InputTextbox', 'Text')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 18"><rect x="0.75" y="0.75" width="44.5" height="16.5" rx="3" fill="#1a1a2e" stroke="#3d3d60" stroke-width="1.5"/><rect x="0.75" y="0.75" width="3" height="16.5" rx="1.5" fill="#3d3d60"/><line x1="8" y1="9" x2="34" y2="9" stroke="#5a5a90" stroke-width="1.5" stroke-linecap="round"/></svg>'), l('InputTextbox', 'Text')),
         shape: new app.Rectangle({
           size: { width: 90, height: 30 },
           attrs: {
             label: { text: '文本', fontSize: 14, fill: '#e0e0e0' },
-            body: { stroke: '#555577', fill: '#2a2a3e' }
+            body: { stroke: '#3d3d60', fill: '#1a1a2e', rx: 3, ry: 3 }
           }
         })
       },
       {
-        ...stencilElement('./stencil/chart-arc.svg', l('Knob', 'Knob')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1a1a2e" stroke="#3d3d60" stroke-width="2"/><path d="M10 32 A14 14 0 1 1 30 32" fill="none" stroke="#2a2a40" stroke-width="4" stroke-linecap="round"/><path d="M10 32 A14 14 0 1 1 33 17" fill="none" stroke="#4a9eff" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#3d3d60"/></svg>'), l('Knob', 'Knob')),
         shape: new joint.shapes.chart.Knob({
           size: { width: 100, height: 100 },
           min: 0,
           max: 100,
           value: 80,
-          fill: '#2c97de'
+          fill: '#4a9eff'
         } as any)
       },
       {
-        ...stencilElement('./stencil/chart-pie.svg', l('Pie', 'Pie')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1a1a2e"/><path d="M20 20 L20 2 A18 18 0 0 1 35.6 29 Z" fill="#4a9eff"/><path d="M20 20 L35.6 29 A18 18 0 0 1 4.4 29 Z" fill="#7c5af8"/><path d="M20 20 L4.4 29 A18 18 0 0 1 20 2 Z" fill="#00c4b4"/><circle cx="20" cy="20" r="7" fill="#1a1a2e"/></svg>'), l('Pie', 'Pie')),
         shape: new joint.shapes.chart.Pie({
           size: { width: 100, height: 100 },
           series: [{
@@ -128,7 +128,7 @@ export const getStencilLoad = (lang: string) => {
         } as any)
       },
       {
-        ...stencilElement('./stencil/chart-bar.svg', l('Plot', 'Plot')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 32"><rect x="0" y="0" width="46" height="32" rx="3" fill="#1a1a2e"/><line x1="8" y1="4" x2="8" y2="24" stroke="#2a2a40" stroke-width="1"/><line x1="8" y1="24" x2="42" y2="24" stroke="#2a2a40" stroke-width="1"/><polyline points="8,20 16,14 24,17 32,9 40,12" fill="none" stroke="#4a9eff" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>'), l('Plot', 'Plot')),
         shape: new joint.shapes.chart.Plot({
           size: { width: 300, height: 100 },
           axis: {
@@ -139,30 +139,30 @@ export const getStencilLoad = (lang: string) => {
         } as any)
       },
       {
-        ...stencilElement('./stencil/table.svg', l('Table', 'Table')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 32"><rect x="0.75" y="0.75" width="44.5" height="30.5" rx="2.5" fill="#1a1a2e" stroke="#3d3d60" stroke-width="1.5"/><rect x="0.75" y="0.75" width="44.5" height="8" rx="2.5" fill="#252540"/><line x1="0.75" y1="8.75" x2="45.25" y2="8.75" stroke="#3d3d60" stroke-width="1"/><line x1="15" y1="0.75" x2="15" y2="31.25" stroke="#2a2a40" stroke-width="1"/><line x1="30" y1="0.75" x2="30" y2="31.25" stroke="#2a2a40" stroke-width="1"/><line x1="0.75" y1="18" x2="45.25" y2="18" stroke="#2a2a40" stroke-width="1"/></svg>'), l('Table', 'Table')),
         shape: new app.Table()
       },
       {
-        ...stencilElement('./stencil/progress-bar.svg', '进度条'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 18"><rect x="0.75" y="0.75" width="44.5" height="16.5" rx="3" fill="#1a1a2e" stroke="#3d3d60" stroke-width="1.5"/><rect x="2" y="2" width="27" height="14" rx="2" fill="#4a9eff"/></svg>'), '进度条'),
         shape: new app.ProgressBar({ size: { width: 160, height: 30 } })
       },
       {
-        ...stencilElement('./stencil/gauge.svg', '仪表盘'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 32"><rect x="0" y="0" width="50" height="32" rx="3" fill="#1a1a2e"/><path d="M7 28 A18 18 0 0 0 43 28" fill="none" stroke="#2a2a40" stroke-width="4" stroke-linecap="round"/><path d="M7 28 A18 18 0 0 0 30.6 10.9" fill="none" stroke="#4a9eff" stroke-width="4" stroke-linecap="round"/><line x1="25" y1="28" x2="31" y2="12" stroke="#e0e0e0" stroke-width="1.5" stroke-linecap="round"/><circle cx="25" cy="28" r="2" fill="#3d3d60"/></svg>'), '仪表盘'),
         shape: new app.Gauge({ size: { width: 120, height: 120 } })
       },
       {
-        ...stencilElement('./stencil/state-display.svg', '状态显示'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 20"><rect x="0" y="0" width="46" height="20" rx="3" fill="#21BA45"/><text x="23" y="14" text-anchor="middle" font-size="10" font-weight="600" font-family="sans-serif" fill="#ffffff">ON</text></svg>'), '状态显示'),
         shape: new app.StateDisplay({ size: { width: 80, height: 40 } })
       },
       {
-        ...stencilElement('./stencil/trend-chart.svg', '趋势图'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 30"><rect x="0" y="0" width="46" height="30" rx="3" fill="#1e1e32"/><rect x="7" y="3" width="36" height="19" fill="#16162a"/><line x1="7" y1="3" x2="7" y2="22" stroke="#333350" stroke-width="1"/><line x1="7" y1="22" x2="43" y2="22" stroke="#333350" stroke-width="1"/><polyline points="7,18 13,12 20,15 27,7 34,10 43,6" fill="none" stroke="#4a9eff" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>'), '趋势图'),
         shape: new app.TrendChart({
           size: { width: 300, height: 150 },
           data: [20, 35, 28, 50, 42, 60, 55, 70, 65, 80]
         })
       },
       {
-        ...stencilElement('./stencil/alarm-list.svg', '报警列表'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 34"><rect x="0.75" y="0.75" width="44.5" height="32.5" rx="2.5" fill="#1e1e32" stroke="#333350" stroke-width="1.5"/><rect x="0.75" y="0.75" width="44.5" height="8" rx="2.5" fill="#252540"/><line x1="0.75" y1="8.75" x2="45.25" y2="8.75" stroke="#333350" stroke-width="1"/><rect x="4" y="13" width="4" height="4" rx="1" fill="#C10015"/><rect x="4" y="21" width="4" height="4" rx="1" fill="#F2C037"/><rect x="4" y="29" width="4" height="4" rx="1" fill="#4a9eff"/><line x1="11" y1="15" x2="38" y2="15" stroke="#555577" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="23" x2="32" y2="23" stroke="#555577" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="31" x2="28" y2="31" stroke="#555577" stroke-width="1.5" stroke-linecap="round"/></svg>'), '报警列表'),
         shape: new app.AlarmList({ size: { width: 320, height: 200 } })
       }
     ],

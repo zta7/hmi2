@@ -87,11 +87,11 @@ export const RectangleView = joint.dia.ElementView.extend({
       "#e0e0e0";
     const fontSize = model.attr("label/fontSize");
     const fontWeight = model.attr("label/fontWeight");
-    const bodyFill = model.attr("body/fill") || "#2a2a3e";
-    const bodyStroke = model.attr("body/stroke") || "#555577";
+    const bodyFill = model.attr("body/fill") || "#1a1a2e";
+    const bodyStroke = model.attr("body/stroke") || "#3d3d60";
     const bodyStrokeWidth = model.attr("body/strokeWidth") || 1;
-    const bodyRx = model.attr("body/rx") || 0;
-    const bodyRy = model.attr("body/ry") || 0;
+    const bodyRx = model.attr("body/rx") || 3;
+    const bodyRy = model.attr("body/ry") || 3;
 
     const rect = {
       tagName: "rect",
@@ -123,6 +123,19 @@ export const RectangleView = joint.dia.ElementView.extend({
     this.body = doc.selectors.body;
     this.el.innerHTML = "";
     this.el.appendChild(doc.fragment);
+
+    // 左侧装饰条
+    const svgNS = "http://www.w3.org/2000/svg";
+    const accent = document.createElementNS(svgNS, "rect");
+    accent.setAttribute("x", "0");
+    accent.setAttribute("y", "0");
+    accent.setAttribute("width", "3");
+    accent.setAttribute("height", String(size.height));
+    accent.setAttribute("fill", bodyStroke);
+    accent.setAttribute("rx", String(bodyRx));
+    accent.setAttribute("class", "rect-accent");
+    const foElRef = this.el.querySelector("foreignObject");
+    if (foElRef) this.el.insertBefore(accent, foElRef);
 
     this.updateSize();
 
@@ -186,5 +199,7 @@ export const RectangleView = joint.dia.ElementView.extend({
       bodyRect.setAttribute("width", String(size.width));
       bodyRect.setAttribute("height", String(size.height));
     }
+    const accentBar = this.el.querySelector(".rect-accent");
+    if (accentBar) accentBar.setAttribute("height", String(size.height));
   },
 });

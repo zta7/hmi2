@@ -63,7 +63,7 @@ export const AlarmListView = joint.dia.ElementView.extend({
     const fo = this.el.querySelector('foreignObject')
     if (fo) {
       fo.innerHTML = `
-        <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;background:#1e1e32;border:1px solid #333350;border-radius:4px;overflow:hidden;box-sizing:border-box;display:flex;flex-direction:column;">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;background:#1e1e32;border:1px solid #3d3d60;border-radius:4px;overflow:hidden;box-sizing:border-box;display:flex;flex-direction:column;box-shadow:0 4px 16px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);">
           <div style="padding:4px 8px;background:#252540;border-bottom:1px solid #333350;font-size:10px;font-weight:600;color:#8888a0;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0;">
             Alarm List
           </div>

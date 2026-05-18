@@ -11,7 +11,7 @@ export class ProgressBar extends joint.dia.Element {
       max: 100,
       value: 60,
       barColor: '#4a9eff',
-      bgColor: '#2a2a3e',
+      bgColor: '#1e1e32',
       showLabel: true,
       direction: 'horizontal' // 'horizontal' | 'vertical'
     }
@@ -42,8 +42,8 @@ export const ProgressBarView = joint.dia.ElementView.extend({
     const isVertical = direction === 'vertical'
 
     const barStyle = isVertical
-      ? `width:100%;height:${pct}%;background:${barColor};position:absolute;bottom:0;left:0;transition:height 0.3s;border-radius:2px;`
-      : `height:100%;width:${pct}%;background:${barColor};position:absolute;top:0;left:0;transition:width 0.3s;border-radius:2px;`
+      ? `width:100%;height:${pct}%;background:linear-gradient(0deg,${barColor}bb,${barColor});position:absolute;bottom:0;left:0;transition:height 0.3s;border-radius:2px;box-shadow:0 0 8px ${barColor}55;`
+      : `height:100%;width:${pct}%;background:linear-gradient(90deg,${barColor}bb,${barColor});position:absolute;top:0;left:0;transition:width 0.3s;border-radius:2px;box-shadow:0 0 8px ${barColor}55;`
 
     const markup = [
       {
@@ -59,7 +59,7 @@ export const ProgressBarView = joint.dia.ElementView.extend({
           tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
           attributes: {
-            style: `width:100%;height:100%;background:${bgColor};border-radius:4px;position:relative;overflow:hidden;border:1px solid #555577;box-sizing:border-box;`
+            style: `width:100%;height:100%;background:linear-gradient(135deg,${bgColor},#16162a);border-radius:4px;position:relative;overflow:hidden;border:1px solid #3d3d60;box-shadow:0 3px 12px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);box-sizing:border-box;`
           },
           children: [
             {

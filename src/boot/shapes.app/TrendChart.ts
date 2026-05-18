@@ -42,12 +42,15 @@ export const TrendChartView = joint.dia.ElementView.extend({
     const h = height - pad.top - pad.bottom
 
     let polyline = ''
+    let areaFill = ''
     if (data.length > 1) {
       const pts = data.map((v: number, i: number) => {
         const x = pad.left + (i / (data.length - 1)) * w
         const y = pad.top + h - ((v - min) / (max - min)) * h
         return `${x},${y}`
       })
+      const baseY = pad.top + h
+      areaFill = `<path d="M ${pad.left} ${baseY} L ${pts.join(' L ')} L ${pad.left + w} ${baseY} Z" fill="${lineColor}" fill-opacity="0.12"/>`
       polyline = `<polyline points="${pts.join(' ')}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>`
     }
 
@@ -59,10 +62,12 @@ export const TrendChartView = joint.dia.ElementView.extend({
 
     const svgContent = `
       <rect width="${width}" height="${height}" fill="#1e1e32" rx="4"/>
+      <rect width="${width}" height="${height}" fill="none" rx="4" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
       <rect x="${pad.left}" y="${pad.top}" width="${w}" height="${h}" fill="#16162a"/>
       <line x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${pad.top + h}" stroke="#333350" stroke-width="1"/>
       <line x1="${pad.left}" y1="${pad.top + h}" x2="${pad.left + w}" y2="${pad.top + h}" stroke="#333350" stroke-width="1"/>
       ${yLabels}
+      ${areaFill}
       ${polyline}
       <text x="${pad.left + w / 2}" y="${height - 4}" text-anchor="middle" font-size="9" fill="#8888a0">${label}</text>
     `
