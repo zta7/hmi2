@@ -55,25 +55,79 @@ export const SelectView = joint.dia.ElementView.extend({
       },
       children: [
         {
-          tagName: 'select',
+          tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'select',
           attributes: {
-            name: 'select'
-          },
-          style: {
-            width: '100%',
-            height: '100%'
+            style: 'width: 100%; height: 100%; border-radius: 4px; background: #1a1a2e; border: 1px solid #3d3d60; overflow: hidden; position: relative;'
           },
           children: [
-            ...model.attributes.options.map((e: any) => ({
-              tagName: 'option',
+            {
+              tagName: 'select',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              selector: 'select',
               attributes: {
-                value: e.value,
-                label: e.label,
-                selected: e.value === model.attributes.value
-              }
-            }))
+                name: 'select'
+              },
+              style: {
+                width: '100%',
+                height: '100%',
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                color: '#e0e0e0',
+                padding: '0 24px 0 8px',
+                appearance: 'none',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontFamily: 'sans-serif'
+              },
+              children: [
+                ...model.attributes.options.map((e: any) => ({
+                  tagName: 'option',
+                  attributes: {
+                    value: e.value,
+                    label: e.label,
+                    selected: e.value === model.attributes.value
+                  },
+                  style: {
+                    background: '#1a1a2e',
+                    color: '#e0e0e0'
+                  }
+                }))
+              ]
+            },
+            {
+              tagName: 'div',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              attributes: {
+                style: 'position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 0;'
+              },
+              children: [
+                {
+                  tagName: 'svg',
+                  namespaceURI: 'http://www.w3.org/2000/svg',
+                  attributes: {
+                    width: '14',
+                    height: '14',
+                    viewBox: '0 0 24 24'
+                  },
+                  children: [
+                    {
+                      tagName: 'path',
+                      namespaceURI: 'http://www.w3.org/2000/svg',
+                      attributes: {
+                        d: 'M6 9l6 6 6-6',
+                        fill: 'none',
+                        stroke: '#4a9eff',
+                        'stroke-width': '2.5',
+                        'stroke-linecap': 'round',
+                        'stroke-linejoin': 'round'
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]

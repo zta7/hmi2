@@ -29,6 +29,7 @@ export const SwitchView = joint.dia.ElementView.extend({
     const { util } = joint
     const { model } = this
     const online = !window.online
+    const isOn = model.attributes.on
 
     const rect = {
       tagName: 'rect',
@@ -51,27 +52,16 @@ export const SwitchView = joint.dia.ElementView.extend({
         {
           tagName: 'div',
           attributes: {
-            style: 'width: 100%;height: 100%; position: relative'
+            style: `width: 100%; height: 100%; border-radius: 50%; background: ${isOn ? '#4a9eff' : '#1a1a2e'}; border: 2px solid ${isOn ? '#4a9eff' : '#3d3d60'}; display: flex; align-items: center; justify-content: center; cursor: pointer;`
           },
           namespaceURI: 'http://www.w3.org/1999/xhtml',
           children: [
             {
+              tagName: 'div',
               attributes: {
-                overflow: 'hidden',
-                style: 'width: 100%; height: 100%;',
-                // 'data-content': model.attributes.text,
-                type: 'button'
+                style: `width: 55%; height: 55%; border-radius: 50%; background: ${isOn ? '#ffffff' : '#3d3d60'};`
               },
-              tagName: 'button',
-              selector: 'button'
-              // textContent: 'Button'
-            },
-            {
-              tagName: 'img',
-              attributes: {
-                style: `position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; rotate: ${model.attributes.on ? '0deg' : '30deg'}`,
-                src: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjgwNTk0MzI0MDA5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI4NDIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxwYXRoIGQ9Ik02NDAgMTQ2LjU5MlYyODIuNTZhMzIwIDMyMCAwIDAgMSA5OC4yNzIgNjcuMTY4Qzc5OC43MiA0MTAuMTc2IDgzMiA0OTAuNTI4IDgzMiA1NzZzLTMzLjI4IDE2NS44MjQtOTMuNzI4IDIyNi4yNzJDNjc3LjgyNCA4NjIuNzIgNTk3LjQ3MiA4OTYgNTEyIDg5NnMtMTY1LjgyNC0zMy4yOC0yMjYuMjcyLTkzLjcyOEMyMjUuMjggNzQxLjgyNCAxOTIgNjYxLjQ3MiAxOTIgNTc2czMzLjI4LTE2NS44MjQgOTMuNzI4LTIyNi4yNzJBMzE5LjQyNCAzMTkuNDI0IDAgMCAxIDM4NCAyODIuNTZWMTQ2LjU5MkMxOTguOTQ0IDIwMS42NjQgNjQgMzczLjA1NiA2NCA1NzZjMCAyNDcuNDI0IDIwMC41NzYgNDQ4IDQ0OCA0NDhzNDQ4LTIwMC41NzYgNDQ4LTQ0OGMwLTIwMi45NDQtMTM0Ljk0NC0zNzQuMzM2LTMyMC00MjkuNDA4ek00NDggMGgxMjh2NTEyaC0xMjh6IiBwLWlkPSIyODQzIj48L3BhdGg+PC9zdmc+'
-              }
+              namespaceURI: 'http://www.w3.org/1999/xhtml'
             }
           ]
         }

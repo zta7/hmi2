@@ -28,6 +28,8 @@ export const CheckboxView = joint.dia.ElementView.extend({
     const { model } = this
     const { util } = joint
     const online = !window.online
+    const isChecked = model.attributes.checked
+
     const rect = {
       tagName: 'rect',
       selector: 'body',
@@ -47,18 +49,36 @@ export const CheckboxView = joint.dia.ElementView.extend({
       },
       children: [
         {
-          tagName: 'input',
+          tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'checkbox',
           attributes: {
-            type: 'checkbox',
-            name: 'input',
-            checked: model.attributes.checked
+            style: `width: 100%; height: 100%; border-radius: 4px; background: ${isChecked ? '#4a9eff' : '#1a1a2e'}; border: 2px solid ${isChecked ? '#4a9eff' : '#3d3d60'}; display: flex; align-items: center; justify-content: center; cursor: pointer;`
           },
-          style: {
-            width: '100%',
-            height: '100%'
-          }
+          children: isChecked ? [
+            {
+              tagName: 'svg',
+              namespaceURI: 'http://www.w3.org/2000/svg',
+              attributes: {
+                width: '16',
+                height: '16',
+                viewBox: '0 0 24 24'
+              },
+              children: [
+                {
+                  tagName: 'path',
+                  namespaceURI: 'http://www.w3.org/2000/svg',
+                  attributes: {
+                    d: 'M5 13l4 4L19 7',
+                    fill: 'none',
+                    stroke: '#ffffff',
+                    'stroke-width': '3',
+                    'stroke-linecap': 'round',
+                    'stroke-linejoin': 'round'
+                  }
+                }
+              ]
+            }
+          ] : []
         }
       ]
     }

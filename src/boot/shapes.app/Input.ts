@@ -27,7 +27,9 @@ export const InputView = joint.dia.ElementView.extend({
     size: ['RESIZE'],
     position: ['TRANSFORM'],
     angle: ['TRANSFORM'],
-    value: ['RENDER']
+    value: ['RENDER'],
+    color: ['RENDER'],
+    fontSize: ['RENDER']
   },
 
   render () {
@@ -56,41 +58,66 @@ export const InputView = joint.dia.ElementView.extend({
       },
       children: [
         {
-          tagName: 'input',
+          tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'input',
           attributes: {
-            autocomplete: 'off',
-            type: 'text',
-            name: 'input',
-            placeholder: '输入框',
-            id: inputId,
-            value: model.attributes.value
-
+            style: 'width: 100%; height: 100%; display: flex; border-radius: 4px; background: #1a1a2e; border: 1px solid #3d3d60; overflow: hidden;'
           },
-          style: {
-            fontSize: model.attributes.fontSize,
-            width: 'calc(100% - 35px)',
-            height: '100%'
-          }
-        },
-        {
-          tagName: 'button',
-          namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'button',
-          attributes: {
-            'data-content': '确认',
-            id: buttonId
-          },
-          style: {
-            padding: 0,
-            margin: 0,
-            border: '1px solid',
-            // fontSize: '10px',
-            width: '35px',
-            height: '100%',
-            whiteSpace: 'nowrap'
-          }
+          children: [
+            {
+              tagName: 'div',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              attributes: {
+                style: `width: 3px; background: ${model.attributes.color}; margin: 4px; border-radius: 1.5px;`
+              }
+            },
+            {
+              tagName: 'input',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              selector: 'input',
+              attributes: {
+                autocomplete: 'off',
+                type: 'text',
+                name: 'input',
+                placeholder: '输入',
+                id: inputId,
+                value: model.attributes.value
+              },
+              style: {
+                fontSize: model.attributes.fontSize,
+                width: 'calc(100% - 48px)',
+                height: '100%',
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                color: model.attributes.color,
+                padding: '0 6px',
+                fontFamily: 'sans-serif'
+              }
+            },
+            {
+              tagName: 'button',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              selector: 'button',
+              attributes: {
+                'data-content': 'OK',
+                id: buttonId
+              },
+              style: {
+                padding: '0 8px',
+                margin: 0,
+                border: 'none',
+                borderLeft: '1px solid #3d3d60',
+                background: '#2a2a40',
+                color: model.attributes.color,
+                fontSize: '11px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                minWidth: '35px',
+                height: '100%'
+              }
+            }
+          ]
         }
       ]
     }

@@ -168,23 +168,23 @@ export const getStencilLoad = (lang: string) => {
     ],
     Outputs: [
       {
-        ...stencilElement('./stencil/button.svg', l('Switch', 'Switch')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1a1a2e" stroke="#4a9eff" stroke-width="2"/><circle cx="20" cy="20" r="10" fill="#4a9eff"/><circle cx="20" cy="20" r="5" fill="#ffffff"/></svg>'), l('Switch', 'Switch')),
         shape: new app.Switch({ size: { width: 32, height: 32 } })
       },
       {
-        ...stencilElement('./stencil/input.svg', l('Input', 'Input')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24"><rect x="0.75" y="0.75" width="44.5" height="22.5" rx="3" fill="#1a1a2e" stroke="#00c4b4" stroke-width="1.5"/><rect x="3" y="3" width="8" height="16" rx="1.5" fill="#00c4b4"/><line x1="14" y1="12" x2="38" y2="12" stroke="#00c4b4" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg>'), l('Input', 'Input')),
         shape: new app.Input()
       },
       {
-        ...stencilElement('./stencil/select.svg', l('Select', 'Select')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24"><rect x="0.75" y="0.75" width="44.5" height="22.5" rx="3" fill="#1a1a2e" stroke="#7c5af8" stroke-width="1.5"/><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#7c5af8" opacity="0.3"/><polygon points="36,9 40,12 36,15" fill="#7c5af8"/></svg>'), l('Select', 'Select')),
         shape: new app.Select()
       },
       {
-        ...stencilElement('./stencil/slider.svg', l('Slider', 'Slider')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 20"><rect x="0.75" y="7.25" width="44.5" height="5.5" rx="2.75" fill="#1a1a2e" stroke="#f2c037" stroke-width="1.5"/><rect x="0.75" y="7.25" width="22" height="5.5" rx="2.75" fill="#f2c037"/><circle cx="22.75" cy="10" r="4" fill="#1a1a2e"/></svg>'), l('Slider', 'Slider')),
         shape: new app.Slider()
       },
       {
-        ...stencilElement('./stencil/checkbox.svg', l('CheckBox', 'Checkbox')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0.75" y="0.75" width="22.5" height="22.5" rx="3" fill="#1a1a2e" stroke="#e15656" stroke-width="1.5"/><path d="M6 12 L10 16 L18 8" fill="none" stroke="#e15656" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'), l('CheckBox', 'Checkbox')),
         shape: new app.Checkbox()
       }
     ],

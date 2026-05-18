@@ -54,21 +54,33 @@ export const SliderView = joint.dia.ElementView.extend({
       },
       children: [
         {
-          tagName: 'input',
+          tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'slider',
-          style: {
-            width: '100%',
-            height: '100%'
-          },
           attributes: {
-            type: 'range',
-            name: 'slider',
-            min: model.attributes.min,
-            max: model.attributes.max,
-            step: model.attributes.step,
-            value: model.attributes.value
-          }
+            style: 'width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4px;'
+          },
+          children: [
+            {
+              tagName: 'input',
+              namespaceURI: 'http://www.w3.org/1999/xhtml',
+              selector: 'slider',
+              style: {
+                width: '100%',
+                height: '6px',
+                appearance: 'none',
+                background: 'transparent',
+                cursor: 'pointer'
+              },
+              attributes: {
+                type: 'range',
+                name: 'slider',
+                min: model.attributes.min,
+                max: model.attributes.max,
+                step: model.attributes.step,
+                value: model.attributes.value
+              }
+            }
+          ]
         }
       ]
     }
@@ -79,6 +91,53 @@ export const SliderView = joint.dia.ElementView.extend({
     this.body = doc.selectors.body
     this.el.innerHTML = ''
     this.el.appendChild(doc.fragment)
+    const sliderInput = this.el.querySelector('input[type="range"]')
+    if (sliderInput) {
+      const style = document.createElement('style')
+      style.textContent = `
+        input[type="range"]::-webkit-slider-track {
+          width: 100%;
+          height: 6px;
+          background: #1a1a2e;
+          border-radius: 3px;
+          border: 1px solid #3d3d60;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 14px;
+          height: 14px;
+          background: #ffffff;
+          border-radius: 50%;
+          cursor: pointer;
+          margin-top: -5px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        input[type="range"]::-moz-range-track {
+          width: 100%;
+          height: 6px;
+          background: #1a1a2e;
+          border-radius: 3px;
+          border: 1px solid #3d3d60;
+        }
+        input[type="range"]::-moz-range-thumb {
+          width: 14px;
+          height: 14px;
+          background: #ffffff;
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 6px;
+          background: linear-gradient(to right, #4a9eff 0%, #4a9eff ${((model.attributes.value - model.attributes.min) / (model.attributes.max - model.attributes.min)) * 100}%, #1a1a2e ${((model.attributes.value - model.attributes.min) / (model.attributes.max - model.attributes.min)) * 100}%, #1a1a2e 100%);
+          border-radius: 3px;
+          border: 1px solid #3d3d60;
+        }
+      `
+      this.el.appendChild(style)
+    }
     this.updateSize()
     this.translate()
   },
