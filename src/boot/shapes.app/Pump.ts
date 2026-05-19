@@ -28,9 +28,9 @@ export class Pump extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#4a9eff',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         label: {
           text: 'Pump',
@@ -40,7 +40,7 @@ export class Pump extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         },
         rotorGroup: {
           transform: 'translate(calc(w/2),calc(h/2))',
@@ -49,14 +49,14 @@ export class Pump extends joint.dia.Element {
         },
         rotorFrame: {
           r: 40,
-          fill: '#eee',
-          stroke: '#666',
+          fill: '#3d3d60',
+          stroke: '#4a9eff',
           strokeWidth: 2
         },
         rotorBackground: {
           r: 34,
-          fill: '#777',
-          stroke: '#222',
+          fill: '#2a2a40',
+          stroke: '#2d6bc9',
           strokeWidth: 1,
           style: {
             transition: 'fill 0.5s ease-in-out'
@@ -65,9 +65,9 @@ export class Pump extends joint.dia.Element {
         rotor: {
           // d: `M ${a} ${a} ${b} ${r} -${b} ${r} -${a} ${a} -${r} ${b} -${r} -${b} -${a} -${a} -${b} -${r} ${b} -${r} ${a} -${a} ${r} -${b} ${r} ${b} Z`,
           d: `M 0 0 V ${r} l ${-d} ${-l} Z M 0 0 V ${-r} l ${d} ${l} Z M 0 0 H ${r} l ${-l} ${d} Z M 0 0 H ${-r} l ${l} ${-d} Z`,
-          stroke: '#222',
+          stroke: '#4a9eff',
           strokeWidth: 3,
-          fill: '#bbb'
+          fill: '#4a4a80'
         }
       },
       ports: {
@@ -93,8 +93,8 @@ export class Pump extends joint.dia.Element {
                 width: 'calc(w)',
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                fill: '#ddd',
-                stroke: 'gray',
+                fill: '#2a2a40',
+                stroke: '#4a9eff',
                 strokeWidth: 1
               },
               pipeEnd: {
@@ -102,9 +102,9 @@ export class Pump extends joint.dia.Element {
                 width: 10,
                 height: 'calc(h+6)',
                 y: 'calc(h / -2 - 3)',
-                stroke: 'gray',
+                stroke: '#4a9eff',
                 strokeWidth: 3,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

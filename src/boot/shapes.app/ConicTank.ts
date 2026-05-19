@@ -16,7 +16,7 @@ export class ConicTank extends joint.dia.Element {
           magnetSelector: 'body'
         },
         body: {
-          stroke: 'gray',
+          stroke: '#7c5af8',
           strokeWidth: 4,
           x: 0,
           y: 0,
@@ -24,7 +24,7 @@ export class ConicTank extends joint.dia.Element {
           height: 'calc(h)',
           rx: 120,
           ry: 10,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         top: {
           x: 0,
@@ -32,16 +32,16 @@ export class ConicTank extends joint.dia.Element {
           width: 'calc(w)',
           height: 20,
           fill: 'none',
-          stroke: 'gray',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         bottom: {
           d: 'M 0 0 L calc(w) 0 L calc(w / 2 + 10) 70 h -20 Z',
           transform: 'translate(0, calc(h - 10))',
-          stroke: 'gray',
+          stroke: '#7c5af8',
           strokeLinejoin: 'round',
           strokeWidth: 2,
-          fill: '#ddd'
+          fill: '#3d3d60'
         },
         label: {
           text: 'Tank 2',
@@ -51,7 +51,7 @@ export class ConicTank extends joint.dia.Element {
           y: -10,
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       }
     }

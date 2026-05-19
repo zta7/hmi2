@@ -15,28 +15,28 @@ export class ButterflyValve extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#00c4b4',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         stem: {
           x1: 'calc(w / 2)',
           y1: 0,
           x2: 'calc(w / 2)',
           y2: 'calc(h)',
-          stroke: '#555',
+          stroke: '#00c4b4',
           strokeWidth: 3
         },
         discLeft: {
           d: 'M calc(w/2) calc(h/2 - 14) Q calc(w/2 - 14) calc(h/2) calc(w/2) calc(h/2 + 14)',
-          fill: '#aaa',
-          stroke: '#555',
+          fill: '#00a399',
+          stroke: '#008077',
           strokeWidth: 1.5
         },
         discRight: {
           d: 'M calc(w/2) calc(h/2 - 14) Q calc(w/2 + 14) calc(h/2) calc(w/2) calc(h/2 + 14)',
-          fill: '#bbb',
-          stroke: '#555',
+          fill: '#00c4b4',
+          stroke: '#008077',
           strokeWidth: 1.5
         },
         label: {
@@ -47,7 +47,7 @@ export class ButterflyValve extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -57,8 +57,8 @@ export class ButterflyValve extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeBody" /><rect @selector="pipeEnd" />`,
             size: { width: 50, height: 24 },
             attrs: {
-              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#ddd', stroke: 'gray', strokeWidth: 1 },
-              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#2a2a40', stroke: '#00c4b4', strokeWidth: 1 },
+              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: '#00c4b4', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

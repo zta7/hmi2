@@ -15,8 +15,8 @@ export class PipeFlange extends joint.dia.Element {
           y: 'calc(h/2 - 8)',
           width: 'calc(w - 28)',
           height: 16,
-          fill: '#ddd',
-          stroke: 'gray',
+          fill: '#2a2a40',
+          stroke: '#a0a0c0',
           strokeWidth: 1
         },
         flangeLeft: {
@@ -26,8 +26,8 @@ export class PipeFlange extends joint.dia.Element {
           height: 'calc(h)',
           rx: 2,
           ry: 2,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#a0a0c0',
           strokeWidth: 2
         },
         flangeRight: {
@@ -37,14 +37,14 @@ export class PipeFlange extends joint.dia.Element {
           height: 'calc(h)',
           rx: 2,
           ry: 2,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#a0a0c0',
           strokeWidth: 2
         },
-        boltL1: { cx: 7, cy: 8, r: 2.5, fill: '#888', stroke: 'none' },
-        boltL2: { cx: 7, cy: 'calc(h - 8)', r: 2.5, fill: '#888', stroke: 'none' },
-        boltR1: { cx: 'calc(w - 7)', cy: 8, r: 2.5, fill: '#888', stroke: 'none' },
-        boltR2: { cx: 'calc(w - 7)', cy: 'calc(h - 8)', r: 2.5, fill: '#888', stroke: 'none' },
+        boltL1: { cx: 7, cy: 8, r: 2.5, fill: '#5a5a90', stroke: 'none' },
+        boltL2: { cx: 7, cy: 'calc(h - 8)', r: 2.5, fill: '#5a5a90', stroke: 'none' },
+        boltR1: { cx: 'calc(w - 7)', cy: 8, r: 2.5, fill: '#5a5a90', stroke: 'none' },
+        boltR2: { cx: 'calc(w - 7)', cy: 'calc(h - 8)', r: 2.5, fill: '#5a5a90', stroke: 'none' },
         label: {
           text: '法兰',
           textAnchor: 'middle',
@@ -53,7 +53,7 @@ export class PipeFlange extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -63,7 +63,7 @@ export class PipeFlange extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeEnd" />`,
             size: { width: 10, height: 30 },
             attrs: {
-              pipeEnd: { magnet: true, width: 10, height: 'calc(h)', y: 'calc(h / -2)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeEnd: { magnet: true, width: 10, height: 'calc(h)', y: 'calc(h / -2)', stroke: '#a0a0c0', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

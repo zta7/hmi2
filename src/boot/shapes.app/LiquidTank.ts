@@ -29,7 +29,7 @@ export class LiquidTank extends joint.dia.Element {
           d: 'M 20 calc(h) l -5 10 M calc(w - 20) calc(h) l 5 10'
         },
         body: {
-          stroke: 'gray',
+          stroke: '#7c5af8',
           strokeWidth: 4,
           x: 0,
           y: 0,
@@ -37,7 +37,7 @@ export class LiquidTank extends joint.dia.Element {
           height: 'calc(h)',
           rx: 120,
           ry: 10,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         top: {
           x: 0,
@@ -45,7 +45,7 @@ export class LiquidTank extends joint.dia.Element {
           width: 'calc(w)',
           height: 20,
           fill: 'none',
-          stroke: 'gray',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         label: {
@@ -56,7 +56,7 @@ export class LiquidTank extends joint.dia.Element {
           y: 'calc(h + 10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         },
         panelBody: {
           x: 20,
@@ -65,8 +65,8 @@ export class LiquidTank extends joint.dia.Element {
           height: 'calc(h - 70)',
           rx: 1,
           ry: 1,
-          fill: 'lightgray',
-          stroke: 'gray',
+          fill: '#1a1a2e',
+          stroke: '#7c5af8',
           strokeWidth: 1
         },
         panelWindow: {

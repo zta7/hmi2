@@ -15,8 +15,8 @@ export class HorizontalTank extends joint.dia.Element {
           y: 0,
           width: 'calc(w - 60)',
           height: 'calc(h)',
-          fill: 'lightgray',
-          stroke: 'gray',
+          fill: '#1a1a2e',
+          stroke: '#7c5af8',
           strokeWidth: 3
         },
         capLeft: {
@@ -24,8 +24,8 @@ export class HorizontalTank extends joint.dia.Element {
           cy: 'calc(h / 2)',
           rx: 30,
           ry: 'calc(h / 2)',
-          fill: '#ddd',
-          stroke: 'gray',
+          fill: '#2a2a40',
+          stroke: '#7c5af8',
           strokeWidth: 3
         },
         capRight: {
@@ -33,8 +33,8 @@ export class HorizontalTank extends joint.dia.Element {
           cy: 'calc(h / 2)',
           rx: 30,
           ry: 'calc(h / 2)',
-          fill: '#ddd',
-          stroke: 'gray',
+          fill: '#2a2a40',
+          stroke: '#7c5af8',
           strokeWidth: 3
         },
         nozzleTop: {
@@ -42,8 +42,8 @@ export class HorizontalTank extends joint.dia.Element {
           y: -18,
           width: 12,
           height: 18,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         nozzleBottom: {
@@ -51,8 +51,8 @@ export class HorizontalTank extends joint.dia.Element {
           y: 'calc(h)',
           width: 12,
           height: 18,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         label: {
@@ -63,7 +63,7 @@ export class HorizontalTank extends joint.dia.Element {
           y: 'calc(h+28)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -73,7 +73,7 @@ export class HorizontalTank extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeEnd" />`,
             size: { width: 10, height: 24 },
             attrs: {
-              pipeEnd: { magnet: true, width: 10, height: 24, y: -12, stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeEnd: { magnet: true, width: 10, height: 24, y: -12, stroke: '#7c5af8', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

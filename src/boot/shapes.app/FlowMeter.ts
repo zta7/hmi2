@@ -24,9 +24,9 @@ export class FlowMeter extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#e15656',
           strokeWidth: 2,
-          fill: '#eee'
+          fill: '#1a1a2e'
         },
         flowIcon: {
           text: 'F',
@@ -37,8 +37,8 @@ export class FlowMeter extends joint.dia.Element {
           fontSize: 20,
           fontWeight: 700,
           fontFamily: 'sans-serif',
-          fill: '#222',
-          stroke: '#555555',
+          fill: '#e15656',
+          stroke: '#b03a3a',
           strokeWidth: 2
         },
         valueText: {
@@ -49,8 +49,8 @@ export class FlowMeter extends joint.dia.Element {
           y: 'calc(h / 2 + 12)',
           fontSize: 10,
           fontFamily: 'sans-serif',
-          // fill: '#333',
-          stroke: '#666666',
+          fill: '#a0a0c0',
+          stroke: '#a0a0c0',
           strokeWidth: 1
         },
         label: {
@@ -61,7 +61,7 @@ export class FlowMeter extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -84,8 +84,8 @@ export class FlowMeter extends joint.dia.Element {
                 width: 'calc(w)',
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                fill: '#ddd',
-                stroke: 'gray',
+                fill: '#2a2a40',
+                stroke: '#e15656',
                 strokeWidth: 1
               },
               pipeEnd: {
@@ -93,9 +93,9 @@ export class FlowMeter extends joint.dia.Element {
                 width: 10,
                 height: 'calc(h+6)',
                 y: 'calc(h / -2 - 3)',
-                stroke: 'gray',
+                stroke: '#e15656',
                 strokeWidth: 3,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

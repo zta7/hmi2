@@ -13,7 +13,7 @@ export class PipeElbow extends joint.dia.Element {
         body: {
           d: 'M 0 calc(h/2 - 12) H calc(w/2 - 12) Q calc(w/2 + 12) calc(h/2 - 12) calc(w/2 + 12) calc(h/2 + 12) V calc(h)',
           fill: 'none',
-          stroke: '#ddd',
+          stroke: '#2a2a40',
           strokeWidth: 24,
           strokeLinecap: 'square',
           strokeLinejoin: 'round'
@@ -21,7 +21,7 @@ export class PipeElbow extends joint.dia.Element {
         outline: {
           d: 'M 0 calc(h/2 - 12) H calc(w/2 - 12) Q calc(w/2 + 12) calc(h/2 - 12) calc(w/2 + 12) calc(h/2 + 12) V calc(h)',
           fill: 'none',
-          stroke: 'gray',
+          stroke: '#a0a0c0',
           strokeWidth: 28,
           strokeLinecap: 'square',
           strokeLinejoin: 'round'
@@ -34,7 +34,7 @@ export class PipeElbow extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -44,7 +44,7 @@ export class PipeElbow extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeEnd" />`,
             size: { width: 10, height: 28 },
             attrs: {
-              pipeEnd: { magnet: true, width: 10, height: 28, y: -14, stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeEnd: { magnet: true, width: 10, height: 28, y: -14, stroke: '#a0a0c0', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

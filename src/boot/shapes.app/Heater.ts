@@ -17,8 +17,8 @@ export class Heater extends joint.dia.Element {
           height: 'calc(h)',
           rx: 4,
           ry: 4,
-          fill: 'lightgray',
-          stroke: 'gray',
+          fill: '#1a1a2e',
+          stroke: '#ff8c42',
           strokeWidth: 3
         },
         coil: {
@@ -50,7 +50,7 @@ export class Heater extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -60,8 +60,8 @@ export class Heater extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeBody" /><rect @selector="pipeEnd" />`,
             size: { width: 50, height: 24 },
             attrs: {
-              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#ddd', stroke: 'gray', strokeWidth: 1 },
-              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#2a2a40', stroke: '#ff8c42', strokeWidth: 1 },
+              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: '#ff8c42', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

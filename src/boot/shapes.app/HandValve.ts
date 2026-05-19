@@ -20,29 +20,29 @@ export class HandValve extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#00c4b4',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         stem: {
           width: 10,
           height: 30,
           x: 'calc(w / 2 - 5)',
           y: -30,
-          stroke: '#333',
+          stroke: '#00c4b4',
           strokeWidth: 2,
-          fill: '#555'
+          fill: '#3d3d60'
         },
         handwheel: {
           width: 60,
           height: 10,
           x: 'calc(w / 2 - 30)',
           y: -30,
-          stroke: '#333',
+          stroke: '#008077',
           strokeWidth: 2,
           rx: 5,
           ry: 5,
-          fill: '#666'
+          fill: '#4a4a80'
         },
         label: {
           text: 'Valve',
@@ -52,7 +52,7 @@ export class HandValve extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: '14',
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -78,8 +78,8 @@ export class HandValve extends joint.dia.Element {
                 width: 'calc(w)',
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                fill: '#ddd',
-                stroke: 'gray',
+                fill: '#2a2a40',
+                stroke: '#00c4b4',
                 strokeWidth: 1
               },
               pipeEnd: {
@@ -87,9 +87,9 @@ export class HandValve extends joint.dia.Element {
                 width: 10,
                 height: 'calc(h+6)',
                 y: 'calc(h / -2 - 3)',
-                stroke: 'gray',
+                stroke: '#00c4b4',
                 strokeWidth: 3,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

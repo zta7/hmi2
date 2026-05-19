@@ -21,7 +21,7 @@ export class PipeJoin extends joint.shapes.standard.Rectangle {
             attrs: {
               portBody: {
                 magnet: true,
-                fill: '#61549c',
+                fill: '#5a5a90',
                 strokeWidth: 0
               },
               portLabel: {

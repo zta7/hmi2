@@ -23,9 +23,9 @@ export class Motor extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#4a9eff',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         motorText: {
           text: 'M',
@@ -36,8 +36,8 @@ export class Motor extends joint.dia.Element {
           fontSize: 28,
           fontWeight: 700,
           fontFamily: 'sans-serif',
-          fill: '#222222',
-          stroke: '#555555',
+          fill: '#4a9eff',
+          stroke: '#2d6bc9',
           strokeWidth: 2
         },
         statusRing: {
@@ -58,15 +58,15 @@ export class Motor extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         },
         shaft: {
           x: 'calc(w)',
           y: 'calc(h / 2 - 6)',
           width: 30,
           height: 12,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#4a9eff',
           strokeWidth: 1
         }
       },
@@ -90,9 +90,9 @@ export class Motor extends joint.dia.Element {
                 width: 10,
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                stroke: 'gray',
+                stroke: '#4a9eff',
                 strokeWidth: 3,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

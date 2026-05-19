@@ -25,14 +25,14 @@ export class Pipe extends joint.dia.Link {
         },
         line: {
           connection: true,
-          stroke: '#eee',
+          stroke: '#2a2a40',
           strokeWidth: 10,
           strokeLinejoin: 'round',
           strokeLinecap: 'round'
         },
         outline: {
           connection: true,
-          stroke: '#444',
+          stroke: '#5a5a90',
           strokeWidth: 16,
           strokeLinejoin: 'round',
           strokeLinecap: 'round'

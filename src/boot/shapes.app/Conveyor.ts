@@ -16,7 +16,7 @@ export class Conveyor extends joint.dia.Element {
           width: 'calc(w - 40)',
           height: 28,
           fill: 'none',
-          stroke: 'gray',
+          stroke: '#4a9eff',
           strokeWidth: 3,
           rx: 14,
           ry: 14
@@ -26,7 +26,7 @@ export class Conveyor extends joint.dia.Element {
           y: 'calc(h/2 - 14)',
           width: 'calc(w - 40)',
           height: 28,
-          fill: '#ddd',
+          fill: '#2a2a40',
           stroke: 'none',
           rx: 14,
           ry: 14
@@ -35,38 +35,38 @@ export class Conveyor extends joint.dia.Element {
           cx: 20,
           cy: 'calc(h/2)',
           r: 14,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#4a9eff',
           strokeWidth: 3
         },
         rollerRight: {
           cx: 'calc(w - 20)',
           cy: 'calc(h/2)',
           r: 14,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#4a9eff',
           strokeWidth: 3
         },
         rollerLeftInner: {
           cx: 20,
           cy: 'calc(h/2)',
           r: 6,
-          fill: '#777',
-          stroke: '#555',
+          fill: '#5a5a90',
+          stroke: '#2d6bc9',
           strokeWidth: 1
         },
         rollerRightInner: {
           cx: 'calc(w - 20)',
           cy: 'calc(h/2)',
           r: 6,
-          fill: '#777',
-          stroke: '#555',
+          fill: '#5a5a90',
+          stroke: '#2d6bc9',
           strokeWidth: 1
         },
         legs: {
           d: 'M 30 calc(h/2 + 14) V calc(h) M calc(w - 30) calc(h/2 + 14) V calc(h)',
           fill: 'none',
-          stroke: 'gray',
+          stroke: '#4a9eff',
           strokeWidth: 4,
           strokeLinecap: 'round'
         },
@@ -78,7 +78,7 @@ export class Conveyor extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -87,7 +87,7 @@ export class Conveyor extends joint.dia.Element {
             position: { name: 'absolute', args: {} },
             markup: joint.util.svg`<rect @selector="portBody" />`,
             size: { width: 20, height: 8 },
-            attrs: { portBody: { magnet: true, width: 20, height: 8, x: -10, y: -4, fill: '#ddd', stroke: 'gray', strokeWidth: 2 } }
+            attrs: { portBody: { magnet: true, width: 20, height: 8, x: -10, y: -4, fill: '#2a2a40', stroke: '#4a9eff', strokeWidth: 2 } }
           }
         },
         items: [

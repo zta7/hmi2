@@ -15,15 +15,15 @@ export class Silo extends joint.dia.Element {
           y: 0,
           width: 'calc(w)',
           height: 'calc(h - 60)',
-          fill: 'lightgray',
-          stroke: 'gray',
+          fill: '#1a1a2e',
+          stroke: '#7c5af8',
           strokeWidth: 3
         },
         hopper: {
           d: 'M 0 0 L calc(w) 0 L calc(w/2 + 12) 60 H calc(w/2 - 12) Z',
           transform: 'translate(0, calc(h - 60))',
-          fill: '#ddd',
-          stroke: 'gray',
+          fill: '#2a2a40',
+          stroke: '#7c5af8',
           strokeWidth: 3,
           strokeLinejoin: 'round'
         },
@@ -32,8 +32,8 @@ export class Silo extends joint.dia.Element {
           y: 'calc(h - 8)',
           width: 16,
           height: 12,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         lid: {
@@ -41,8 +41,8 @@ export class Silo extends joint.dia.Element {
           y: 0,
           width: 'calc(w)',
           height: 14,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         ventPipe: {
@@ -50,8 +50,8 @@ export class Silo extends joint.dia.Element {
           y: -20,
           width: 10,
           height: 20,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#7c5af8',
           strokeWidth: 2
         },
         label: {
@@ -62,7 +62,7 @@ export class Silo extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -72,7 +72,7 @@ export class Silo extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeEnd" />`,
             size: { width: 10, height: 24 },
             attrs: {
-              pipeEnd: { magnet: true, width: 10, height: 24, y: -12, stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeEnd: { magnet: true, width: 10, height: 24, y: -12, stroke: '#7c5af8', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

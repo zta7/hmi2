@@ -273,98 +273,98 @@ export const getStencilLoad = (lang: string) => {
     ],
     Scala: [
       {
-        ...stencilElement('./stencil/pump.svg', l('Pump', 'Pump')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#4a9eff" stroke-width="2"/><circle cx="18" cy="18" r="8" fill="#3d3d60" stroke="#4a9eff" stroke-width="1"/><path d="M 14 18 L 18 10 L 22 18 M 18 10 V 22 M 14 22 L 22 14" fill="none" stroke="#4a9eff" stroke-width="2" stroke-linejoin="round"/></svg>'), l('Pump', 'Pump')),
         shape: new app.Pump({ attrs: { label: { text: 'Pump' } } })
       },
       {
-        ...stencilElement('./stencil/controlValue.svg', l('ControlValve', 'Ctrl Valve')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><rect x="10" y="10" width="16" height="16" rx="3" fill="#2a2a40" stroke="#00c4b4" stroke-width="1"/><rect x="12" y="8" width="12" height="6" rx="2" fill="#4a4a80" stroke="#008077" stroke-width="1"/></svg>'), l('ControlValve', 'Ctrl Valve')),
         shape: new app.ControlValve({ open: 1, attrs: { label: { text: 'CTRL Valve 1' } } })
       },
       {
-        ...stencilElement('./stencil/liquidTank.svg', l('LiquidTank', 'Liquid Tank')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="2" width="28" height="28" rx="10" ry="4" fill="#1a1a2e" stroke="#7c5af8" stroke-width="2"/><rect x="4" y="12" width="28" height="8" fill="#2a2a40" stroke="#7c5af8" stroke-width="1"/></svg>'), l('LiquidTank', 'Liquid Tank')),
         shape: new app.LiquidTank({ attrs: { label: { text: 'LiquidTank' } } })
       },
       {
-        ...stencilElement('./stencil/conicTank.svg', l('ConicTank', 'Conic Tank')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="6" y="4" width="24" height="18" rx="12" ry="3" fill="#1a1a2e" stroke="#7c5af8" stroke-width="2"/><path d="M 6 22 L 14 32 H 22 L 30 22 Z" fill="#3d3d60" stroke="#7c5af8" stroke-width="2" stroke-linejoin="round"/></svg>'), l('ConicTank', 'Conic Tank')),
         shape: new app.ConicTank({ attrs: { label: { text: 'ConicTank' } } })
       },
       {
-        ...stencilElement('./stencil/handValue.svg', l('HandValue', 'Valve')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="12" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><rect x="14" y="2" width="8" height="10" rx="2" fill="#4a4a80" stroke="#008077" stroke-width="1"/><rect x="12" y="2" width="20" height="4" rx="2" fill="#3d3d60" stroke="#00c4b4" stroke-width="1"/></svg>'), l('HandValue', 'Valve')),
         shape: new app.HandValve({ attrs: { label: { text: 'HandValue' } } })
       },
       {
-        ...stencilElement('./stencil/pipeJoin.svg', l('PipeJoin', 'Pipe Joint')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="2" y="10" width="32" height="16" rx="4" fill="#2a2a40" stroke="#a0a0c0" stroke-width="2"/><circle cx="10" cy="18" r="3" fill="#5a5a90"/><circle cx="26" cy="18" r="3" fill="#5a5a90"/></svg>'), l('PipeJoin', 'Pipe Joint')),
         shape: new app.PipeJoin({
-          attrs: { root: { magnet: false }, body: { fill: '#eee', strokeWidth: 0 } },
+          attrs: { root: { magnet: false }, body: { fill: '#2a2a40', strokeWidth: 0 } },
           size: { width: 30, height: 30 }
         })
       },
       {
-        ...stencilElement('./stencil/pipe.svg', l('Pipe', 'Pipe')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><line x1="2" y1="18" x2="34" y2="18" stroke="#5a5a90" stroke-width="8" stroke-linecap="round"/><line x1="2" y1="18" x2="34" y2="18" stroke="#2a2a40" stroke-width="4" stroke-linecap="round"/></svg>'), l('Pipe', 'Pipe')),
         shape: new app.Pipe()
       },
       {
-        ...stencilElement('./stencil/motor.svg', l('Motor', '电机')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#4a9eff" stroke-width="2"/><text x="18" y="24" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="700" fill="#4a9eff" stroke="#2d6bc9" stroke-width="2">M</text></svg>'), l('Motor', '电机')),
         shape: new app.Motor({ attrs: { label: { text: '电机' } } })
       },
       {
-        ...stencilElement('./stencil/mixer.svg', l('Mixer', '搅拌器')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="8" width="28" height="24" rx="3" fill="#1a1a2e" stroke="#f2c037" stroke-width="2"/><rect x="14" y="1" width="8" height="7" rx="2" fill="#4a4a80" stroke="#f2c037" stroke-width="1"/><line x1="18" y1="10" x2="18" y2="20" stroke="#f2c037" stroke-width="2"/><line x1="8" y1="18" x2="28" y2="18" stroke="#f2c037" stroke-width="2" stroke-linecap="round"/></svg>'), l('Mixer', '搅拌器')),
         shape: new app.Mixer({ attrs: { label: { text: '搅拌器' } } })
       },
       {
-        ...stencilElement('./stencil/sensor.svg', l('Sensor', '传感器')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#e15656" stroke-width="2"/><text x="18" y="24" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#e15656" stroke="#b03a3a" stroke-width="1">T</text></svg>'), l('Sensor', '传感器')),
         shape: new app.Sensor({ attrs: { label: { text: '传感器' } } })
       },
       {
-        ...stencilElement('./stencil/flowMeter.svg', l('FlowMeter', '流量计')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#e15656" stroke-width="2"/><text x="18" y="24" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#e15656" stroke="#b03a3a" stroke-width="1">F</text></svg>'), l('FlowMeter', '流量计')),
         shape: new app.FlowMeter({ attrs: { label: { text: '流量计' } } })
       },
       {
-        ...stencilElement('./stencil/checkValve.svg', l('CheckValve', '止回阀')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><line x1="18" y1="6" x2="18" y2="30" stroke="#00c4b4" stroke-width="3" stroke-linecap="round"/><path d="M 22 14 H 28 M 26 10 L 28 14 L 26 18" fill="none" stroke="#00c4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'), l('CheckValve', '止回阀')),
         shape: new app.CheckValve({ attrs: { label: { text: '止回阀' } } })
       },
       {
-        ...stencilElement('./stencil/butterflyValve.svg', l('ButterflyValve', '蝶阀')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><line x1="18" y1="2" x2="18" y2="34" stroke="#00c4b4" stroke-width="3"/><path d="M 18 8 Q 4 18 18 28" fill="#00a399" stroke="#008077" stroke-width="1"/><path d="M 18 8 Q 32 18 18 28" fill="#00c4b4" stroke="#008077" stroke-width="1"/></svg>'), l('ButterflyValve', '蝶阀')),
         shape: new app.ButterflyValve({ attrs: { label: { text: '蝶阀' } } })
       },
       {
-        ...stencilElement('./stencil/threeWayValve.svg', l('ThreeWayValve', '三通阀')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><line x1="4" y1="18" x2="32" y2="18" stroke="#00c4b4" stroke-width="3" stroke-linecap="round"/><line x1="18" y1="18" x2="18" y2="32" stroke="#00c4b4" stroke-width="3" stroke-linecap="round"/><circle cx="18" cy="18" r="3" fill="#008077"/></svg>'), l('ThreeWayValve', '三通阀')),
         shape: new app.ThreeWayValve({ attrs: { label: { text: '三通阀' } } })
       },
       {
-        ...stencilElement('./stencil/safetyValve.svg', l('SafetyValve', '安全阀')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="12" fill="#1a1a2e" stroke="#e15656" stroke-width="2"/><rect x="15" y="4" width="6" height="10" fill="#3d3d60" stroke="#e15656" stroke-width="1"/><rect x="12" y="0" width="12" height="4" rx="1" fill="#4a4a80" stroke="#b03a3a" stroke-width="1"/><path d="M 27 16 H 34 L 34 13 L 36 16 L 34 19 L 34 16" fill="none" stroke="#e15656" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'), l('SafetyValve', '安全阀')),
         shape: new app.SafetyValve({ attrs: { label: { text: '安全阀' } } })
       },
       {
-        ...stencilElement('./stencil/pipeElbow.svg', l('PipeElbow', '弯头')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M 4 20 H 14 Q 18 20 18 16 V 4" fill="none" stroke="#a0a0c0" stroke-width="14" stroke-linecap="square" stroke-linejoin="round"/><path d="M 4 20 H 14 Q 18 20 18 16 V 4" fill="none" stroke="#2a2a40" stroke-width="10" stroke-linecap="square" stroke-linejoin="round"/></svg>'), l('PipeElbow', '弯头')),
         shape: new app.PipeElbow({ attrs: { label: { text: '弯头' } } })
       },
       {
-        ...stencilElement('./stencil/pipeTee.svg', l('PipeTee', '三通')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M 2 14 L 34 14 M 18 14 L 18 34" fill="none" stroke="#a0a0c0" stroke-width="14" stroke-linecap="square" stroke-linejoin="round"/><path d="M 2 14 L 34 14 M 18 14 L 18 34" fill="none" stroke="#2a2a40" stroke-width="10" stroke-linecap="square" stroke-linejoin="round"/></svg>'), l('PipeTee', '三通')),
         shape: new app.PipeTee({ attrs: { label: { text: '三通' } } })
       },
       {
-        ...stencilElement('./stencil/pipeFlange.svg', l('PipeFlange', '法兰')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="2" y="12" width="10" height="12" rx="2" fill="#3d3d60" stroke="#a0a0c0" stroke-width="1"/><rect x="12" y="14" width="12" height="8" fill="#2a2a40" stroke="#a0a0c0" stroke-width="1"/><rect x="24" y="12" width="10" height="12" rx="2" fill="#3d3d60" stroke="#a0a0c0" stroke-width="1"/><circle cx="6" cy="16" r="1.5" fill="#5a5a90"/><circle cx="6" cy="20" r="1.5" fill="#5a5a90"/><circle cx="30" cy="16" r="1.5" fill="#5a5a90"/><circle cx="30" cy="20" r="1.5" fill="#5a5a90"/></svg>'), l('PipeFlange', '法兰')),
         shape: new app.PipeFlange({ attrs: { label: { text: '法兰' } } })
       },
       {
-        ...stencilElement('./stencil/horizontalTank.svg', l('HorizontalTank', '卧式罐')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="2" y="6" width="32" height="16" fill="#1a1a2e" stroke="#7c5af8" stroke-width="2"/><ellipse cx="4" cy="14" rx="4" ry="8" fill="#2a2a40" stroke="#7c5af8" stroke-width="2"/><ellipse cx="32" cy="14" rx="4" ry="8" fill="#2a2a40" stroke="#7c5af8" stroke-width="2"/><rect x="14" y="0" width="8" height="6" rx="1" fill="#3d3d60" stroke="#7c5af8" stroke-width="1"/></svg>'), l('HorizontalTank', '卧式罐')),
         shape: new app.HorizontalTank({ attrs: { label: { text: '卧式罐' } } })
       },
       {
-        ...stencilElement('./stencil/reactor.svg', l('Reactor', '反应器')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><defs><linearGradient id="rBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="50%" stop-color="#222244"/><stop offset="100%" stop-color="#15152a"/></linearGradient><linearGradient id="rDomeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#2a2a4a"/><stop offset="100%" stop-color="#1a1a2e"/></linearGradient></defs><rect x="4" y="4" width="28" height="20" fill="url(#rBodyGrad)" stroke="#f2c037" stroke-width="2" rx="2"/><ellipse cx="18" cy="4" rx="14" ry="5" fill="url(#rDomeGrad)" stroke="#f2c037" stroke-width="2"/><path d="M 4 24 L 10 32 H 26 L 32 24 Z" fill="url(#rBodyGrad)" stroke="#f2c037" stroke-width="2" stroke-linejoin="round"/><rect x="14" y="0" width="8" height="4" fill="#3d3d60" stroke="#f2c037" stroke-width="1"/></svg>'), l('Reactor', '反应器')),
         shape: new app.Reactor({ attrs: { label: { text: '反应器' } } })
       },
       {
-        ...stencilElement('./stencil/silo.svg', l('Silo', '料仓')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="6" y="2" width="24" height="20" fill="#1a1a2e" stroke="#7c5af8" stroke-width="2"/><path d="M 6 22 L 14 34 H 22 L 30 22 Z" fill="#2a2a40" stroke="#7c5af8" stroke-width="2" stroke-linejoin="round"/><rect x="14" y="0" width="8" height="4" rx="1" fill="#3d3d60" stroke="#7c5af8" stroke-width="1"/></svg>'), l('Silo', '料仓')),
         shape: new app.Silo({ attrs: { label: { text: '料仓' } } })
       },
       {
-        ...stencilElement('./stencil/conveyor.svg', l('Conveyor', '传送带')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="12" width="28" height="12" rx="6" fill="#2a2a40" stroke="#4a9eff" stroke-width="2"/><circle cx="6" cy="18" r="6" fill="#3d3d60" stroke="#4a9eff" stroke-width="1"/><circle cx="6" cy="18" r="2" fill="#5a5a90"/><circle cx="30" cy="18" r="6" fill="#3d3d60" stroke="#4a9eff" stroke-width="1"/><circle cx="30" cy="18" r="2" fill="#5a5a90"/><line x1="10" y1="18" x2="4" y2="14" stroke="#4a9eff" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="18" x2="32" y2="14" stroke="#4a9eff" stroke-width="2" stroke-linecap="round"/></svg>'), l('Conveyor', '传送带')),
         shape: new app.Conveyor({ attrs: { label: { text: '传送带' } } })
       },
       {
-        ...stencilElement('./stencil/heater.svg', l('Heater', '加热器')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="6" width="28" height="20" rx="3" fill="#1a1a2e" stroke="#ff8c42" stroke-width="2"/><line x1="8" y1="12" x2="28" y2="12" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="16" x2="28" y2="16" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="20" x2="28" y2="20" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/></svg>'), l('Heater', '加热器')),
         shape: new app.Heater({ attrs: { label: { text: '加热器' } } })
       }
     ],

@@ -15,23 +15,23 @@ export class SafetyValve extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#e15656',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         stem: {
           x: 'calc(w / 2 - 4)',
           y: -28,
           width: 8,
           height: 28,
-          fill: '#bbb',
-          stroke: 'gray',
+          fill: '#3d3d60',
+          stroke: '#e15656',
           strokeWidth: 1
         },
         spring: {
           d: 'M 17 -24 L 33 -21 L 17 -18 L 33 -15 L 17 -12 L 33 -9 L 17 -6',
           fill: 'none',
-          stroke: '#555',
+          stroke: '#e15656',
           strokeWidth: 2,
           strokeLinecap: 'round',
           strokeLinejoin: 'round'
@@ -43,13 +43,13 @@ export class SafetyValve extends joint.dia.Element {
           height: 12,
           rx: 2,
           ry: 2,
-          fill: '#777',
-          stroke: '#333',
+          fill: '#4a4a80',
+          stroke: '#b03a3a',
           strokeWidth: 2
         },
         vent: {
           d: 'M 29 17 H 55 L 55 12 L 60 17 L 55 22 L 55 17',
-          stroke: '#555',
+          stroke: '#e15656',
           strokeWidth: 2,
           fill: 'none',
           strokeLinecap: 'round',
@@ -63,7 +63,7 @@ export class SafetyValve extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -73,8 +73,8 @@ export class SafetyValve extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeBody" /><rect @selector="pipeEnd" />`,
             size: { width: 50, height: 24 },
             attrs: {
-              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#ddd', stroke: 'gray', strokeWidth: 1 },
-              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#2a2a40', stroke: '#e15656', strokeWidth: 1 },
+              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: '#e15656', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },

@@ -25,9 +25,9 @@ export class Mixer extends joint.dia.Element {
           height: 'calc(h - 40)',
           rx: 4,
           ry: 4,
-          stroke: 'gray',
+          stroke: '#f2c037',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         motorBox: {
           x: 'calc(w / 2 - 15)',
@@ -36,9 +36,9 @@ export class Mixer extends joint.dia.Element {
           height: 25,
           rx: 2,
           ry: 2,
-          stroke: '#333',
+          stroke: '#f2c037',
           strokeWidth: 2,
-          fill: '#777'
+          fill: '#4a4a80'
         },
         motorLabel: {
           text: 'M',
@@ -49,27 +49,27 @@ export class Mixer extends joint.dia.Element {
           fontSize: 12,
           fontWeight: 700,
           fontFamily: 'sans-serif',
-          fill: '#fff',
+          fill: '#f2c037',
         },
         shaftLine: {
           x1: 'calc(w / 2)',
           y1: 25,
           x2: 'calc(w / 2)',
           y2: 'calc(h / 2 + 30)',
-          stroke: '#333',
+          stroke: '#f2c037',
           strokeWidth: 3
         },
         blade1: {
           d: 'M -20 0 H 20',
           transform: 'translate(calc(w/2), calc(h/2 + 15))',
-          stroke: '#333',
+          stroke: '#f2c037',
           strokeWidth: 4,
           strokeLinecap: 'round'
         },
         blade2: {
           d: 'M -15 -10 H 15',
           transform: 'translate(calc(w/2), calc(h/2 + 30))',
-          stroke: '#333',
+          stroke: '#f2c037',
           strokeWidth: 4,
           strokeLinecap: 'round'
         },
@@ -81,7 +81,7 @@ export class Mixer extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -104,8 +104,8 @@ export class Mixer extends joint.dia.Element {
                 width: 'calc(w)',
                 height: 'calc(h)',
                 y: 'calc(h / -2)',
-                fill: '#ddd',
-                stroke: 'gray',
+                fill: '#2a2a40',
+                stroke: '#f2c037',
                 strokeWidth: 1
               },
               pipeEnd: {
@@ -113,9 +113,9 @@ export class Mixer extends joint.dia.Element {
                 width: 10,
                 height: 'calc(h+6)',
                 y: 'calc(h / -2 - 3)',
-                stroke: 'gray',
+                stroke: '#f2c037',
                 strokeWidth: 3,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

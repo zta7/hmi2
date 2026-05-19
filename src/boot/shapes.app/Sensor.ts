@@ -25,9 +25,9 @@ export class Sensor extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#ff6b6b',
           strokeWidth: 2,
-          fill: '#eee'
+          fill: '#1a1a2e'
         },
         sensorIcon: {
           text: 'T',
@@ -38,8 +38,8 @@ export class Sensor extends joint.dia.Element {
           fontSize: 20,
           fontWeight: 700,
           fontFamily: 'sans-serif',
-          fill: '#ffffff',
-          stroke: '#555555',
+          fill: '#e15656',
+          stroke: '#b03a3a',
           strokeWidth: 2
         },
         valueText: {
@@ -50,8 +50,8 @@ export class Sensor extends joint.dia.Element {
           y: 'calc(h / 2 + 12)',
           fontSize: 10,
           fontFamily: 'sans-serif',
-          // fill: '#333',
-          stroke: '#555555',
+          fill: '#a0a0c0',
+          stroke: '#a0a0c0',
           strokeWidth: 1
         },
         stem: {
@@ -59,9 +59,9 @@ export class Sensor extends joint.dia.Element {
           y: 'calc(h)',
           width: 8,
           height: 20,
-          stroke: 'gray',
+          stroke: '#e15656',
           strokeWidth: 1,
-          fill: '#bbb'
+          fill: '#3d3d60'
         },
         label: {
           text: '传感器',
@@ -71,7 +71,7 @@ export class Sensor extends joint.dia.Element {
           y: 'calc(h + 25)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -95,9 +95,9 @@ export class Sensor extends joint.dia.Element {
                 height: 10,
                 x: -5,
                 y: 0,
-                stroke: 'gray',
+                stroke: '#e15656',
                 strokeWidth: 2,
-                fill: 'white'
+                fill: '#2a2a40'
               }
             }
           }

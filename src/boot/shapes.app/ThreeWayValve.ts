@@ -15,20 +15,20 @@ export class ThreeWayValve extends joint.dia.Element {
           ry: 'calc(h / 2)',
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
-          stroke: 'gray',
+          stroke: '#00c4b4',
           strokeWidth: 2,
-          fill: 'lightgray'
+          fill: '#1a1a2e'
         },
         crossH: {
           d: 'M calc(w/2 - 16) calc(h/2) H calc(w/2 + 16)',
-          stroke: '#333',
+          stroke: '#00c4b4',
           strokeWidth: 3,
           fill: 'none',
           strokeLinecap: 'round'
         },
         crossV: {
           d: 'M calc(w/2) calc(h/2) V calc(h/2 + 16)',
-          stroke: '#333',
+          stroke: '#00c4b4',
           strokeWidth: 3,
           fill: 'none',
           strokeLinecap: 'round'
@@ -37,8 +37,8 @@ export class ThreeWayValve extends joint.dia.Element {
           cx: 'calc(w / 2)',
           cy: 'calc(h / 2)',
           r: 5,
-          fill: '#555',
-          stroke: '#333',
+          fill: '#008077',
+          stroke: '#00c4b4',
           strokeWidth: 1
         },
         label: {
@@ -49,7 +49,7 @@ export class ThreeWayValve extends joint.dia.Element {
           y: 'calc(h+10)',
           fontSize: 14,
           fontFamily: 'sans-serif',
-          fill: '#350100'
+          fill: '#a0a0c0'
         }
       },
       ports: {
@@ -59,8 +59,8 @@ export class ThreeWayValve extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeBody" /><rect @selector="pipeEnd" />`,
             size: { width: 50, height: 24 },
             attrs: {
-              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#ddd', stroke: 'gray', strokeWidth: 1 },
-              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeBody: { width: 'calc(w)', height: 'calc(h)', y: 'calc(h / -2)', fill: '#2a2a40', stroke: '#00c4b4', strokeWidth: 1 },
+              pipeEnd: { magnet: true, width: 10, height: 'calc(h+6)', y: 'calc(h / -2 - 3)', stroke: '#00c4b4', strokeWidth: 3, fill: '#2a2a40' }
             }
           },
           pipesV: {
@@ -68,8 +68,8 @@ export class ThreeWayValve extends joint.dia.Element {
             markup: joint.util.svg`<rect @selector="pipeBody" /><rect @selector="pipeEnd" />`,
             size: { width: 24, height: 40 },
             attrs: {
-              pipeBody: { width: 'calc(w)', height: 'calc(h)', x: 'calc(w / -2)', fill: '#ddd', stroke: 'gray', strokeWidth: 1 },
-              pipeEnd: { magnet: true, width: 'calc(w+6)', height: 10, x: 'calc(w / -2 - 3)', stroke: 'gray', strokeWidth: 3, fill: 'white' }
+              pipeBody: { width: 'calc(w)', height: 'calc(h)', x: 'calc(w / -2)', fill: '#2a2a40', stroke: '#00c4b4', strokeWidth: 1 },
+              pipeEnd: { magnet: true, width: 'calc(w+6)', height: 10, x: 'calc(w / -2 - 3)', stroke: '#00c4b4', strokeWidth: 3, fill: '#2a2a40' }
             }
           }
         },
