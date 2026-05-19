@@ -190,11 +190,11 @@ export const getStencilLoad = (lang: string) => {
     ],
     OutputEvents: [
       {
-        ...stencilElement('./stencil/button.svg', l('Button', 'Button')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24"><rect x="0.75" y="0.75" width="44.5" height="22.5" rx="3" fill="#1a1a2e" stroke="#4a9eff" stroke-width="1.5"/><text x="23" y="16" text-anchor="middle" font-size="10" font-weight="600" font-family="sans-serif" fill="#4a9eff">Btn</text></svg>'), l('Button', 'Button')),
         shape: new app.Button()
       },
       {
-        ...stencilElement('./stencil/alarm-light-outline.svg', l('CircleButton', 'Circle Btn')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1a1a2e" stroke="#e15656" stroke-width="2"/><circle cx="20" cy="20" r="12" fill="#e15656"/><text x="20" y="24" text-anchor="middle" font-size="10" font-weight="600" font-family="sans-serif" fill="#ffffff">●</text></svg>'), l('CircleButton', 'Circle Btn')),
         shape: new app.LightButton({
           size: { width: 50, height: 50 },
           text: 'Push',
@@ -202,30 +202,30 @@ export const getStencilLoad = (lang: string) => {
         })
       },
       {
-        ...stencilElement('./stencil/multi-state-btn.svg', '多状态按钮'),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 28"><rect x="0.75" y="0.75" width="44.5" height="12.5" rx="3" fill="#1a1a2e" stroke="#555577" stroke-width="1.5"/><rect x="0.75" y="14.75" width="44.5" height="12.5" rx="3" fill="#1a1a2e" stroke="#4a9eff" stroke-width="1.5"/><text x="23" y="9" text-anchor="middle" font-size="8" font-weight="600" font-family="sans-serif" fill="#555577">OFF</text><text x="23" y="24" text-anchor="middle" font-size="8" font-weight="600" font-family="sans-serif" fill="#4a9eff">ON</text></svg>'), '多状态按钮'),
         shape: new app.MultiStateButton({ size: { width: 90, height: 36 } })
       }
     ],
     Links: [
       {
-        ...stencilElement('./stencil/straightLink.svg', l('Link', 'Link')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24"><line x1="4" y1="12" x2="42" y2="12" stroke="#4a9eff" stroke-width="2" stroke-linecap="round"/><circle cx="4" cy="12" r="3" fill="#1a1a2e" stroke="#4a9eff" stroke-width="1.5"/><polygon points="42,12 37,9 37,15" fill="#4a9eff"/></svg>'), l('Link', 'Link')),
         shape: new app.Link({ vertice: true })
       },
       {
-        ...stencilElement('./stencil/angle-rise-lined.svg', l('Polyline', 'Polyline')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 24"><polyline points="4,12 23,12 23,4 42,4" fill="none" stroke="#00c4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="12" r="3" fill="#1a1a2e" stroke="#00c4b4" stroke-width="1.5"/><polygon points="42,4 37,1 37,7" fill="#00c4b4"/></svg>'), l('Polyline', 'Polyline')),
         shape: new app.Link()
       }
     ],
     Images: [
       {
-        ...stencilElement('./stencil/image-outline.svg', l('Image', 'Image')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 32"><rect x="0.75" y="0.75" width="44.5" height="30.5" rx="3" fill="#1a1a2e" stroke="#f2c037" stroke-width="1.5"/><rect x="6" y="5" width="14" height="10" rx="1" fill="#2a2a40"/><polygon points="6,15 20,15 20,26 6,26" fill="#2a2a40"/><circle cx="36" cy="22" r="5" fill="#f2c037"/></svg>'), l('Image', 'Image')),
         shape: new joint.shapes.standard.Image({
           size: { width: 30, height: 30 },
           attrs: { image: { href: './stencil/image-outline.svg' } }
         })
       },
       {
-        ...stencilElement('./stencil/text.svg', l('StaticText', 'Static Text')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 20"><rect x="0.75" y="0.75" width="44.5" height="18.5" rx="3" fill="#1a1a2e" stroke="#7c5af8" stroke-width="1.5"/><text x="23" y="14" text-anchor="middle" font-size="9" font-weight="600" font-family="sans-serif" fill="#7c5af8">Text</text></svg>'), l('StaticText', 'Static Text')),
         shape: new app.StaticRectangle({
           size: { width: 90, height: 30 },
           attrs: {
@@ -237,38 +237,38 @@ export const getStencilLoad = (lang: string) => {
     ],
     Shapes: [
       {
-        ...stencilElement('./stencil/format-text.svg', l('TextBlock', 'Text Block')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 20"><rect x="0.75" y="0.75" width="44.5" height="18.5" rx="3" fill="#1a1a2e" stroke="#4a9eff" stroke-width="1.5"/><text x="23" y="14" text-anchor="middle" font-size="9" font-weight="600" font-family="sans-serif" fill="#4a9eff">T</text></svg>'), l('TextBlock', 'Text Block')),
         shape: new app.TextBlock({
           size: { width: 90, height: 30 },
           attrs: {
-            label: { text: '文本', fontSize: 14, fill: '#e0e0e0' },
-            body: { fill: 'transparent', strokeWidth: 0 }
+            label: { text: '文本', fontSize: 14, fill: '#4a9eff', fontWeight: 600 },
+            body: { fill: 'transparent', stroke: 'none', strokeWidth: 0 }
           }
         })
       },
       {
-        ...stencilElement('./stencil/circle.svg', l('Circle', 'Circle')),
-        shape: new app.Circle({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="#1a1a2e" stroke="#00c4b4" stroke-width="2"/><circle cx="18" cy="18" r="8" fill="#00c4b4" opacity="0.3"/></svg>'), l('Circle', 'Circle')),
+        shape: new app.Circle({ size: { width: 30, height: 30 }, attrs: { body: { fill: '#1a1a2e', stroke: '#00c4b4', strokeWidth: 2 } } })
       },
       {
-        ...stencilElement('./stencil/square.svg', l('Square', 'Square')),
-        shape: new app.Square({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="1" y="1" width="34" height="34" rx="4" fill="#1a1a2e" stroke="#7c5af8" stroke-width="2"/><rect x="7" y="7" width="22" height="22" rx="2" fill="#7c5af8" opacity="0.2"/></svg>'), l('Square', 'Square')),
+        shape: new app.Square({ size: { width: 30, height: 30 }, attrs: { body: { fill: '#1a1a2e', stroke: '#7c5af8', strokeWidth: 2, rx: 4 } } })
       },
       {
-        ...stencilElement('./stencil/sphere.svg', l('Sphere', 'Sphere')),
-        shape: new app.Sphere({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="url(#sphereGradIcon)"/><defs><radialGradient id="sphereGradIcon" cx="35%" cy="35%" r="60%"><stop offset="0%" stop-color="#fff9e6"/><stop offset="30%" stop-color="#f2c037"/><stop offset="70%" stop-color="#d4a017"/><stop offset="100%" stop-color="#a88000"/></radialGradient></defs></svg>'), l('Sphere', 'Sphere')),
+        shape: new app.Sphere({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent' } } })
       },
       {
-        ...stencilElement('./stencil/cone.svg', l('Cone', 'Cone')),
-        shape: new app.Cone({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><ellipse cx="18" cy="28" rx="14" ry="5" fill="url(#coneBaseIcon)" stroke="#6b1010" stroke-width="0.5"/><path d="M18 2 L32 28 A14 5 0 0 0 4 28 Z" fill="url(#coneBodyIcon)"/><defs><linearGradient id="coneBodyIcon" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="30%" stop-color="#f08080"/><stop offset="60%" stop-color="#e15656"/><stop offset="100%" stop-color="#b03a3a"/></linearGradient><linearGradient id="coneBaseIcon" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d45a5a"/><stop offset="40%" stop-color="#b03a3a"/><stop offset="100%" stop-color="#8b1a1a"/></linearGradient></defs></svg>'), l('Cone', 'Cone')),
+        shape: new app.Cone({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent' } } })
       },
       {
-        ...stencilElement('./stencil/cube.svg', l('Cube', 'Cube')),
-        shape: new app.Cube({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><polygon points="6,10 26,10 26,30 6,30" fill="url(#cubeFrontIcon)" stroke="#1a4a96" stroke-width="1"/><polygon points="6,10 26,10 30,6 10,6" fill="url(#cubeTopIcon)" stroke="#1a4a96" stroke-width="1"/><polygon points="26,10 26,30 30,26 30,6" fill="url(#cubeSideIcon)" stroke="#1a4a96" stroke-width="1"/><defs><linearGradient id="cubeFrontIcon" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7ebbff"/><stop offset="100%" stop-color="#3a85e6"/></linearGradient><linearGradient id="cubeTopIcon" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#99ccff"/><stop offset="100%" stop-color="#4a9eff"/></linearGradient><linearGradient id="cubeSideIcon" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2d6bc9"/><stop offset="100%" stop-color="#1a4a96"/></linearGradient></defs></svg>'), l('Cube', 'Cube')),
+        shape: new app.Cube({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent' } } })
       },
       {
-        ...stencilElement('./stencil/cylinder.svg', l('Cylinder', 'Cylinder')),
-        shape: new app.Cylinder({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent', stroke: '#8888a0', strokeWidth: 2 } } })
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="8" width="28" height="20" rx="4" fill="url(#cylGradIcon)"/><ellipse cx="18" cy="8" rx="14" ry="4" fill="url(#cylTopGradIcon)"/><ellipse cx="18" cy="28" rx="14" ry="4" fill="#008077"/><defs><linearGradient id="cylGradIcon" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00e6d0"/><stop offset="30%" stop-color="#00c4b4"/><stop offset="70%" stop-color="#00a399"/><stop offset="100%" stop-color="#008077"/></linearGradient><linearGradient id="cylTopGradIcon" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00d4c4"/><stop offset="100%" stop-color="#00a399"/></linearGradient></defs></svg>'), l('Cylinder', 'Cylinder')),
+        shape: new app.Cylinder({ size: { width: 30, height: 30 }, attrs: { body: { fill: 'transparent' } } })
       }
     ],
     Scala: [

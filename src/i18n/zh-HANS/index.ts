@@ -22,7 +22,7 @@ export default {
   Sphere: '球体',
   Cone: '锥体',
   Cube: '立方体',
-  Cylinder: '圆锥体',
+  Cylinder: '圆柱体',
   Pump: '泵',
   ControlValve: '阀门',
   LiquidTank: '液体罐',

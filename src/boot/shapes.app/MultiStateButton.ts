@@ -51,7 +51,7 @@ export const MultiStateButtonView = joint.dia.ElementView.extend({
           selector: 'button',
           attributes: {
             'data-content': label,
-            style: `width:100%;height:100%;background:${color};color:${textColor};border:1px solid #555577;border-radius:4px;font-size:12px;font-family:sans-serif;font-weight:600;cursor:pointer;box-sizing:border-box;`
+            style: `width:100%;height:100%;background:#1a1a2e;color:${color};border:1px solid ${color};border-radius:4px;font-size:12px;font-family:sans-serif;font-weight:600;cursor:pointer;box-sizing:border-box;`
           }
         }]
       }

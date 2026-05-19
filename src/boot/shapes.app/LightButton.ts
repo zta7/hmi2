@@ -51,16 +51,30 @@ export const LightButtonView = joint.dia.ElementView.extend({
       },
       children: [
         {
+          tagName: 'button',
+          namespaceURI: 'http://www.w3.org/1999/xhtml',
+          selector: 'button',
           attributes: {
-            overflow: 'hidden',
-            style: `width: 100%; height: 100%; background: ${model.attributes.background}; border-radius: 9999px`,
             'data-content': model.attributes.text,
             type: 'button'
           },
-          tagName: 'button',
-          namespaceURI: 'http://www.w3.org/1999/xhtml',
-          selector: 'button'
-          // textContent: 'Button'
+          style: {
+            width: '100%',
+            height: '100%',
+            background: '#1a1a2e',
+            border: '2px solid #e15656',
+            borderRadius: '50%',
+            color: '#e15656',
+            fontSize: '12px',
+            fontWeight: '600',
+            fontFamily: 'sans-serif',
+            cursor: 'pointer',
+            outline: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box'
+          }
         }
       ]
     }

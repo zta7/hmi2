@@ -27,18 +27,21 @@ export class Link extends joint.shapes.standard.Link {
       labels: [],
       attrs: {
         line: {
-          stroke: '#8888a0',
+          stroke: '#4a9eff',
           strokeDasharray: '0',
           strokeWidth: 2,
           fill: 'none',
           sourceMarker: {
-            type: 'path',
-            d: 'M 0 0 0 0',
-            stroke: 'none'
+            type: 'circle',
+            r: 4,
+            fill: '#1a1a2e',
+            stroke: '#4a9eff',
+            strokeWidth: 1.5
           },
           targetMarker: {
             type: 'path',
             d: 'M 0 -5 -10 0 0 5 z',
+            fill: '#4a9eff',
             stroke: 'none'
           }
         }
