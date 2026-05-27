@@ -275,7 +275,8 @@ onMounted(() => {
         if (p === `${prefix}.${trigger}`) {
           const type = get(cell, "attributes.type");
           if (["app.Input", "app.Select"].includes(type)) {
-            cell.prop("value", String(value));
+            const strValue = String(value);
+            cell.prop("value", strValue === "''" ? "" : strValue);
           }
         }
       };
