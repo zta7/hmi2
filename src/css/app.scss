@@ -149,7 +149,6 @@ html, body {
     padding-top: 0 !important;
     margin-top: 0 !important;
   }
-
   // Group headers — Webflow style: larger, bolder
   h3 {
     line-height: normal;
@@ -157,27 +156,58 @@ html, body {
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0;
-    padding: 12px 14px 8px;
+    padding: 12px 14px 12px;
     margin: 0;
     background: $dark-bg-secondary;
     border-bottom: none;
     border-top: 1px solid $dark-border;
     cursor: pointer;
     transition: color 0.15s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     &:hover { color: #fff; }
 
-    // Collapse arrow
+    // Remove default left arrow
     &::before {
-      display: inline-block;
-      margin-right: 6px;
-      font-size: 10px;
+      display: none !important;
     }
+
+    // Collapse arrow — positioned at right
+    &::after {
+      content: '▾';
+      display: inline-block;
+      font-size: 14px;
+      color: #c0c0d0;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+  }
+
+  .group.closed h3::after {
+    transform: rotate(-90deg);
   }
 
   .group {
     background: $dark-bg-secondary;
     border-bottom: none;
     padding-bottom: 4px;
+  }
+  .group.closed{
+    max-height: 30px !important;
+  }
+  // Stencil group toggle arrow — white, positioned at right
+  .group > .group-label {
+    &::before {
+      border: 1;
+      border-top-color: #c0c0d0 !important;
+      border-left-color: #c0c0d0 !important;
+      float: right;
+      margin-right: 2px !important;
+      margin-left: auto !important;
+      margin-top: 4px;
+    }
   }
 
   // Elements grid
@@ -335,7 +365,7 @@ label.joint-widget.joint-theme-default {
   h3 {
     line-height: normal;
     color: $dark-text-secondary;
-    font-size: 11px;
+    font-size: 14px !important;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
