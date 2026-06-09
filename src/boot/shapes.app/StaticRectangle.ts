@@ -8,6 +8,8 @@ export class StaticRectangle extends joint.shapes.standard.Rectangle {
       type: 'app.StaticRectangle',
       attrs: {
         body: {
+          width: 'calc(w)',
+          height: 'calc(h)',
           fill: '#1a1a2e',
           stroke: '#7c5af8',
           strokeWidth: 1.5,
@@ -18,7 +20,11 @@ export class StaticRectangle extends joint.shapes.standard.Rectangle {
           fill: '#7c5af8',
           fontSize: 14,
           fontWeight: 600,
-          fontFamily: 'sans-serif'
+          fontFamily: 'sans-serif',
+          refX: 0.5,
+          refY: 0.5,
+          textAnchor: 'middle',
+          textVerticalAnchor: 'middle'
         }
       }
     }

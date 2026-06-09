@@ -8,6 +8,8 @@ export class GroupBox extends joint.shapes.standard.Rectangle {
       size: { width: 200, height: 150 },
       attrs: {
         body: {
+          width: 'calc(w)',
+          height: 'calc(h)',
           fill: 'transparent',
           stroke: '#555577',
           strokeWidth: 1,
