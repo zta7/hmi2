@@ -17,6 +17,7 @@ import * as Checkbox from './shapes.app/Checkbox'
 import * as FunctionBlock from './shapes.app/FunctionBlock'
 import * as Group from './shapes.app/Group'
 import * as Link from './shapes.app/Link'
+import * as DesignLink from './shapes.app/DesignLink'
 import * as Select from './shapes.app/Select'
 import * as Slider from './shapes.app/Slider'
 import * as Table from './shapes.app/Table'
@@ -68,6 +69,15 @@ import * as Reactor from './shapes.app/Reactor'
 import * as Silo from './shapes.app/Silo'
 import * as Conveyor from './shapes.app/Conveyor'
 import * as Heater from './shapes.app/Heater'
+import * as Bus from './shapes.app/Bus'
+import * as Indicator from './shapes.app/Indicator'
+import * as DesignBus from './shapes.app/DesignBus'
+import * as DesignSwitch from './shapes.app/DesignSwitch'
+import * as DesignIndicator from './shapes.app/DesignIndicator'
+import * as DesignTransformer from './shapes.app/DesignTransformer'
+import * as DesignMotor from './shapes.app/DesignMotor'
+import * as DesignRect from './shapes.app/DesignRect'
+import * as DesignGroup from './shapes.app/DesignGroup'
 
 // Pump
 
@@ -103,6 +113,7 @@ export const shapes = {
     ...FunctionBlock,
     ...Group,
     ...Link,
+    ...DesignLink,
     ...Select,
     ...Slider,
     ...Table,
@@ -146,7 +157,16 @@ export const shapes = {
     ...Reactor,
     ...Silo,
     ...Conveyor,
-    ...Heater
+    ...Heater,
+    ...Bus,
+    ...Indicator,
+    ...DesignBus,
+    ...DesignSwitch,
+    ...DesignIndicator,
+    ...DesignTransformer,
+    ...DesignMotor,
+    ...DesignRect,
+    ...DesignGroup
   }
 }
 

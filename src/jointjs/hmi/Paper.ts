@@ -74,15 +74,105 @@ export class Paper {
 
     if (p.width && p.height) {
       this.paper.setDimensions(p.width as number, p.height as number);
+    } else {
+      // 兜底：无纸面尺寸时，根据内容自动撑大
+      this.paper.setDimensions(1920, 1080);
     }
 
+    // ---------- 调试日志：打印 filter 前后的 cells ----------
+    console.log(`[HMI2-Paper] cells BEFORE filter: count=${g.cells.length}`);
+    g.cells.forEach((c: any) => {
+      if (c.type?.endsWith('Link')) return;
+      console.log(
+        `  [FILTER-PRE] id=${c.id?.slice(-8)}, type=${c.type}, ` +
+        `parent=${c.parent ? c.parent.slice(-8) : '-'}, ` +
+        `position=(${c.position?.x}, ${c.position?.y})`
+      );
+    });
     g.cells = g.cells.filter((e: any) => get(namespace, get(e, "type")));
+    console.log(`[HMI2-Paper] cells AFTER filter: count=${g.cells.length}`);
+    g.cells.forEach((c: any) => {
+      if (c.type?.endsWith('Link')) return;
+      console.log(
+        `  [FILTER-POST] id=${c.id?.slice(-8)}, type=${c.type}, ` +
+        `parent=${c.parent ? c.parent.slice(-8) : '-'}, ` +
+        `position=(${c.position?.x}, ${c.position?.y})`
+      );
+    });
     this.graph.fromJSON(g);
+    // 确保嵌入关系建立（JointJS fromJSON 可能不自动处理 embeds）
+    this.graph.getElements().forEach((el: any) => {
+      const embeds = el.get('embeds');
+      if (embeds && embeds.length > 0) {
+        embeds.forEach((childId: string) => {
+          const child = this.graph.getCell(childId);
+          if (child && !el.getEmbeddedCells().includes(child)) {
+            el.embed(child);
+          }
+        });
+      }
+    });
+    // 处理初始折叠状态：隐藏子节点 + 重路由连线到父节点
+    this.graph.getElements().forEach((el: any) => {
+      if (el.get('collapsed')) {
+        // 优先从属性读取 expandedSize（fromJSON 自动恢复），不存在时用当前尺寸兜底（兼容老数据）
+        if (!el.get('expandedSize')) {
+          el.set('expandedSize', { width: el.size().width, height: el.size().height });
+        }
+        el.set('size', { width: 160, height: 36 });
+        const children = el.getEmbeddedCells() || [];
+        const childIdSet = new Set(children.map((c: any) => c.id));
+        const rerouted: Record<string, { source: any; target: any }> = {};
+        children.forEach((child: any) => {
+          const childView = this.paper.findViewByModel(child);
+          if (childView) childView.el.style.display = 'none';
+          const links = this.graph.getConnectedLinks(child);
+          links.forEach((link: any) => {
+            if (rerouted[link.id]) return;
+            const src = link.get('source');
+            const tgt = link.get('target');
+            const srcId = (typeof src === 'string' ? src : src?.id) || '';
+            const tgtId = (typeof tgt === 'string' ? tgt : tgt?.id) || '';
+            const otherId = srcId === child.id ? tgtId : srcId;
+            rerouted[link.id] = { source: src, target: tgt };
+            if (childIdSet.has(otherId)) {
+              const linkView = this.paper.findViewByModel(link);
+              if (linkView) linkView.el.style.display = 'none';
+            } else {
+              if (srcId === child.id) {
+                link.set('source', { id: el.id });
+              } else {
+                link.set('target', { id: el.id });
+              }
+            }
+          });
+        });
+        el.prop('reroutedLinks', rerouted);
+      }
+    });
+    // ---------- 调试日志 ----------
+    console.log(`[HMI2-Paper] graph cells after fromJSON: count=${this.graph.getCells().length}`);
+    this.graph.getElements().forEach((el: any) => {
+      const embeds = el.getEmbeddedCells ? el.getEmbeddedCells().map((c: any) => c.id?.slice(-8)) : [];
+      console.log(
+        `  [GRAPH] id=${el.id?.slice(-8)}, type=${el.get('type')}, ` +
+        `parent=${el.get('parent') || '-'}, embeds=[${embeds.join(',')}]`
+      );
+    });
+    // ---------- 调试日志结束 ----------
 
     this.paperScroller = new joint.ui.PaperScroller({
       paper: this.paper,
+      overflow: 'auto',
+      scrollWhileDragging: true,
+      cursor: 'grab',
     });
-    el.append(this.paperScroller.render().el);
+    const scrollerEl = this.paperScroller.render().el;
+    // 确保 PaperScroller 填满容器，滚动条由 PaperScroller 自身管理
+    scrollerEl.style.width = '100%';
+    scrollerEl.style.height = '100%';
+    scrollerEl.style.overflow = 'auto';
+    el.append(scrollerEl);
 
     if (!window.online) {
       this.commandManager = new joint.dia.CommandManager({ graph: this.graph });
@@ -156,10 +246,61 @@ export class Paper {
 
     if (p.width && p.height) {
       this.paper.setDimensions(p.width as number, p.height as number);
+    } else {
+      this.paper.setDimensions(1920, 1080);
     }
 
     g.cells = g.cells.filter((e: any) => get(namespace, get(e, "type")));
     this.graph.fromJSON(g);
+    this.graph.getElements().forEach((el: any) => {
+      const embeds = el.get('embeds');
+      if (embeds && embeds.length > 0) {
+        embeds.forEach((childId: string) => {
+          const child = this.graph.getCell(childId);
+          if (child && !el.getEmbeddedCells().includes(child)) {
+            el.embed(child);
+          }
+        });
+      }
+    });
+    // 处理初始折叠状态：隐藏子节点 + 重路由连线到父节点
+    this.graph.getElements().forEach((el: any) => {
+      if (el.get('collapsed')) {
+        // 优先从属性读取 expandedSize（fromJSON 自动恢复），不存在时用当前尺寸兜底（兼容老数据）
+        if (!el.get('expandedSize')) {
+          el.set('expandedSize', { width: el.size().width, height: el.size().height });
+        }
+        el.set('size', { width: 160, height: 36 });
+        const children = el.getEmbeddedCells() || [];
+        const childIdSet = new Set(children.map((c: any) => c.id));
+        const rerouted: Record<string, { source: any; target: any }> = {};
+        children.forEach((child: any) => {
+          const childView = this.paper.findViewByModel(child);
+          if (childView) childView.el.style.display = 'none';
+          const links = this.graph.getConnectedLinks(child);
+          links.forEach((link: any) => {
+            if (rerouted[link.id]) return;
+            const src = link.get('source');
+            const tgt = link.get('target');
+            const srcId = (typeof src === 'string' ? src : src?.id) || '';
+            const tgtId = (typeof tgt === 'string' ? tgt : tgt?.id) || '';
+            const otherId = srcId === child.id ? tgtId : srcId;
+            rerouted[link.id] = { source: src, target: tgt };
+            if (childIdSet.has(otherId)) {
+              const linkView = this.paper.findViewByModel(link);
+              if (linkView) linkView.el.style.display = 'none';
+            } else {
+              if (srcId === child.id) {
+                link.set('source', { id: el.id });
+              } else {
+                link.set('target', { id: el.id });
+              }
+            }
+          });
+        });
+        el.prop('reroutedLinks', rerouted);
+      }
+    });
   }
 
   initToolbarEvents() {

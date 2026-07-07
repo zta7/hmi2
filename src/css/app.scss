@@ -484,7 +484,7 @@ label.joint-widget.joint-theme-default {
 // ============================================================
 #paper-container {
   background: $canvas-bg;
-
+  overflow: auto;
   .joint-paper {
     background: $canvas-bg !important;
     svg { background: transparent !important; }

@@ -42,8 +42,8 @@
               ></div>
               <div
                 id="paper-container"
-                class="scroll relative-position col-grow canvas-container"
-                style="height: 0px"
+                class="relative-position col-grow canvas-container"
+                style="height: 0px; overflow: hidden"
                 tabindex="0"
               ></div>
             </div>
@@ -93,6 +93,24 @@ onMounted(() => {
     const target = get(e, "data.target");
     if (target === "hmi") {
       const panel = get(e, "data.data.panel");
+      // ---------- 调试日志：打印 HMI2 接收到的 panel cells ----------
+      console.log('========== [HMI2 RECEIVE] panel cells ==========');
+      const rcells = get(panel, 'graph.cells', []);
+      rcells.forEach((cell: any) => {
+        if (cell.type && cell.type.endsWith('Link')) {
+          console.log(`  [HMI2-IN] LINK id=${cell.id?.slice(-8)}, ${cell.source?.id?.slice(-8) || '?'} → ${cell.target?.id?.slice(-8) || '?'}`);
+        } else {
+          console.log(
+            `  [HMI2-IN] id=${cell.id?.slice(-8)}, type=${cell.type}, isGroup=${cell.isGroup || false}, ` +
+            `parent=${cell.parent ? cell.parent.slice(-8) : '-'}, ` +
+            `position=(${cell.position?.x}, ${cell.position?.y}), ` +
+            `size=(${cell.size?.width}, ${cell.size?.height}), ` +
+            `text="${cell.text}"`
+          );
+        }
+      });
+      console.log('====================================================');
+      // ---------- 调试日志结束 ----------
       if (paper) {
         paper.reset(panel);
       } else {
