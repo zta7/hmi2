@@ -128,6 +128,12 @@ export const DesignIndicatorView = joint.dia.ElementView.extend({
     if (outer) {
       outer.setAttribute('stroke', this.model.attr('outer/stroke') || '#4ade80')
     }
+    // 更新标签文本
+    const label = this.el.querySelector('.design-indicator-label') as Element
+    if (label) {
+      const newText = this.model.attr('label/text') || ''
+      if (label.textContent !== newText) label.textContent = newText
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

@@ -311,6 +311,12 @@ export const DesignRectView = joint.dia.ElementView.extend({
     const body = this.el.querySelector('.design-rect-body') as Element | null
     if (body) {
       body.setAttribute('stroke', this.model.attr('body/stroke') || '#4ade80')
+      body.setAttribute('fill', this.model.attr('body/fill') || '#1f2937')
+    }
+    const headerText = this.el.querySelector('.design-rect-headerText') as Element | null
+    if (headerText) {
+      headerText.textContent = this.model.attr('headerText/text') || ''
+      headerText.setAttribute('fill', this.model.attr('headerText/fill') || '#f9fafb')
     }
   },
 

@@ -100,6 +100,16 @@ export class Paper {
       );
     });
     this.graph.fromJSON(g);
+    // ---------- 调试日志：验证 fromJSON 后 bind 是否在 attrs 内部 ----------
+    this.graph.getElements().forEach((el: any) => {
+      const attrsBind = el.get('attrs')?.bind;
+      console.log(
+        `[HMI2:Paper.fromJSON] id=${el.id?.slice(-8)}, type=${el.get('type')}, ` +
+        `hasAttrsBind=${!!attrsBind}, bindKeys=${JSON.stringify(Object.keys(attrsBind || {}))}`
+      );
+    });
+    console.log('============================================================');
+    // ---------- 调试日志结束 ----------
     // 确保嵌入关系建立（JointJS fromJSON 可能不自动处理 embeds）
     this.graph.getElements().forEach((el: any) => {
       const embeds = el.get('embeds');
@@ -380,10 +390,14 @@ export class Paper {
         const handles = getSelectionHandles(collection);
         handles.forEach((e) => this.selection.addHandle(e));
         // 添加inspector
+        // ---------- 调试日志：点击组件后 ----------
+        console.log(`[HMI2:Paper:inspector] selected type=${collection.first()?.get('type')}, count=${collection.length}`);
         const inspectorConfig = getInspectorConfig(
           collection,
           this.bindOptions,
         );
+        console.log(`[HMI2:Paper:inspector] config null? ${inspectorConfig == null}`);
+        // ---------- 调试日志结束 ----------
         inspectorEl &&
           inspectorConfig &&
           joint.ui.Inspector.create(inspectorEl, inspectorConfig);

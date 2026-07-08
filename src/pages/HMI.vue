@@ -67,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+console.log('=== HMI.VUE COMPILED VERSION: 2026-07-08-v2 ===');
+
 import { onMounted, ref } from "vue";
 import { Paper } from "src/jointjs/hmi/Paper";
 import { set, get } from "lodash";
@@ -105,7 +107,8 @@ onMounted(() => {
             `parent=${cell.parent ? cell.parent.slice(-8) : '-'}, ` +
             `position=(${cell.position?.x}, ${cell.position?.y}), ` +
             `size=(${cell.size?.width}, ${cell.size?.height}), ` +
-            `text="${cell.text}"`
+            `hasAttrsBind=${!!(cell.attrs && cell.attrs.bind)}, ` +
+            `bindKeys=${JSON.stringify(Object.keys((cell.attrs && cell.attrs.bind) || {}))}`
           );
         }
       });

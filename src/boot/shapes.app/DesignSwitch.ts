@@ -1,16 +1,16 @@
 import * as joint from '@clientio/rappid'
 
 /**
- * 方案设计 隔离开关（DesignSwitch）
+ * 方案设计 隔离开关（DesignSwitch）- 垂直布局（向右旋转90°）
  * 对应 GoJS HmiCanvas.vue buildSwitchTemplate：
- *   - 左右两个端子圆（深灰填充 + 灰蓝描边）
- *   - 刀闸水平连线（合闸0° / 分闸-30°）
- *   - 左右进出线
- *   - 底部设备名称标签
+ *   - 上下两个端子圆（深灰填充 + 灰蓝描边）
+ *   - 刀闸垂直连线（合闸0° / 分闸+30°顺时针翘起）
+ *   - 上下进出线
+ *   - 底部设备名称标签（文字方向不变）
  *
  * attrs 来源（gojsToJoint buildSwitchCell 写入）：
- *   portL:     { fill, stroke, strokeWidth }     — 左端子圆样式
- *   portR:     { fill, stroke, strokeWidth }     — 右端子圆样式
+ *   portL:     { fill, stroke, strokeWidth }     — 上端子圆样式
+ *   portR:     { fill, stroke, strokeWidth }     — 下端子圆样式
  *   blade:     { stroke, strokeWidth }            — 刀闸样式
  *   lineStyle: { stroke, strokeWidth }            — 进出线样式
  *   label:     { text, fill, fontSize }           — 设备名称
@@ -21,7 +21,7 @@ export class DesignSwitch extends joint.dia.Element {
     return {
       ...super.defaults,
       type: 'app.DesignSwitch',
-      size: { width: 70, height: 100 },
+      size: { width: 40, height: 80 },
     }
   }
 }
@@ -44,12 +44,12 @@ export const DesignSwitchView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    // 图形区高度：占节点上部约 55%（给底部标签留空间）
-    const gfxH = h * 0.55
-    const cy = gfxH * 0.50 // 图形区中心 Y
-    const tr = Math.min(w * 0.06, gfxH * 0.12, 4.5) // 端子半径
-    const leftX = w * 0.08 // 左端子圆心 X
-    const rightX = w * 0.92 // 右端子圆心 X
+    // 图形区高度：占节点上部约 75%（给底部标签留空间）
+    const gfxH = h * 0.75
+    const cx = w * 0.5 // 水平中心 X
+    const tr = Math.min(w * 0.1, gfxH * 0.06, 4.5) // 端子半径
+    const topY = gfxH * 0.18 // 上端子圆心 Y
+    const bottomY = gfxH * 0.80 // 下端子圆心 Y
 
     const portFill = model.attr('portL/fill') || '#334155'
     const portStroke = model.attr('portL/stroke') || '#94a3b8'
@@ -58,7 +58,7 @@ export const DesignSwitchView = joint.dia.ElementView.extend({
     const bladeStrokeW = model.attr('blade/strokeWidth') || 2
     const lineStroke = model.attr('lineStyle/stroke') || '#94a3b8'
     const lineStrokeW = model.attr('lineStyle/strokeWidth') || 2
-    const on = model.attr('on') !== false // 默认 true（合闸）
+    const on = model.attr('on') !== '0' && model.attr('on') !== false && model.attr('on') != null
 
     // ── 透明点击区 ──
     const hitRect = document.createElementNS(svgNS, 'rect')
@@ -70,41 +70,43 @@ export const DesignSwitchView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // ── 左进线（从左边缘到左端子）──
-    const lineL = document.createElementNS(svgNS, 'line')
-    lineL.setAttribute('x1', '0')
-    lineL.setAttribute('y1', String(cy))
-    lineL.setAttribute('x2', String(leftX - tr))
-    lineL.setAttribute('y2', String(cy))
-    lineL.setAttribute('stroke', lineStroke)
-    lineL.setAttribute('stroke-width', String(lineStrokeW))
-    lineL.setAttribute('class', 'design-switch-line')
-    this.el.appendChild(lineL)
+    // ── 上进线（从上边缘到上端子）──
+    const lineT = document.createElementNS(svgNS, 'line')
+    lineT.setAttribute('x1', String(cx))
+    lineT.setAttribute('y1', '0')
+    lineT.setAttribute('x2', String(cx))
+    lineT.setAttribute('y2', String(topY - tr))
+    lineT.setAttribute('stroke', lineStroke)
+    lineT.setAttribute('stroke-width', String(lineStrokeW))
+    lineT.setAttribute('class', 'design-switch-line')
+    this.el.appendChild(lineT)
 
-    // ── 左端子圆 ──
-    const portL = document.createElementNS(svgNS, 'circle')
-    portL.setAttribute('cx', String(leftX))
-    portL.setAttribute('cy', String(cy))
-    portL.setAttribute('r', String(tr))
-    portL.setAttribute('fill', portFill)
-    portL.setAttribute('stroke', portStroke)
-    portL.setAttribute('stroke-width', String(portStrokeW))
-    portL.setAttribute('class', 'design-switch-port')
-    this.el.appendChild(portL)
+    // ── 上端子圆 ──
+    const portT = document.createElementNS(svgNS, 'circle')
+    portT.setAttribute('cx', String(cx))
+    portT.setAttribute('cy', String(topY))
+    portT.setAttribute('r', String(tr))
+    portT.setAttribute('fill', portFill)
+    portT.setAttribute('stroke', portStroke)
+    portT.setAttribute('stroke-width', String(portStrokeW))
+    portT.setAttribute('class', 'design-switch-port')
+    this.el.appendChild(portT)
 
-    // ── 刀闸（水平线，绕左端子圆心旋转）──
-    const bladeAngle = on ? 0 : -30
-    const bladeLen = rightX - leftX
+    // ── 刀闸（垂直线，绕上端子圆心旋转）──
+    const bladeAngle = on ? 0 : 30
+    const bladeLen = bottomY - topY
 
     const bladeGroup = document.createElementNS(svgNS, 'g')
-    bladeGroup.setAttribute('transform', `translate(${leftX},${cy}) rotate(${bladeAngle})`)
+    bladeGroup.setAttribute('transform', `translate(${cx},${topY}) rotate(${bladeAngle})`)
+    bladeGroup.setAttribute('data-cx', String(cx))
+    bladeGroup.setAttribute('data-top-y', String(topY))
     bladeGroup.setAttribute('class', 'design-switch-blade-group')
 
     const blade = document.createElementNS(svgNS, 'line')
     blade.setAttribute('x1', '0')
     blade.setAttribute('y1', '0')
-    blade.setAttribute('x2', String(bladeLen))
-    blade.setAttribute('y2', '0')
+    blade.setAttribute('x2', '0')
+    blade.setAttribute('y2', String(bladeLen))
     blade.setAttribute('stroke', bladeStroke)
     blade.setAttribute('stroke-width', String(bladeStrokeW))
     blade.setAttribute('stroke-linecap', 'round')
@@ -112,34 +114,34 @@ export const DesignSwitchView = joint.dia.ElementView.extend({
     bladeGroup.appendChild(blade)
     this.el.appendChild(bladeGroup)
 
-    // ── 右端子圆 ──
-    const portR = document.createElementNS(svgNS, 'circle')
-    portR.setAttribute('cx', String(rightX))
-    portR.setAttribute('cy', String(cy))
-    portR.setAttribute('r', String(tr))
-    portR.setAttribute('fill', portFill)
-    portR.setAttribute('stroke', portStroke)
-    portR.setAttribute('stroke-width', String(portStrokeW))
-    portR.setAttribute('class', 'design-switch-port')
-    this.el.appendChild(portR)
+    // ── 下端子圆 ──
+    const portB = document.createElementNS(svgNS, 'circle')
+    portB.setAttribute('cx', String(cx))
+    portB.setAttribute('cy', String(bottomY))
+    portB.setAttribute('r', String(tr))
+    portB.setAttribute('fill', portFill)
+    portB.setAttribute('stroke', portStroke)
+    portB.setAttribute('stroke-width', String(portStrokeW))
+    portB.setAttribute('class', 'design-switch-port')
+    this.el.appendChild(portB)
 
-    // ── 右出线（从右端子到右边缘）──
-    const lineR = document.createElementNS(svgNS, 'line')
-    lineR.setAttribute('x1', String(rightX + tr))
-    lineR.setAttribute('y1', String(cy))
-    lineR.setAttribute('x2', String(w))
-    lineR.setAttribute('y2', String(cy))
-    lineR.setAttribute('stroke', lineStroke)
-    lineR.setAttribute('stroke-width', String(lineStrokeW))
-    lineR.setAttribute('class', 'design-switch-line')
-    this.el.appendChild(lineR)
+    // ── 下出线（从下端子到下边缘）──
+    const lineB = document.createElementNS(svgNS, 'line')
+    lineB.setAttribute('x1', String(cx))
+    lineB.setAttribute('y1', String(bottomY + tr))
+    lineB.setAttribute('x2', String(cx))
+    lineB.setAttribute('y2', String(gfxH))
+    lineB.setAttribute('stroke', lineStroke)
+    lineB.setAttribute('stroke-width', String(lineStrokeW))
+    lineB.setAttribute('class', 'design-switch-line')
+    this.el.appendChild(lineB)
 
-    // ── 设备名称 ──
+    // ── 设备名称（文字方向不变，在图形区下方）──
     const labelText = model.attr('label/text') || ''
     if (labelText) {
       const label = document.createElementNS(svgNS, 'text')
       label.setAttribute('x', String(w / 2))
-      label.setAttribute('y', String(h * 0.85))
+      label.setAttribute('y', String(h * 0.92))
       label.setAttribute('text-anchor', 'middle')
       label.setAttribute('dominant-baseline', 'middle')
       label.setAttribute('fill', model.attr('label/fill') || '#cbd5e1')
@@ -174,6 +176,17 @@ export const DesignSwitchView = joint.dia.ElementView.extend({
     const label = this.el.querySelector('.design-switch-label') as Element
     if (label) {
       label.setAttribute('fill', this.model.attr('label/fill') || '#cbd5e1')
+      const newText = this.model.attr('label/text') || ''
+      if (label.textContent !== newText) label.textContent = newText
+    }
+    // 更新刀闸角度（运行时 on 属性变化）
+    const bladeGroup = this.el.querySelector('.design-switch-blade-group') as Element
+    if (bladeGroup) {
+      const on = this.model.attr('on') !== '0' && this.model.attr('on') !== false && this.model.attr('on') != null
+      const bladeAngle = on ? 0 : 30
+      const cx = bladeGroup.getAttribute('data-cx') || '0'
+      const topY = bladeGroup.getAttribute('data-top-y') || '0'
+      bladeGroup.setAttribute('transform', `translate(${cx},${topY}) rotate(${bladeAngle})`)
     }
   },
 

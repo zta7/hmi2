@@ -196,6 +196,11 @@ const inspectorMap = (type: string, bindOptions = {}) => {
   const outputEvents = get(bindOptions, 'outputEvents', [])
   const windows = get(bindOptions, 'windows', [])
 
+  // 检查是否命中了 Design* 分支
+  if (type?.startsWith('app.Design')) {
+    console.log('[inspector:inspectorMap] type=' + type + ' (Design*) matched');
+  }
+
   if (type === 'app.Rectangle') {
     return {
       inputs: {
@@ -1197,7 +1202,70 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       },
       groups: inspectorGroups
     }
+  } else if (type === 'app.DesignSwitch') {
+    console.log('[inspector:inspectorMap] HIT DesignSwitch branch');
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text,
+            fontSize: inspectorInputs.fontSize,
+            stroke: inspectorInputs.stroke
+          },
+          bind: {
+            'attrs.on': {
+              type: 'select',
+              options: inputs,
+              label: '合闸',
+              group: 'bind'
+            }
+          }
+        },
+        on: inspectorInputs.boolean
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.DesignIndicator') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text,
+            fontSize: inspectorInputs.fontSize,
+            stroke: inspectorInputs.stroke
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.DesignRect') {
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          body: {
+            strokeWidth: inspectorInputs.strokeWidth,
+            rx: inspectorInputs.rx,
+            ry: inspectorInputs.ry,
+            fill: inspectorInputs.fill
+          },
+          header: {
+            fill: inspectorInputs.fill
+          },
+          headerText: {
+            text: inspectorInputs.text,
+            fontSize: inspectorInputs.fontSize,
+            fontWeight: inspectorInputs.fontWeight,
+            fill: inspectorInputs.stroke
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
   } else {
+    console.log('[inspector:inspectorMap] FALLBACK else - type=' + type + ' NOT matched');
     return {
       inputs: {
         ...CommonInputs
@@ -1214,7 +1282,11 @@ export const getInspectorConfig = (
   if (collection.length === 1) {
     const cell = collection.first() as any
     const type = cell.get('type')
+    console.log('[inspector:getInspectorConfig] cell type=' + type,
+      'bindOptions keys=', Object.keys(bindOptions),
+      'inputs.length=' + ((bindOptions as any).inputs?.length || 0));
     const config = inspectorMap(type, bindOptions)
+    console.log('[inspector:getInspectorConfig] config found=' + (config != null));
     if (config) {
       const { inputs, groups } = config
       return {
