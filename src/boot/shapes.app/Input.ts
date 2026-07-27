@@ -1,7 +1,6 @@
 import * as joint from '@clientio/rappid'
-import { debounce, get } from 'lodash'
+import { get } from 'lodash'
 import $ from 'jquery'
-import { uid } from 'quasar'
 
 export class Input extends joint.dia.Element {
   defaults () {
@@ -10,7 +9,10 @@ export class Input extends joint.dia.Element {
       type: 'app.Input',
       size: { width: 90, height: 30 },
       value: '',
-      color: 'black',
+      color: '#e0e0e0',
+      borderColor: '#3d3d60',
+      background: '#1a1a2e',
+      textColor: '#e0e0e0',
       fontSize: 14
     }
   }
@@ -29,6 +31,9 @@ export const InputView = joint.dia.ElementView.extend({
     angle: ['TRANSFORM'],
     value: ['RENDER'],
     color: ['RENDER'],
+    borderColor: ['RENDER'],
+    background: ['RENDER'],
+    textColor: ['RENDER'],
     fontSize: ['RENDER']
   },
 
@@ -38,6 +43,21 @@ export const InputView = joint.dia.ElementView.extend({
     const online = !window.online
     const inputId = 'input'
     const buttonId = 'button'
+
+    const borderColor = model.attributes.borderColor || model.attributes.color || '#3d3d60'
+    const background = model.attributes.background || '#1a1a2e'
+    const textColor = model.attributes.textColor || model.attributes.color || '#e0e0e0'
+
+    // 根据背景色自动生成 OK 按钮背景（深 30%），保证 OK 按钮始终比输入框背景深
+    const darken = (hex: string, factor: number) => {
+      const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+      if (!m) return hex
+      const r = Math.round(parseInt(m[1], 16) * factor)
+      const g = Math.round(parseInt(m[2], 16) * factor)
+      const b = Math.round(parseInt(m[3], 16) * factor)
+      return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')
+    }
+    const okBg = darken(background, 0.7)
 
     const rect = {
       tagName: 'rect',
@@ -61,14 +81,14 @@ export const InputView = joint.dia.ElementView.extend({
           tagName: 'div',
           namespaceURI: 'http://www.w3.org/1999/xhtml',
           attributes: {
-            style: 'width: 100%; height: 100%; display: flex; border-radius: 4px; background: #1a1a2e; border: 1px solid #3d3d60; overflow: hidden;'
+            style: `width: 100%; height: 100%; display: flex; border-radius: 4px; background: ${background}; border: 1px solid ${borderColor}; overflow: hidden;`
           },
           children: [
             {
               tagName: 'div',
               namespaceURI: 'http://www.w3.org/1999/xhtml',
               attributes: {
-                style: `width: 3px; background: ${model.attributes.color}; margin: 4px; border-radius: 1.5px;`
+                style: `width: 3px; background: ${borderColor}; margin: 4px; border-radius: 1.5px;`
               }
             },
             {
@@ -90,7 +110,7 @@ export const InputView = joint.dia.ElementView.extend({
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: model.attributes.color,
+                color: textColor,
                 padding: '0 6px',
                 fontFamily: 'sans-serif'
               }
@@ -107,9 +127,9 @@ export const InputView = joint.dia.ElementView.extend({
                 padding: '0 8px',
                 margin: 0,
                 border: 'none',
-                borderLeft: '1px solid #3d3d60',
-                background: '#2a2a40',
-                color: model.attributes.color,
+                borderLeft: `1px solid ${borderColor}`,
+                background: okBg,
+                color: textColor,
                 fontSize: '11px',
                 fontWeight: '600',
                 cursor: 'pointer',

@@ -210,9 +210,18 @@ const inspectorMap = (type: string, bindOptions = {}) => {
             text: inspectorInputs.text,
             fontSize: inspectorInputs.fontSize,
             fontWeight: inspectorInputs.fontWeight,
-            stroke: inspectorInputs.stroke
+            stroke: {
+              type: 'color',
+              label: 'Text Color',
+              group: 'style'
+            }
           },
           body: {
+            stroke: {
+              type: 'color',
+              label: 'Border Color',
+              group: 'style'
+            },
             strokeWidth: inspectorInputs.strokeWidth,
             rx: inspectorInputs.rx,
             ry: inspectorInputs.ry,
@@ -404,9 +413,19 @@ const inspectorMap = (type: string, bindOptions = {}) => {
     return {
       inputs: {
         ...CommonInputs,
-        color: {
+        borderColor: {
           type: 'color',
-          label: 'Color',
+          label: 'Border Color',
+          group: 'style'
+        },
+        background: {
+          type: 'color',
+          label: 'Background',
+          group: 'style'
+        },
+        textColor: {
+          type: 'color',
+          label: 'Text Color',
           group: 'style'
         },
         value: inspectorInputs.text,

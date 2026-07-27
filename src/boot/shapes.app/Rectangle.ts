@@ -49,8 +49,8 @@ export const RectangleView = joint.dia.ElementView.extend({
     const text = toFormatted(rawText, format);
     console.log('[Rectangle updateText]', { rawText, format, text, modelFormat: this.model.get("format") });
     const labelFill =
-      this.model.attr("label/fill") ||
       this.model.attr("label/stroke") ||
+      this.model.attr("label/fill") ||
       "#e0e0e0";
     const fontSize = this.model.attr("label/fontSize");
     const fontWeight = this.model.attr("label/fontWeight");
@@ -82,8 +82,8 @@ export const RectangleView = joint.dia.ElementView.extend({
     const text = toFormatted(rawText, format);
     console.log('[Rectangle render]', { rawText, format, text, modelFormat: model.get("format"), allKeys: Object.keys(model.attributes) });
     const labelFill =
-      model.attr("label/fill") ||
       model.attr("label/stroke") ||
+      model.attr("label/fill") ||
       "#e0e0e0";
     const fontSize = model.attr("label/fontSize");
     const fontWeight = model.attr("label/fontWeight");
