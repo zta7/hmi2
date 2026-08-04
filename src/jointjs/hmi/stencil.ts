@@ -52,14 +52,15 @@ export const getStencilConfig = (paper: joint.dia.Paper | joint.ui.PaperScroller
       }
     },
     groups: {
-      Inputs: { label: get(i18n, `${lang}.INPUTS`, 'Inputs'), index: 1 },
-      Outputs: { label: get(i18n, `${lang}.OUTPUTS`, 'Outputs'), index: 2 },
-      OutputEvents: { label: get(i18n, `${lang}.OUTPUTEVENTS`, 'Events'), index: 3 },
-      Links: { label: get(i18n, `${lang}.LINKS`, 'Links'), index: 4 },
-      Images: { label: get(i18n, `${lang}.STATIC`, 'Static'), index: 5 },
-      Shapes: { label: get(i18n, `${lang}.SHAPES`, 'Shapes'), index: 6 },
-      Scala: { label: get(i18n, `${lang}.PROCESS`, 'Process'), index: 7 },
-      Window: { label: get(i18n, `${lang}.POPUP WINDOW`, 'Window'), index: 8 }
+      Power: { label: get(i18n, `${lang}.POWER`, '电气'), index: 1 },
+      Inputs: { label: get(i18n, `${lang}.INPUTS`, 'Inputs'), index: 2 },
+      Outputs: { label: get(i18n, `${lang}.OUTPUTS`, 'Outputs'), index: 3 },
+      OutputEvents: { label: get(i18n, `${lang}.OUTPUTEVENTS`, 'Events'), index: 4 },
+      Links: { label: get(i18n, `${lang}.LINKS`, 'Links'), index: 5 },
+      Images: { label: get(i18n, `${lang}.STATIC`, 'Static'), index: 6 },
+      Shapes: { label: get(i18n, `${lang}.SHAPES`, 'Shapes'), index: 7 },
+      Scala: { label: get(i18n, `${lang}.PROCESS`, 'Process'), index: 8 },
+      Window: { label: get(i18n, `${lang}.POPUP WINDOW`, 'Window'), index: 9 }
     },
     layout: {
       columns: 3,
@@ -373,6 +374,58 @@ export const getStencilLoad = (lang: string) => {
         ...stencilElement('./stencil/button.svg', l('WindowButton', 'Popup')),
         shape: new app.WindowButton()
       }
+    ],
+    Power: [
+      // 光伏：蓝色倾斜板 + 支架
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><g transform="translate(23,18) rotate(-8)"><rect x="-16" y="-10" width="32" height="20" rx="1" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.2"/><line x1="-12" y1="-5" x2="-7" y2="-5" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/><line x1="-3" y1="-5" x2="2" y2="-5" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/><line x1="6" y1="-5" x2="11" y2="-5" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/><line x1="-12" y1="3" x2="-7" y2="3" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/><line x1="-3" y1="3" x2="2" y2="3" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/><line x1="6" y1="3" x2="11" y2="3" stroke="rgba(255,255,255,0.6)" stroke-width="0.6"/></g><line x1="13" y1="30" x2="13" y2="34" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/><line x1="33" y1="30" x2="33" y2="34" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/><line x1="9" y1="34" x2="37" y2="34" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/></svg>'), l('PvPanel', '光伏')),
+        shape: new app.PvPanel({ size: { width: 130, height: 110 }, attrs: { label: { text: 'PV' } } })
+      },
+      // 储能系统：白柜 + 4×3 电池模组网格
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><rect x="6" y="6" width="34" height="24" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><g fill="#475569" stroke="#1e293b" stroke-width="0.4"><rect x="9" y="9" width="6" height="5" rx="0.5"/><rect x="17" y="9" width="6" height="5" rx="0.5"/><rect x="25" y="9" width="6" height="5" rx="0.5"/><rect x="33" y="9" width="6" height="5" rx="0.5"/><rect x="9" y="16" width="6" height="5" rx="0.5"/><rect x="17" y="16" width="6" height="5" rx="0.5"/><rect x="25" y="16" width="6" height="5" rx="0.5"/><rect x="33" y="16" width="6" height="5" rx="0.5"/><rect x="9" y="23" width="6" height="5" rx="0.5"/><rect x="17" y="23" width="6" height="5" rx="0.5"/><rect x="25" y="23" width="6" height="5" rx="0.5"/><rect x="33" y="23" width="6" height="5" rx="0.5"/></g><polygon points="3,4 5,4 4,2" fill="#facc15" stroke="#1f2937" stroke-width="0.4"/></svg>'), l('EnergyStorage', '储能')),
+        shape: new app.EnergyStorage({ size: { width: 150, height: 110 }, attrs: { label: { text: 'Battery' } } })
+      },
+      // 双向 DC/AC 交换器：白柜 + 顶部三风扇 + 中央 ⇄
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><rect x="8" y="6" width="30" height="24" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><circle cx="14" cy="11" r="2.5" fill="#475569" stroke="#64748b" stroke-width="0.6"/><circle cx="23" cy="11" r="2.5" fill="#475569" stroke="#64748b" stroke-width="0.6"/><circle cx="32" cy="11" r="2.5" fill="#475569" stroke="#64748b" stroke-width="0.6"/><text x="23" y="22" text-anchor="middle" font-size="8" font-weight="bold" font-family="sans-serif" fill="#1e293b">DC&#x21C4;AC</text><polygon points="11,17 14,17 12.5,15" fill="#facc15" stroke="#1f2937" stroke-width="0.4"/></svg>'), l('DcAcConverter', 'DC/AC')),
+        shape: new app.DcAcConverter({ size: { width: 130, height: 110 }, attrs: { label: { text: 'DC/AC' } } })
+      },
+      // 并网接入点：窄高柜 + 顶部 10kV/380V 铭牌
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 40"><rect x="9" y="3" width="18" height="3" rx="0.5" fill="#1e293b"/><text x="18" y="5.5" text-anchor="middle" font-size="2.8" font-weight="bold" font-family="sans-serif" fill="#facc15">10kV/380V</text><rect x="6" y="7" width="24" height="29" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><line x1="18" y1="7" x2="18" y2="36" stroke="#64748b" stroke-width="0.4" stroke-dasharray="1.5,1"/><rect x="13" y="14" width="10" height="5" rx="0.5" fill="#0f172a"/><line x1="14" y1="16" x2="22" y2="16" stroke="#22d3ee" stroke-width="0.6"/><polygon points="18,24 20,28 16,28" fill="#facc15" stroke="#1f2937" stroke-width="0.4"/></svg>'), l('GridPoint', '并网点')),
+        shape: new app.GridPoint({ size: { width: 90, height: 130 }, attrs: { label: { text: 'Grid' } } })
+      },
+      // 交流负载 / 三相电机（横向）：左圆形端盖 + 中部散热筋 + 顶部接线盒 + 转轴
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 28"><circle cx="11" cy="14" r="6" fill="#94a3b8" stroke="#1e293b" stroke-width="1"/><circle cx="11" cy="14" r="3.2" fill="none" stroke="#1e293b" stroke-width="0.6"/><line x1="11" y1="14" x2="8.4" y2="11.4" stroke="#1e293b" stroke-width="0.8"/><line x1="11" y1="14" x2="13.6" y2="11.4" stroke="#1e293b" stroke-width="0.8"/><line x1="11" y1="14" x2="11" y2="11.4" stroke="#1e293b" stroke-width="0.8"/><rect x="4.4" y="13" width="2.6" height="2" fill="#64748b" stroke="#1e293b" stroke-width="0.4"/><rect x="11" y="9.5" width="36" height="9" rx="0.8" fill="#cbd5e1" stroke="#475569" stroke-width="0.8"/><g stroke="#64748b" stroke-width="0.4"><line x1="16" y1="11" x2="16" y2="17"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="24" y1="11" x2="24" y2="17"/><line x1="28" y1="11" x2="28" y2="17"/><line x1="32" y1="11" x2="32" y2="17"/><line x1="36" y1="11" x2="36" y2="17"/><line x1="40" y1="11" x2="40" y2="17"/></g><rect x="26" y="6" width="6" height="3.5" rx="0.4" fill="#cbd5e1" stroke="#1e293b" stroke-width="0.4"/><line x1="26" y1="8" x2="32" y2="8" stroke="#1e293b" stroke-width="0.3"/><circle cx="34" cy="7.6" r="0.7" fill="none" stroke="#1e293b" stroke-width="0.4"/><circle cx="48" cy="14" r="6" fill="#94a3b8" stroke="#1e293b" stroke-width="1"/><rect x="14" y="18.5" width="2.5" height="3" fill="#94a3b8" stroke="#1e293b" stroke-width="0.4"/><rect x="42" y="18.5" width="2.5" height="3" fill="#94a3b8" stroke="#1e293b" stroke-width="0.4"/></svg>'), l('AcLoad', '交流负载')),
+        shape: new app.AcLoad({ size: { width: 160, height: 110 }, attrs: { label: { text: 'AC Load' } } })
+      },
+      // 变压器：两个相切圆（ANSI 简化符号）
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 36"><circle cx="15" cy="13" r="8" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="25" cy="21" r="8" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="15" cy="1.5" r="1.6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><line x1="15" y1="5" x2="15" y2="3.2" stroke="#4ade80" stroke-width="1.2"/><circle cx="25" cy="33" r="1.6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><line x1="25" y1="29" x2="25" y2="31.4" stroke="#4ade80" stroke-width="1.2"/></svg>'), l('Transformer', '变压器')),
+        shape: new app.Transformer({ size: { width: 100, height: 110 }, attrs: { label: { text: 'Transformer' } } })
+      },
+      // 直流负载：窄高柜 + DC 铭牌 + 中部显示屏
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 40"><rect x="10" y="3" width="16" height="3" rx="0.5" fill="#0ea5e9"/><text x="18" y="5.8" text-anchor="middle" font-size="3" font-weight="bold" font-family="sans-serif" fill="#fff">DC</text><rect x="6" y="7" width="24" height="29" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><line x1="18" y1="7" x2="18" y2="36" stroke="#64748b" stroke-width="0.4" stroke-dasharray="1.5,1"/><rect x="13" y="13" width="10" height="4" rx="0.5" fill="#0f172a"/><line x1="14" y1="15" x2="22" y2="15" stroke="#22d3ee" stroke-width="0.6"/><polygon points="18,24 20,28 16,28" fill="#facc15" stroke="#1f2937" stroke-width="0.4"/></svg>'), l('DcLoad', '直流负载')),
+        shape: new app.DcLoad({ size: { width: 90, height: 120 }, attrs: { label: { text: 'DC Load' } } })
+      },
+      // 母线：水平绿色粗线 + 上方灰色标签
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 14"><text x="23" y="5" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#9ca3af">Bus</text><line x1="2" y1="10" x2="44" y2="10" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/></svg>'), l('DesignBus', '母线')),
+        shape: new app.DesignBus({ size: { width: 200, height: 6 }, attrs: { label: { text: 'Bus' } } })
+      },
+      // 隔离开关：上 / 下端子圆 + 刀闸（合闸状态）
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 40"><line x1="14" y1="3" x2="14" y2="9" stroke="#94a3b8" stroke-width="2"/><line x1="14" y1="29" x2="14" y2="37" stroke="#94a3b8" stroke-width="2"/><circle cx="14" cy="9" r="3" fill="#334155" stroke="#94a3b8" stroke-width="1.4"/><circle cx="14" cy="29" r="3" fill="#334155" stroke="#94a3b8" stroke-width="1.4"/><line x1="14" y1="9" x2="14" y2="29" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/></svg>'), l('DesignSwitch', '隔离开关')),
+        shape: new app.DesignSwitch({ size: { width: 40, height: 80 }, on: true, attrs: { label: { text: 'Breaker' } } })
+      },
+      // 电机 / 发电机：圆 + 中心字母 + 上下端口
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><line x1="16" y1="3" x2="16" y2="11" stroke="#4ade80" stroke-width="1.6"/><circle cx="16" cy="20" r="9" fill="transparent" stroke="#4ade80" stroke-width="1.6"/><text x="16" y="24" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="#4ade80">M</text><line x1="16" y1="29" x2="16" y2="37" stroke="#4ade80" stroke-width="1.6"/><circle cx="16" cy="3" r="2" fill="#facc15" stroke="#1f2937" stroke-width="0.8"/><circle cx="16" cy="37" r="2" fill="#facc15" stroke="#1f2937" stroke-width="0.8"/></svg>'), l('DesignMotor', '电机')),
+        shape: new app.DesignMotor({ size: { width: 80, height: 110 }, attrs: { subType: { text: 'M' }, label: { text: 'Motor' } } })
+      },
     ]
   }
 }

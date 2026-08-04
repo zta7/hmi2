@@ -293,11 +293,15 @@ button.joint-widget.joint-theme-default {
 
 .joint-widget.joint-theme-default[data-name="undo"],
 .joint-widget.joint-theme-default[data-name="redo"],
-.joint-widget.joint-theme-default[data-name="zoom-to-fit"],
+.joint-widget.joint-theme-default[data-name="reset-view"],
 .joint-widget.joint-theme-default[data-name="zoom-out"],
 .joint-widget.joint-theme-default[data-name="zoom-in"],
 .joint-widget.joint-theme-default[data-name="copy"],
-.joint-widget.joint-theme-default[data-name="paste"] {
+.joint-widget.joint-theme-default[data-name="paste"],
+.joint-widget.joint-theme-default[data-name="pan-mode"],
+.joint-widget.joint-theme-default[data-name="select-mode"],
+.joint-widget.joint-theme-default[data-name="navigator-toggle"],
+.joint-widget.joint-theme-default[data-name="reference-toggle"] {
   position: relative;
   top: 0;
   padding: 0;
@@ -318,11 +322,22 @@ button.joint-widget.joint-theme-default {
 
 .joint-widget.joint-theme-default[data-name="undo"]:after { background-image: url(../assets/toolbar/undo-variant.svg); }
 .joint-widget.joint-theme-default[data-name="redo"]:after { background-image: url(../assets/toolbar/redo-variant.svg); }
-.joint-widget.joint-theme-default[data-name="zoom-to-fit"]:after { background-image: url(../assets/toolbar/arrow-expand.svg); }
+.joint-widget.joint-theme-default[data-name="reset-view"]:after { background-image: url(../assets/toolbar/arrow-expand.svg); }
 .joint-widget.joint-theme-default[data-name="zoom-in"]:after { background-image: url(../assets/toolbar/plus.svg); }
 .joint-widget.joint-theme-default[data-name="zoom-out"]:after { background-image: url(../assets/toolbar/minus.svg); }
 .joint-widget.joint-theme-default[data-name="copy"]:after { background-image: url(../assets/toolbar/content-copy.svg); transform: scale(0.8); }
 .joint-widget.joint-theme-default[data-name="paste"]:after { background-image: url(../assets/toolbar/content-paste.svg); transform: scale(0.8); }
+.joint-widget.joint-theme-default[data-name="pan-mode"]:after { background-image: url(../assets/toolbar/hand-back-right-outline.svg); }
+.joint-widget.joint-theme-default[data-name="select-mode"]:after { background-image: url(../assets/toolbar/cursor-default-outline.svg); }
+.joint-widget.joint-theme-default[data-name="navigator-toggle"]:after { background-image: url(../assets/toolbar/map-outline.svg); }
+.joint-widget.joint-theme-default[data-name="reference-toggle"]:after { background-image: url(../assets/toolbar/border-style-dashed.svg); }
+.joint-widget.joint-theme-default[data-name="pan-mode"][data-active="true"],
+.joint-widget.joint-theme-default[data-name="select-mode"][data-active="true"],
+.joint-widget.joint-theme-default[data-name="navigator-toggle"][data-active="true"],
+.joint-widget.joint-theme-default[data-name="reference-toggle"][data-active="true"] {
+  background: $dark-hover;
+  border-color: $dark-accent;
+}
 
 .joint-widget.joint-theme-default[data-name=separator] {
   line-height: 36px;
@@ -596,3 +611,32 @@ label.joint-widget.joint-theme-default {
 .q-page { background: $dark-bg-primary; }
 .q-splitter__separator { background: $dark-border !important; }
 .border-left { border-left: 1px solid $dark-border; }
+
+// ============================================================
+// Navigator（画布缩略图）— 配色与画布一致
+// ============================================================
+#navigator-container .joint-navigator.joint-theme-dark {
+  background-color: $dark-bg-tertiary; // 与 navigator-container 底色一致
+  box-sizing: border-box;
+  // Rappid 默认 table-cell 居中依赖父级 table 布局，这里改为 flex 保证缩略图正中间
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // 缩略图 paper 背景 = 画布背景
+  > .joint-paper {
+    background-color: $canvas-bg !important;
+    box-shadow: none;
+    > svg {
+      background: transparent;
+    }
+  }
+
+  // 当前视口框 = 画布强调色
+  .current-view {
+    border: 1px solid $dark-accent;
+  }
+  .current-view-control {
+    color: $dark-accent;
+  }
+}

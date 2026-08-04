@@ -1,51 +1,28 @@
 <template>
-  <q-page
-    class="hmi-editor"
-    :style-fn="(offset, height) => ({ height: `${height - offset}px` })"
-  >
-    <q-splitter
-      class="fit hmi-splitter"
-      @mouseenter="onMouseenter"
-      v-model="splitterModel"
-      :limits="[0, 100]"
-      separator-class="hmi-separator"
-    >
+  <q-page class="hmi-editor" :style-fn="(offset, height) => ({ height: `${height - offset}px` })">
+    <q-splitter class="fit hmi-splitter" @mouseenter="onMouseenter" v-model="splitterModel" :limits="[0, 100]"
+      separator-class="hmi-separator">
       <template v-slot:before>
         <div class="stencil-panel fit column no-wrap">
           <div class="panel-header">
             <span class="panel-title">Components 组件</span>
           </div>
-          <div
-            id="stencil-container"
-            class="col-grow relative-position"
-            style="height: 0px"
-          ></div>
+          <div id="stencil-container" class="col-grow relative-position" style="height: 0px"></div>
         </div>
       </template>
 
       <template v-slot:after>
-        <q-splitter
-          class="fit hmi-splitter"
-          v-model="splitterModel2"
-          :limits="[0, 100]"
-          separator-class="hmi-separator"
-        >
+        <q-splitter class="fit hmi-splitter" v-model="splitterModel2" :limits="[0, 100]"
+          separator-class="hmi-separator">
           <template v-slot:before>
-            <div
-              class="fit col-grow column no-wrap canvas-area"
-              style="width: 0px"
-            >
-              <div
-                id="toolbar-container"
-                class="toolbar-panel overflow-hidden"
-                style="flex: 0 0 auto"
-              ></div>
-              <div
-                id="paper-container"
-                class="relative-position col-grow canvas-container"
-                style="height: 0px; overflow: hidden"
-                tabindex="0"
-              ></div>
+            <div class="fit col-grow column no-wrap canvas-area" style="width: 0px; position: relative;">
+              <div id="toolbar-container" class="toolbar-panel overflow-hidden" style="flex: 0 0 auto"></div>
+              <div id="paper-container" class="relative-position col-grow canvas-container"
+                style="height: 0px; overflow: hidden" tabindex="0">
+              </div>
+              <!-- 画布缩略图 Navigator，固定在 canvas-area（画布区域）右下角，
+                   放在 paper-container 外部避免与 PaperScroller 层叠冲突 -->
+              <div id="navigator-container" class="navigator-container" aria-hidden="true"></div>
             </div>
           </template>
           <template v-slot:after>
@@ -53,11 +30,7 @@
               <div class="panel-header">
                 <span class="panel-title">Properties </span>
               </div>
-              <div
-                id="inspector-container"
-                class="relative-position col-grow fit"
-                style="height: 0px"
-              ></div>
+              <div id="inspector-container" class="relative-position col-grow fit" style="height: 0px"></div>
             </div>
           </template>
         </q-splitter>
@@ -115,7 +88,13 @@ onMounted(() => {
       console.log('====================================================');
       // ---------- 调试日志结束 ----------
       if (paper) {
-        paper.reset(panel);
+        // 父系统回灌：优先走增量更新，避免 fromJSON 全量重建
+        // reset 在 applyChanges 检测到「大幅变更」时仍会自动退化兜底
+        if (typeof (paper as any).applyChanges === "function") {
+          (paper as any).applyChanges(panel);
+        } else {
+          paper.reset(panel);
+        }
       } else {
         paper = new Paper(
           el,
@@ -192,6 +171,37 @@ onMounted(() => {
 .toolbar-panel {
   background: #1e1e32;
   border-bottom: 1px solid #2a2a40;
+}
+
+/* 缩略图 Navigator：固定在画布右下角，受显隐 class 控制 */
+.navigator-container {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 200px;
+  height: 140px;
+  z-index: 6;
+  background: #1a1a2e;
+  border: 1px solid #2a2a40;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  /* 让 Navigator 及内部画布在容器正中显示 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigator-container.hidden {
+  display: none;
+}
+
+/* 确保 Navigator 内部元素填满容器 */
+.navigator-container :deep(.joint-navigator),
+.navigator-container .joint-navigator,
+.navigator-container>* {
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>
 

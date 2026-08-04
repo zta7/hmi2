@@ -79,6 +79,15 @@ import * as DesignMotor from './shapes.app/DesignMotor'
 import * as DesignRect from './shapes.app/DesignRect'
 import * as DesignGroup from './shapes.app/DesignGroup'
 
+// 电气方案组件（对应 demoimg/ 实物参考图，纯矢量自绘）
+import * as PvPanel from './shapes.app/PvPanel'
+import * as EnergyStorage from './shapes.app/EnergyStorage'
+import * as DcAcConverter from './shapes.app/DcAcConverter'
+import * as GridPoint from './shapes.app/GridPoint'
+import * as AcLoad from './shapes.app/AcLoad'
+import * as DcLoad from './shapes.app/DcLoad'
+import * as Transformer from './shapes.app/Transformer'
+
 // Pump
 
 // const p = joint.dia.CellView.prototype as any
@@ -166,7 +175,14 @@ export const shapes = {
     ...DesignTransformer,
     ...DesignMotor,
     ...DesignRect,
-    ...DesignGroup
+    ...DesignGroup,
+    ...PvPanel,
+    ...EnergyStorage,
+    ...DcAcConverter,
+    ...GridPoint,
+    ...AcLoad,
+    ...DcLoad,
+    ...Transformer
   }
 }
 

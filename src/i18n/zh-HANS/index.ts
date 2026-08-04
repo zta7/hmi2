@@ -39,6 +39,19 @@ export default {
   SHAPES: '形状',
   PROCESS: '过程控制',
   'POPUP WINDOW': '弹出窗',
+  POWER: '电气方案',
+  PvPanel: '光伏',
+  EnergyStorage: '储能',
+  DcAcConverter: '双向DC/AC',
+  GridPoint: '并网点',
+  AcLoad: '交流负载',
+  DcLoad: '直流负载',
+  Transformer: '变压器',
+  DesignBus: '母线',
+  DesignSwitch: '隔离开关',
+  DesignMotor: '电机',
+  DesignIndicator: '指示灯',
+  DesignTransformer: '变压器',
 
   a: 'AAA'
 
