@@ -28,6 +28,7 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 
@@ -43,15 +44,10 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
     const gfxH = h * 0.78
     const cx = w / 2
 
-    const termR = Math.min(w * 0.04, 3.5)
-
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
     const cabinetFill = model.attr('cabinet/fill') || '#e2e8f0'
     const cabinetStroke = model.attr('cabinet/stroke') || '#64748b'
-    const termFill = model.attr('terminal/fill') || '#facc15'
-    const termStroke = model.attr('terminal/stroke') || '#1f2937'
-    const termStrokeW = model.attr('terminal/strokeWidth') || 1
 
     // ── 透明点击区 ──
     const hitRect = document.createElementNS(svgNS, 'rect')
@@ -62,27 +58,6 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
     hitRect.setAttribute('fill', 'transparent')
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
-
-    // ── 上引出线 + 上端口（DC 端） ──
-    const topLine = document.createElementNS(svgNS, 'line')
-    topLine.setAttribute('x1', String(cx))
-    topLine.setAttribute('y1', '0')
-    topLine.setAttribute('x2', String(cx))
-    topLine.setAttribute('y2', String(gfxH * 0.18))
-    topLine.setAttribute('stroke', bodyStroke)
-    topLine.setAttribute('stroke-width', String(bodyStrokeW))
-    topLine.setAttribute('class', 'dcac-line')
-    this.el.appendChild(topLine)
-
-    const topTerm = document.createElementNS(svgNS, 'circle')
-    topTerm.setAttribute('cx', String(cx))
-    topTerm.setAttribute('cy', '0')
-    topTerm.setAttribute('r', String(termR))
-    topTerm.setAttribute('fill', termFill)
-    topTerm.setAttribute('stroke', termStroke)
-    topTerm.setAttribute('stroke-width', String(termStrokeW))
-    topTerm.setAttribute('class', 'dcac-terminal')
-    this.el.appendChild(topTerm)
 
     // ── 柜体外形 ──
     const cabW = w * 0.82
@@ -161,28 +136,6 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
     triangle.setAttribute('stroke', '#1f2937')
     triangle.setAttribute('stroke-width', '0.6')
     this.el.appendChild(triangle)
-
-    // ── 下引出线 + 下端口（AC 端） ──
-    const botY = gfxH
-    const botLine = document.createElementNS(svgNS, 'line')
-    botLine.setAttribute('x1', String(cx))
-    botLine.setAttribute('y1', String(botY))
-    botLine.setAttribute('x2', String(cx))
-    botLine.setAttribute('y2', String(botY - gfxH * 0.10))
-    botLine.setAttribute('stroke', bodyStroke)
-    botLine.setAttribute('stroke-width', String(bodyStrokeW))
-    botLine.setAttribute('class', 'dcac-line')
-    this.el.appendChild(botLine)
-
-    const botTerm = document.createElementNS(svgNS, 'circle')
-    botTerm.setAttribute('cx', String(cx))
-    botTerm.setAttribute('cy', String(botY))
-    botTerm.setAttribute('r', String(termR))
-    botTerm.setAttribute('fill', termFill)
-    botTerm.setAttribute('stroke', termStroke)
-    botTerm.setAttribute('stroke-width', String(termStrokeW))
-    botTerm.setAttribute('class', 'dcac-terminal')
-    this.el.appendChild(botTerm)
 
     // ── 设备名称 ──
     const labelText = model.attr('label/text') || 'DC/AC'

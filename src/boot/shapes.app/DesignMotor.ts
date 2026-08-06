@@ -31,6 +31,7 @@ export const DesignMotorView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 
@@ -50,13 +51,9 @@ export const DesignMotorView = joint.dia.ElementView.extend({
 
     // 主体圆半径
     const bodyR = Math.min(w * 0.30, gfxH * 0.38, 22)
-    const termR = Math.min(w * 0.04, 3.5)
 
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 2
-    const termFill = model.attr('terminal/fill') || '#facc15'
-    const termStroke = model.attr('terminal/stroke') || '#1f2937'
-    const termStrokeW = model.attr('terminal/strokeWidth') || 1
 
     // ── 透明点击区 ──
     const hitRect = document.createElementNS(svgNS, 'rect')
@@ -67,28 +64,6 @@ export const DesignMotorView = joint.dia.ElementView.extend({
     hitRect.setAttribute('fill', 'transparent')
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
-
-    // ── 上接线端圆点 ──
-    const topTerm = document.createElementNS(svgNS, 'circle')
-    topTerm.setAttribute('cx', String(cx))
-    topTerm.setAttribute('cy', '0')
-    topTerm.setAttribute('r', String(termR))
-    topTerm.setAttribute('fill', termFill)
-    topTerm.setAttribute('stroke', termStroke)
-    topTerm.setAttribute('stroke-width', String(termStrokeW))
-    topTerm.setAttribute('class', 'design-motor-terminal')
-    this.el.appendChild(topTerm)
-
-    // ── 上引出线 ──
-    const topLine = document.createElementNS(svgNS, 'line')
-    topLine.setAttribute('x1', String(cx))
-    topLine.setAttribute('y1', String(termR))
-    topLine.setAttribute('x2', String(cx))
-    topLine.setAttribute('y2', String(cy - bodyR))
-    topLine.setAttribute('stroke', bodyStroke)
-    topLine.setAttribute('stroke-width', String(bodyStrokeW))
-    topLine.setAttribute('class', 'design-motor-line')
-    this.el.appendChild(topLine)
 
     // ── 主体圆 ──
     const body = document.createElementNS(svgNS, 'circle')
@@ -117,28 +92,6 @@ export const DesignMotorView = joint.dia.ElementView.extend({
       centerLetter.textContent = subText
       this.el.appendChild(centerLetter)
     }
-
-    // ── 下引出线 ──
-    const botLine = document.createElementNS(svgNS, 'line')
-    botLine.setAttribute('x1', String(cx))
-    botLine.setAttribute('y1', String(cy + bodyR))
-    botLine.setAttribute('x2', String(cx))
-    botLine.setAttribute('y2', String(gfxH - termR))
-    botLine.setAttribute('stroke', bodyStroke)
-    botLine.setAttribute('stroke-width', String(bodyStrokeW))
-    botLine.setAttribute('class', 'design-motor-line')
-    this.el.appendChild(botLine)
-
-    // ── 下接线端圆点 ──
-    const botTerm = document.createElementNS(svgNS, 'circle')
-    botTerm.setAttribute('cx', String(cx))
-    botTerm.setAttribute('cy', String(gfxH))
-    botTerm.setAttribute('r', String(termR))
-    botTerm.setAttribute('fill', termFill)
-    botTerm.setAttribute('stroke', termStroke)
-    botTerm.setAttribute('stroke-width', String(termStrokeW))
-    botTerm.setAttribute('class', 'design-motor-terminal')
-    this.el.appendChild(botTerm)
 
     // ── 设备名称 ──
     const labelText = model.attr('label/text') || ''

@@ -34,6 +34,7 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 
@@ -51,14 +52,10 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
     const cx = w / 2
     const cy = gfxH / 2
 
-    const termR = Math.min(w * 0.04, 3.5)
     const arcR = Math.min(w * 0.20, gfxH * 0.22, 18)
     const arcGap = arcR * 0.25 // 上下圆弧间距
-    const dotR = Math.min(termR * 0.5, 1.8) // 绕组中心点半径
+    const dotR = 1.5 // 绕组中心点半径
 
-    const termFill = model.attr('terminal/fill') || '#facc15'
-    const termStroke = model.attr('terminal/stroke') || '#1f2937'
-    const termStrokeW = model.attr('terminal/strokeWidth') || 1
     const wStroke = model.attr('winding/stroke') || '#4ade80'
     const wStrokeW = model.attr('winding/strokeWidth') || 2.5
     const coreStroke = model.attr('core/stroke') || '#4ade80'
@@ -73,28 +70,6 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
     hitRect.setAttribute('fill', 'transparent')
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
-
-    // ── 上引出线 ──
-    const topLine = document.createElementNS(svgNS, 'line')
-    topLine.setAttribute('x1', String(cx))
-    topLine.setAttribute('y1', '0')
-    topLine.setAttribute('x2', String(cx))
-    topLine.setAttribute('y2', String(cy - arcR - arcGap))
-    topLine.setAttribute('stroke', wStroke)
-    topLine.setAttribute('stroke-width', String(wStrokeW))
-    topLine.setAttribute('class', 'design-transformer-line')
-    this.el.appendChild(topLine)
-
-    // ── 上接线端圆点 ──
-    const topTerm = document.createElementNS(svgNS, 'circle')
-    topTerm.setAttribute('cx', String(cx))
-    topTerm.setAttribute('cy', '0')
-    topTerm.setAttribute('r', String(termR))
-    topTerm.setAttribute('fill', termFill)
-    topTerm.setAttribute('stroke', termStroke)
-    topTerm.setAttribute('stroke-width', String(termStrokeW))
-    topTerm.setAttribute('class', 'design-transformer-terminal')
-    this.el.appendChild(topTerm)
 
     // ── 一次绕组（上半圆弧）──
     const primaryArc = document.createElementNS(svgNS, 'path')
@@ -149,28 +124,6 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
     secDot.setAttribute('fill', wStroke)
     secDot.setAttribute('class', 'design-transformer-dot')
     this.el.appendChild(secDot)
-
-    // ── 下引出线 ──
-    const botLine = document.createElementNS(svgNS, 'line')
-    botLine.setAttribute('x1', String(cx))
-    botLine.setAttribute('y1', String(cy + arcR + arcGap))
-    botLine.setAttribute('x2', String(cx))
-    botLine.setAttribute('y2', String(gfxH))
-    botLine.setAttribute('stroke', wStroke)
-    botLine.setAttribute('stroke-width', String(wStrokeW))
-    botLine.setAttribute('class', 'design-transformer-line')
-    this.el.appendChild(botLine)
-
-    // ── 下接线端圆点 ──
-    const botTerm = document.createElementNS(svgNS, 'circle')
-    botTerm.setAttribute('cx', String(cx))
-    botTerm.setAttribute('cy', String(gfxH))
-    botTerm.setAttribute('r', String(termR))
-    botTerm.setAttribute('fill', termFill)
-    botTerm.setAttribute('stroke', termStroke)
-    botTerm.setAttribute('stroke-width', String(termStrokeW))
-    botTerm.setAttribute('class', 'design-transformer-terminal')
-    this.el.appendChild(botTerm)
 
     // ── 型号标签（左上角）──
     const subText = model.attr('subType/text') || 'T'

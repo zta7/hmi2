@@ -788,8 +788,11 @@ export class Paper {
       debouncedSync();
     });
     this.graph.on("add remove", () => {
-      // 立即 flush 掉等待中的 debounce，避免拖入新组件后被后续 change 延迟发送
-      debouncedSync.flush();
+      // 结构性变化（新增/删除）必须立即同步，不能依赖 debounce flush：
+      // flush 在没有待执行的 change 调用时是 no-op，会导致新增/删除组件无法回传到 fbb 保存。
+      // 先取消待执行的 change debounce（避免稍后补发的旧状态覆盖这次增删结果），再直接发送最新数据
+      debouncedSync.cancel();
+      this.postWindowTop();
     });
     // 命令栈执行结束后（拖动/缩放/调整完成）主动同步一次，规避拖动结束 vs debounce 周期错位的边界情况
     if (this.commandManager) {

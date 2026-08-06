@@ -29,6 +29,7 @@ export const DesignIndicatorView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 

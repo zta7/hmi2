@@ -29,6 +29,7 @@ export const TransformerView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 
@@ -45,15 +46,10 @@ export const TransformerView = joint.dia.ElementView.extend({
     const cx = w / 2
     const cy = gfxH * 0.55
 
-    const termR = Math.min(w * 0.04, 3.5)
-
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
     const windingStroke = model.attr('winding/stroke') || '#4ade80'
     const windingStrokeW = model.attr('winding/strokeWidth') || 2
-    const termFill = model.attr('terminal/fill') || '#facc15'
-    const termStroke = model.attr('terminal/stroke') || '#1f2937'
-    const termStrokeW = model.attr('terminal/strokeWidth') || 1
 
     // 圆半径 / 偏移：两个圆等大，半径以 gfxH 比例为基准
     const r = Math.min(gfxH * 0.30, w * 0.32, 28)
@@ -96,48 +92,6 @@ export const TransformerView = joint.dia.ElementView.extend({
     rightCircle.setAttribute('stroke-width', String(windingStrokeW))
     rightCircle.setAttribute('class', 'xfmr-winding')
     this.el.appendChild(rightCircle)
-
-    // ── 上端口 1（左上角，连接左圆顶部） ──
-    const topLine = document.createElementNS(svgNS, 'line')
-    topLine.setAttribute('x1', String(leftCx))
-    topLine.setAttribute('y1', String(leftCy - r))
-    topLine.setAttribute('x2', String(leftCx))
-    topLine.setAttribute('y2', '0')
-    topLine.setAttribute('stroke', bodyStroke)
-    topLine.setAttribute('stroke-width', String(bodyStrokeW))
-    topLine.setAttribute('class', 'xfmr-line')
-    this.el.appendChild(topLine)
-
-    const topTerm = document.createElementNS(svgNS, 'circle')
-    topTerm.setAttribute('cx', String(leftCx))
-    topTerm.setAttribute('cy', '0')
-    topTerm.setAttribute('r', String(termR))
-    topTerm.setAttribute('fill', termFill)
-    topTerm.setAttribute('stroke', termStroke)
-    topTerm.setAttribute('stroke-width', String(termStrokeW))
-    topTerm.setAttribute('class', 'xfmr-terminal')
-    this.el.appendChild(topTerm)
-
-    // ── 下端口 2（右圆底部） ──
-    const botLine = document.createElementNS(svgNS, 'line')
-    botLine.setAttribute('x1', String(rightCx))
-    botLine.setAttribute('y1', String(gfxH))
-    botLine.setAttribute('x2', String(rightCx))
-    botLine.setAttribute('y2', String(rightCy + r))
-    botLine.setAttribute('stroke', bodyStroke)
-    botLine.setAttribute('stroke-width', String(bodyStrokeW))
-    botLine.setAttribute('class', 'xfmr-line')
-    this.el.appendChild(botLine)
-
-    const botTerm = document.createElementNS(svgNS, 'circle')
-    botTerm.setAttribute('cx', String(rightCx))
-    botTerm.setAttribute('cy', String(gfxH))
-    botTerm.setAttribute('r', String(termR))
-    botTerm.setAttribute('fill', termFill)
-    botTerm.setAttribute('stroke', termStroke)
-    botTerm.setAttribute('stroke-width', String(termStrokeW))
-    botTerm.setAttribute('class', 'xfmr-terminal')
-    this.el.appendChild(botTerm)
 
     // ── 设备名称 ──
     const labelText = model.attr('label/text') || 'Transformer'

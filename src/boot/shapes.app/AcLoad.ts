@@ -32,6 +32,7 @@ export const AcLoadView = joint.dia.ElementView.extend({
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
+    angle: ['TRANSFORM'],
     attrs: ['UPDATE_ATTRS'],
   },
 
@@ -47,8 +48,6 @@ export const AcLoadView = joint.dia.ElementView.extend({
     const gfxH = h * 0.80
     const cy = gfxH * 0.50
 
-    const termR = Math.min(w * 0.03, 3)
-
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
     const housingFill = model.attr('housing/fill') || '#cbd5e1'
@@ -56,9 +55,6 @@ export const AcLoadView = joint.dia.ElementView.extend({
     const fanFill = model.attr('fan/fill') || '#94a3b8'
     const fanStroke = model.attr('fan/stroke') || '#1e293b'
     const finStroke = model.attr('fin/stroke') || '#64748b'
-    const termFill = model.attr('terminal/fill') || '#facc15'
-    const termStroke = model.attr('terminal/stroke') || '#1f2937'
-    const termStrokeW = model.attr('terminal/strokeWidth') || 1
 
     // ── 透明点击区 ──
     const hitRect = document.createElementNS(svgNS, 'rect')
@@ -244,51 +240,6 @@ export const AcLoadView = joint.dia.ElementView.extend({
       rightFoot.setAttribute('stroke-width', '1')
       this.el.appendChild(rightFoot)
     }
-
-    // ── 上引出线 + 上端口 ──
-    const topX = leftCapCx
-    const topY = jbY - 4
-    const topLine = document.createElementNS(svgNS, 'line')
-    topLine.setAttribute('x1', String(topX))
-    topLine.setAttribute('y1', '0')
-    topLine.setAttribute('x2', String(topX))
-    topLine.setAttribute('y2', String(Math.max(topY, 0)))
-    topLine.setAttribute('stroke', bodyStroke)
-    topLine.setAttribute('stroke-width', String(bodyStrokeW))
-    topLine.setAttribute('class', 'ac-line')
-    this.el.appendChild(topLine)
-
-    const topTerm = document.createElementNS(svgNS, 'circle')
-    topTerm.setAttribute('cx', String(topX))
-    topTerm.setAttribute('cy', '0')
-    topTerm.setAttribute('r', String(termR))
-    topTerm.setAttribute('fill', termFill)
-    topTerm.setAttribute('stroke', termStroke)
-    topTerm.setAttribute('stroke-width', String(termStrokeW))
-    topTerm.setAttribute('class', 'ac-terminal')
-    this.el.appendChild(topTerm)
-
-    // ── 下引出线 + 下端口 ──
-    const botY = housingY + housingH + (footH > 1 ? footH : 0)
-    const botLine = document.createElementNS(svgNS, 'line')
-    botLine.setAttribute('x1', String(topX))
-    botLine.setAttribute('y1', String(botY))
-    botLine.setAttribute('x2', String(topX))
-    botLine.setAttribute('y2', String(gfxH))
-    botLine.setAttribute('stroke', bodyStroke)
-    botLine.setAttribute('stroke-width', String(bodyStrokeW))
-    botLine.setAttribute('class', 'ac-line')
-    this.el.appendChild(botLine)
-
-    const botTerm = document.createElementNS(svgNS, 'circle')
-    botTerm.setAttribute('cx', String(topX))
-    botTerm.setAttribute('cy', String(gfxH))
-    botTerm.setAttribute('r', String(termR))
-    botTerm.setAttribute('fill', termFill)
-    botTerm.setAttribute('stroke', termStroke)
-    botTerm.setAttribute('stroke-width', String(termStrokeW))
-    botTerm.setAttribute('class', 'ac-terminal')
-    this.el.appendChild(botTerm)
 
     // ── 设备名称 ──
     const labelText = model.attr('label/text') || 'AC Load'
