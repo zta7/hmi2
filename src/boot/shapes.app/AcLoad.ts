@@ -263,6 +263,11 @@ export const AcLoadView = joint.dia.ElementView.extend({
     const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
     const lines = this.el.querySelectorAll('.ac-line')
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
+    // 更新组件名称
+    const label = this.el.querySelector('.ac-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || 'AC Load'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

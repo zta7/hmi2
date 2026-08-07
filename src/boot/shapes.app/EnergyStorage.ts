@@ -177,6 +177,11 @@ export const EnergyStorageView = joint.dia.ElementView.extend({
     const bodyStroke = this.model.attr('body/stroke') || '#94a3b8'
     const lines = this.el.querySelectorAll('.es-line')
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
+    // 更新组件名称
+    const label = this.el.querySelector('.es-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || 'Battery'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

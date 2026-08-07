@@ -176,6 +176,11 @@ export const DcLoadView = joint.dia.ElementView.extend({
     const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
     const lines = this.el.querySelectorAll('.dcl-line')
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
+    // 更新组件名称
+    const label = this.el.querySelector('.dcl-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || 'DC Load'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

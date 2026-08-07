@@ -118,6 +118,11 @@ export const TransformerView = joint.dia.ElementView.extend({
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
     const windings = this.el.querySelectorAll('.xfmr-winding')
     windings.forEach((el: Element) => el.setAttribute('stroke', windingStroke))
+    // 更新组件名称
+    const label = this.el.querySelector('.xfmr-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || 'Transformer'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

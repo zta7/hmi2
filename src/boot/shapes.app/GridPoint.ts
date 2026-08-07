@@ -185,6 +185,11 @@ export const GridPointView = joint.dia.ElementView.extend({
     const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
     const lines = this.el.querySelectorAll('.grid-line')
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
+    // 更新组件名称
+    const label = this.el.querySelector('.grid-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || 'Grid'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

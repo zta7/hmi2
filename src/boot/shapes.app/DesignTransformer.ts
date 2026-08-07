@@ -184,6 +184,11 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
     if (core) {
       core.setAttribute('stroke', this.model.attr('core/stroke') || '#4ade80')
     }
+    // 更新设备名称
+    const label = this.el.querySelector('.design-transformer-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || ''
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {

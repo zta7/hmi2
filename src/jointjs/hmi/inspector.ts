@@ -1283,6 +1283,58 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       },
       groups: inspectorGroups
     }
+  } else if (type === 'app.DesignBus') {
+    // 母线：可编辑组件名称 + 线段颜色/粗细
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          body: {
+            stroke: {
+              ...inspectorInputs.stroke,
+              defaultValue: '#22c55e'
+            },
+            strokeWidth: {
+              ...inspectorInputs.strokeWidth,
+              defaultValue: 3
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (type === 'app.DesignTransformer') {
+    // 方案变压器：可编辑设备名称
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
+  } else if (
+    ['app.DesignMotor', 'app.DesignGroup', 'app.AcLoad', 'app.DcLoad', 'app.DcAcConverter',
+      'app.EnergyStorage', 'app.GridPoint', 'app.PvPanel', 'app.Transformer'].includes(type)
+  ) {
+    // 电气方案组件：可编辑组件名称
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
   } else {
     console.log('[inspector:inspectorMap] FALLBACK else - type=' + type + ' NOT matched');
     return {

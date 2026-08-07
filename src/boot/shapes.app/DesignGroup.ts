@@ -238,6 +238,11 @@ export const DesignGroupView = joint.dia.ElementView.extend({
       body.setAttribute('stroke', this.model.attr('body/stroke') || '#3B82F6')
       body.setAttribute('stroke-width', String(this.model.attr('body/strokeWidth') || 1.5))
     }
+    // 更新组件名称
+    const label = this.el.querySelector('.design-group-label') as Element | null
+    if (label) {
+      label.textContent = this.model.attr('label/text') || '分组'
+    }
   },
 
   confirmUpdate(flags: number, opt: any) {
