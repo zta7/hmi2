@@ -1320,7 +1320,7 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       groups: inspectorGroups
     }
   } else if (
-    ['app.DesignMotor', 'app.DesignGroup', 'app.AcLoad', 'app.DcLoad', 'app.DcAcConverter',
+    ['app.DesignMotor', 'app.DesignGroup', 'app.AcLoad', 'app.AcLoad2', 'app.DcLoad', 'app.DcAcConverter',
       'app.EnergyStorage', 'app.GridPoint', 'app.PvPanel', 'app.Transformer'].includes(type)
   ) {
     // 电气方案组件：可编辑组件名称

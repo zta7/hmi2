@@ -1,4 +1,5 @@
 import * as joint from '@clientio/rappid'
+import iconDcLoad from '../../assets/demoimg/icon-DC_load.png'
 
 /**
  * 电气组件 直流负载（DcLoad）
@@ -42,15 +43,7 @@ export const DcLoadView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    const gfxH = h * 0.82
-    const cx = w / 2
-
-    const bodyStroke = model.attr('body/stroke') || '#4ade80'
-    const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
-    const cabinetFill = model.attr('cabinet/fill') || '#e2e8f0'
-    const cabinetStroke = model.attr('cabinet/stroke') || '#64748b'
-
-    // ── 透明点击区 ──
+    // 透明点击区
     const hitRect = document.createElementNS(svgNS, 'rect')
     hitRect.setAttribute('x', '0')
     hitRect.setAttribute('y', '0')
@@ -60,126 +53,43 @@ export const DcLoadView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // ── 顶部铭牌 DC ──
-    const plateY = gfxH * 0.05
-    const plateH = gfxH * 0.08
-    const plateW = w * 0.60
-    const plateX = (w - plateW) / 2
-    const plate = document.createElementNS(svgNS, 'rect')
-    plate.setAttribute('x', String(plateX))
-    plate.setAttribute('y', String(plateY))
-    plate.setAttribute('width', String(plateW))
-    plate.setAttribute('height', String(plateH))
-    plate.setAttribute('rx', '1')
-    plate.setAttribute('fill', '#0ea5e9')
-    plate.setAttribute('stroke', cabinetStroke)
-    plate.setAttribute('stroke-width', '0.6')
-    this.el.appendChild(plate)
-    const plateText = document.createElementNS(svgNS, 'text')
-    plateText.setAttribute('x', String(cx))
-    plateText.setAttribute('y', String(plateY + plateH / 2))
-    plateText.setAttribute('text-anchor', 'middle')
-    plateText.setAttribute('dominant-baseline', 'central')
-    plateText.setAttribute('fill', '#ffffff')
-    plateText.setAttribute('font-size', '11')
-    plateText.setAttribute('font-weight', 'bold')
-    plateText.setAttribute('font-family', 'sans-serif')
-    plateText.textContent = 'DC'
-    this.el.appendChild(plateText)
+    // 设备图片（代替手绘样式）
+    const img = document.createElementNS(svgNS, 'image')
+    img.setAttribute('href', iconDcLoad)
+    img.setAttribute('x', '0')
+    img.setAttribute('y', '0')
+    img.setAttribute('width', String(w))
+    img.setAttribute('height', String(h))
+    img.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+    this.el.appendChild(img)
 
-    // ── 柜体外形 ──
-    const cabW = w * 0.86
-    const cabH = gfxH * 0.92
-    const cabX = (w - cabW) / 2
-    const cabY = gfxH * 0.06
-
-    const cabinet = document.createElementNS(svgNS, 'rect')
-    cabinet.setAttribute('x', String(cabX))
-    cabinet.setAttribute('y', String(cabY))
-    cabinet.setAttribute('width', String(cabW))
-    cabinet.setAttribute('height', String(cabH))
-    cabinet.setAttribute('rx', '2')
-    cabinet.setAttribute('ry', '2')
-    cabinet.setAttribute('fill', cabinetFill)
-    cabinet.setAttribute('stroke', cabinetStroke)
-    cabinet.setAttribute('stroke-width', '1.5')
-    cabinet.setAttribute('class', 'dcl-cabinet')
-    this.el.appendChild(cabinet)
-
-    // ── 柜门分隔竖线 ──
-    const doorLine = document.createElementNS(svgNS, 'line')
-    doorLine.setAttribute('x1', String(cx))
-    doorLine.setAttribute('y1', String(cabY))
-    doorLine.setAttribute('x2', String(cx))
-    doorLine.setAttribute('y2', String(cabY + cabH))
-    doorLine.setAttribute('stroke', cabinetStroke)
-    doorLine.setAttribute('stroke-width', '0.8')
-    doorLine.setAttribute('stroke-dasharray', '3,2')
-    this.el.appendChild(doorLine)
-
-    // ── 中部显示屏 ──
-    const displayY = cabY + cabH * 0.30
-    const displayW = cabW * 0.32
-    const displayH = cabH * 0.12
-    const displayX = (w - displayW) / 2
-
-    const display = document.createElementNS(svgNS, 'rect')
-    display.setAttribute('x', String(displayX))
-    display.setAttribute('y', String(displayY))
-    display.setAttribute('width', String(displayW))
-    display.setAttribute('height', String(displayH))
-    display.setAttribute('rx', '1')
-    display.setAttribute('fill', '#0f172a')
-    display.setAttribute('stroke', cabinetStroke)
-    display.setAttribute('stroke-width', '0.8')
-    this.el.appendChild(display)
-    const dataLine = document.createElementNS(svgNS, 'line')
-    dataLine.setAttribute('x1', String(displayX + displayW * 0.12))
-    dataLine.setAttribute('y1', String(displayY + displayH * 0.5))
-    dataLine.setAttribute('x2', String(displayX + displayW * 0.70))
-    dataLine.setAttribute('y2', String(displayY + displayH * 0.5))
-    dataLine.setAttribute('stroke', '#22d3ee')
-    dataLine.setAttribute('stroke-width', '1')
-    this.el.appendChild(dataLine)
-
-    // ── 警示三角（中部偏下） ──
-    const warnX = cx
-    const warnY = cabY + cabH * 0.62
-    const warnS = Math.min(cabW, cabH) * 0.08
-    const triangle = document.createElementNS(svgNS, 'polygon')
-    triangle.setAttribute('points',
-      `${warnX - warnS / 2},${warnY + warnS} ${warnX + warnS / 2},${warnY + warnS} ${warnX},${warnY}`)
-    triangle.setAttribute('fill', '#facc15')
-    triangle.setAttribute('stroke', '#1f2937')
-    triangle.setAttribute('stroke-width', '0.6')
-    this.el.appendChild(triangle)
-
-    // ── 设备名称 ──
+    // 设备名称
     const labelText = model.attr('label/text') || 'DC Load'
-    const label = document.createElementNS(svgNS, 'text')
-    label.setAttribute('x', String(w / 2))
-    label.setAttribute('y', String(h * 0.93))
-    label.setAttribute('text-anchor', 'middle')
-    label.setAttribute('dominant-baseline', 'middle')
-    label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
-    label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
-    label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))
-    label.setAttribute('font-family', 'sans-serif')
-    label.setAttribute('class', 'dcl-label')
-    label.textContent = labelText
-    this.el.appendChild(label)
+    if (labelText) {
+      const label = document.createElementNS(svgNS, 'text')
+      label.setAttribute('x', String(w / 2))
+      label.setAttribute('y', String(h - 4))
+      label.setAttribute('text-anchor', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
+      label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
+      label.setAttribute('font-weight', 'bold')
+      label.setAttribute('font-family', 'sans-serif')
+      label.setAttribute('class', 'dcl-label')
+      label.textContent = labelText
+      this.el.appendChild(label)
+    }
 
     this.translate()
   },
 
   updateAttrs() {
-    const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
-    const lines = this.el.querySelectorAll('.dcl-line')
-    lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
-    // 更新组件名称
+    // 设备图片固定，仅需刷新设备名称
     const label = this.el.querySelector('.dcl-label') as Element | null
     if (label) {
       label.textContent = this.model.attr('label/text') || 'DC Load'
+      label.setAttribute('fill', this.model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(this.model.attr('label/fontSize') || 11))
     }
   },
 

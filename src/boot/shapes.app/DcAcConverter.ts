@@ -1,4 +1,5 @@
 import * as joint from '@clientio/rappid'
+import iconDcac from '../../assets/demoimg/icon-bidirectional_ DCAC_converter.png'
 
 /**
  * 电气组件 双向 DC/AC 交换器（DcAcConverter）
@@ -41,15 +42,7 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    const gfxH = h * 0.78
-    const cx = w / 2
-
-    const bodyStroke = model.attr('body/stroke') || '#4ade80'
-    const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
-    const cabinetFill = model.attr('cabinet/fill') || '#e2e8f0'
-    const cabinetStroke = model.attr('cabinet/stroke') || '#64748b'
-
-    // ── 透明点击区 ──
+    // 透明点击区
     const hitRect = document.createElementNS(svgNS, 'rect')
     hitRect.setAttribute('x', '0')
     hitRect.setAttribute('y', '0')
@@ -59,110 +52,43 @@ export const DcAcConverterView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // ── 柜体外形 ──
-    const cabW = w * 0.82
-    const cabH = gfxH * 0.78
-    const cabX = (w - cabW) / 2
-    const cabY = gfxH * 0.12
+    // 设备图片（代替手绘样式）
+    const img = document.createElementNS(svgNS, 'image')
+    img.setAttribute('href', iconDcac)
+    img.setAttribute('x', '0')
+    img.setAttribute('y', '0')
+    img.setAttribute('width', String(w))
+    img.setAttribute('height', String(h))
+    img.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+    this.el.appendChild(img)
 
-    const cabinet = document.createElementNS(svgNS, 'rect')
-    cabinet.setAttribute('x', String(cabX))
-    cabinet.setAttribute('y', String(cabY))
-    cabinet.setAttribute('width', String(cabW))
-    cabinet.setAttribute('height', String(cabH))
-    cabinet.setAttribute('rx', '2')
-    cabinet.setAttribute('ry', '2')
-    cabinet.setAttribute('fill', cabinetFill)
-    cabinet.setAttribute('stroke', cabinetStroke)
-    cabinet.setAttribute('stroke-width', '1.5')
-    cabinet.setAttribute('class', 'dcac-cabinet')
-    this.el.appendChild(cabinet)
-
-    // ── 顶部三个风扇罩 ──
-    const fanY = cabY + cabH * 0.10
-    const fanR = cabH * 0.10
-    const fanGap = cabW / 4
-    for (let i = 0; i < 3; i++) {
-      const fx = cabX + fanGap * (i + 0.5)
-      const fan = document.createElementNS(svgNS, 'circle')
-      fan.setAttribute('cx', String(fx))
-      fan.setAttribute('cy', String(fanY + fanR))
-      fan.setAttribute('r', String(fanR))
-      fan.setAttribute('fill', '#475569')
-      fan.setAttribute('stroke', cabinetStroke)
-      fan.setAttribute('stroke-width', '0.8')
-      fan.setAttribute('class', 'dcac-fan')
-      this.el.appendChild(fan)
-      // 风扇叶片（十字）
-      const blade1 = document.createElementNS(svgNS, 'line')
-      blade1.setAttribute('x1', String(fx - fanR * 0.7))
-      blade1.setAttribute('y1', String(fanY + fanR))
-      blade1.setAttribute('x2', String(fx + fanR * 0.7))
-      blade1.setAttribute('y2', String(fanY + fanR))
-      blade1.setAttribute('stroke', '#94a3b8')
-      blade1.setAttribute('stroke-width', '0.6')
-      this.el.appendChild(blade1)
-      const blade2 = document.createElementNS(svgNS, 'line')
-      blade2.setAttribute('x1', String(fx))
-      blade2.setAttribute('y1', String(fanY + fanR - fanR * 0.7))
-      blade2.setAttribute('x2', String(fx))
-      blade2.setAttribute('y2', String(fanY + fanR + fanR * 0.7))
-      blade2.setAttribute('stroke', '#94a3b8')
-      blade2.setAttribute('stroke-width', '0.6')
-      this.el.appendChild(blade2)
-    }
-
-    // ── 中央文本 "DC ⇄ AC" ──
-    const centerText = document.createElementNS(svgNS, 'text')
-    centerText.setAttribute('x', String(cx))
-    centerText.setAttribute('y', String(cabY + cabH * 0.65))
-    centerText.setAttribute('text-anchor', 'middle')
-    centerText.setAttribute('dominant-baseline', 'middle')
-    centerText.setAttribute('fill', '#1e293b')
-    centerText.setAttribute('font-size', '12')
-    centerText.setAttribute('font-weight', 'bold')
-    centerText.setAttribute('font-family', 'sans-serif')
-    centerText.textContent = 'DC ⇄ AC'
-    this.el.appendChild(centerText)
-
-    // ── 左上角警示三角 ──
-    const warnX = cabX + cabW * 0.10
-    const warnY = cabY + cabH * 0.35
-    const warnS = Math.min(cabW, cabH) * 0.08
-    const triangle = document.createElementNS(svgNS, 'polygon')
-    triangle.setAttribute('points',
-      `${warnX},${warnY + warnS} ${warnX + warnS},${warnY + warnS} ${warnX + warnS / 2},${warnY}`)
-    triangle.setAttribute('fill', '#facc15')
-    triangle.setAttribute('stroke', '#1f2937')
-    triangle.setAttribute('stroke-width', '0.6')
-    this.el.appendChild(triangle)
-
-    // ── 设备名称 ──
+    // 设备名称
     const labelText = model.attr('label/text') || 'DC/AC'
-    const label = document.createElementNS(svgNS, 'text')
-    label.setAttribute('x', String(w / 2))
-    label.setAttribute('y', String(h * 0.92))
-    label.setAttribute('text-anchor', 'middle')
-    label.setAttribute('dominant-baseline', 'middle')
-    label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
-    label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
-    label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))
-    label.setAttribute('font-family', 'sans-serif')
-    label.setAttribute('class', 'dcac-label')
-    label.textContent = labelText
-    this.el.appendChild(label)
+    if (labelText) {
+      const label = document.createElementNS(svgNS, 'text')
+      label.setAttribute('x', String(w / 2))
+      label.setAttribute('y', String(h - 4))
+      label.setAttribute('text-anchor', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
+      label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
+      label.setAttribute('font-weight', 'bold')
+      label.setAttribute('font-family', 'sans-serif')
+      label.setAttribute('class', 'dcac-label')
+      label.textContent = labelText
+      this.el.appendChild(label)
+    }
 
     this.translate()
   },
 
   updateAttrs() {
-    const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
-    const lines = this.el.querySelectorAll('.dcac-line')
-    lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
-    // 更新组件名称
+    // 设备图片固定，仅需刷新设备名称
     const label = this.el.querySelector('.dcac-label') as Element | null
     if (label) {
       label.textContent = this.model.attr('label/text') || 'DC/AC'
+      label.setAttribute('fill', this.model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(this.model.attr('label/fontSize') || 11))
     }
   },
 

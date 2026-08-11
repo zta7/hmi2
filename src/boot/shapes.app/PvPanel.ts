@@ -1,4 +1,5 @@
 import * as joint from '@clientio/rappid'
+import iconPv from '../../assets/demoimg/icon-photovoltaic.png'
 
 /**
  * 电气组件 光伏板（PvPanel）
@@ -43,16 +44,7 @@ export const PvPanelView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    // 图形区（不含底部标签）
-    const gfxH = h * 0.78
-    const cx = w / 2
-
-    const bodyStroke = model.attr('body/stroke') || '#4ade80'
-    const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
-    const panelFill = model.attr('panel/fill') || '#3b82f6'
-    const panelStroke = model.attr('panel/stroke') || '#1d4ed8'
-
-    // ── 透明点击区 ──
+    // 透明点击区
     const hitRect = document.createElementNS(svgNS, 'rect')
     hitRect.setAttribute('x', '0')
     hitRect.setAttribute('y', '0')
@@ -62,118 +54,43 @@ export const PvPanelView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // ── 光伏面板（向左上方倾斜的矩形，模拟图中支架效果） ──
-    const panelW = w * 0.78
-    const panelH = gfxH * 0.50
-    const panelX = (w - panelW) / 2
-    const panelY = gfxH * 0.22
-    const tilt = 8 // 倾斜角度
+    // 设备图片（代替手绘样式）
+    const img = document.createElementNS(svgNS, 'image')
+    img.setAttribute('href', iconPv)
+    img.setAttribute('x', '0')
+    img.setAttribute('y', '0')
+    img.setAttribute('width', String(w))
+    img.setAttribute('height', String(h))
+    img.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+    this.el.appendChild(img)
 
-    const panelGroup = document.createElementNS(svgNS, 'g')
-    panelGroup.setAttribute('transform', `rotate(${-tilt} ${cx} ${panelY + panelH / 2})`)
-    panelGroup.setAttribute('class', 'pv-panel-group')
-
-    // 面板底
-    const panel = document.createElementNS(svgNS, 'rect')
-    panel.setAttribute('x', String(panelX))
-    panel.setAttribute('y', String(panelY))
-    panel.setAttribute('width', String(panelW))
-    panel.setAttribute('height', String(panelH))
-    panel.setAttribute('rx', '2')
-    panel.setAttribute('ry', '2')
-    panel.setAttribute('fill', panelFill)
-    panel.setAttribute('stroke', panelStroke)
-    panel.setAttribute('stroke-width', '1.5')
-    panel.setAttribute('class', 'pv-panel')
-    panelGroup.appendChild(panel)
-
-    // 面板上的电池网格（3×2）
-    const cols = 3
-    const rows = 2
-    const padX = panelW * 0.05
-    const padY = panelH * 0.10
-    const cellW = (panelW - padX * 2) / cols
-    const cellH = (panelH - padY * 2) / rows
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const cell = document.createElementNS(svgNS, 'rect')
-        cell.setAttribute('x', String(panelX + padX + c * cellW))
-        cell.setAttribute('y', String(panelY + padY + r * cellH))
-        cell.setAttribute('width', String(cellW * 0.88))
-        cell.setAttribute('height', String(cellH * 0.78))
-        cell.setAttribute('fill', 'rgba(255,255,255,0.10)')
-        cell.setAttribute('stroke', 'rgba(255,255,255,0.35)')
-        cell.setAttribute('stroke-width', '0.5')
-        panelGroup.appendChild(cell)
-      }
-    }
-    this.el.appendChild(panelGroup)
-
-    // ── 支架（左右两根短柱 + 水平底座） ──
-    const standY = panelY + panelH
-    const baseY = gfxH * 0.85
-    const standW = Math.max(2, panelStroke ? 2 : 2)
-
-    const leftStand = document.createElementNS(svgNS, 'line')
-    leftStand.setAttribute('x1', String(panelX + panelW * 0.15))
-    leftStand.setAttribute('y1', String(standY))
-    leftStand.setAttribute('x2', String(panelX + panelW * 0.15))
-    leftStand.setAttribute('y2', String(baseY))
-    leftStand.setAttribute('stroke', '#94a3b8')
-    leftStand.setAttribute('stroke-width', '2')
-    leftStand.setAttribute('stroke-linecap', 'round')
-    leftStand.setAttribute('class', 'pv-stand')
-    this.el.appendChild(leftStand)
-
-    const rightStand = document.createElementNS(svgNS, 'line')
-    rightStand.setAttribute('x1', String(panelX + panelW * 0.85))
-    rightStand.setAttribute('y1', String(standY))
-    rightStand.setAttribute('x2', String(panelX + panelW * 0.85))
-    rightStand.setAttribute('y2', String(baseY))
-    rightStand.setAttribute('stroke', '#94a3b8')
-    rightStand.setAttribute('stroke-width', '2')
-    rightStand.setAttribute('stroke-linecap', 'round')
-    rightStand.setAttribute('class', 'pv-stand')
-    this.el.appendChild(rightStand)
-
-    // 底座横线
-    const base = document.createElementNS(svgNS, 'line')
-    base.setAttribute('x1', String(panelX + panelW * 0.10))
-    base.setAttribute('y1', String(baseY))
-    base.setAttribute('x2', String(panelX + panelW * 0.90))
-    base.setAttribute('y2', String(baseY))
-    base.setAttribute('stroke', '#94a3b8')
-    base.setAttribute('stroke-width', '3')
-    base.setAttribute('stroke-linecap', 'round')
-    base.setAttribute('class', 'pv-base')
-    this.el.appendChild(base)
-
-    // ── 设备名称 ──
+    // 设备名称
     const labelText = model.attr('label/text') || 'PV'
-    const label = document.createElementNS(svgNS, 'text')
-    label.setAttribute('x', String(w / 2))
-    label.setAttribute('y', String(h * 0.92))
-    label.setAttribute('text-anchor', 'middle')
-    label.setAttribute('dominant-baseline', 'middle')
-    label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
-    label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
-    label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))
-    label.setAttribute('font-family', 'sans-serif')
-    label.setAttribute('class', 'pv-label')
-    label.textContent = labelText
-    this.el.appendChild(label)
+    if (labelText) {
+      const label = document.createElementNS(svgNS, 'text')
+      label.setAttribute('x', String(w / 2))
+      label.setAttribute('y', String(h - 4))
+      label.setAttribute('text-anchor', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
+      label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
+      label.setAttribute('font-weight', 'bold')
+      label.setAttribute('font-family', 'sans-serif')
+      label.setAttribute('class', 'pv-label')
+      label.textContent = labelText
+      this.el.appendChild(label)
+    }
 
     this.translate()
   },
 
   updateAttrs() {
-    const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
-    const lines = this.el.querySelectorAll('.pv-line')
-    lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
-    // 更新组件名称
+    // 设备图片固定，仅需刷新设备名称
     const label = this.el.querySelector('.pv-label') as Element | null
     if (label) {
       label.textContent = this.model.attr('label/text') || 'PV'
+      label.setAttribute('fill', this.model.attr('label/fill') || '#e5e7eb')
+      label.setAttribute('font-size', String(this.model.attr('label/fontSize') || 11))
     }
   },
 
