@@ -281,6 +281,19 @@ export class Paper {
       this.initKeyboardEvents();
       this.initSelectionEvents(inspectorEl);
 
+      // async 渲染（async: true）下，Selection.updateSelectionBoxes 只是把更新排队到
+      // paper 视图系统，而 confirmUpdate 只会被注册在 paper._views 中的 cell view 触发，
+      // Selection 不在其中，故选中框永远不会刷新。
+      // 改用 useModelGeometry（模型几何，同步准确）+ 直接调用 _updateSelectionBoxes 同步更新。
+      this.graph.on("change", (cell: any) => {
+        if (this.selection && this.selection.collection.has(cell)) {
+          requestAnimationFrame(() => {
+            // rappid.d.ts 未声明 _updateSelectionBoxes，运行时存在，故用 any 规避类型检查
+            (this.selection as any)?._updateSelectionBoxes?.();
+          });
+        }
+      });
+
       // render toolbar（必须先 render，之后 getWidgetByName 才能拿到按钮实例）
       toolbarEl && toolbarEl.append(this.toolbar.render().el);
       stencilEl && stencilEl.append(this.stencil.render().el);

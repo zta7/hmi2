@@ -55,6 +55,9 @@ export const getSelectionHandles = (collection: Backbone.Collection): Array<join
 export const getSelectionConfig = (paper: joint.dia.Paper) => {
   return {
     paper,
-    filter: (el) => el.isEmbedded()
+    filter: (el) => el.isEmbedded(),
+    // async 渲染下 view bbox 滞后，改用模型几何（position/size/angle）计算选中框，
+    // 保证 resize/移动后选中框实时准确（旋转组件也会按角度换算外接矩形）。
+    useModelGeometry: true
   } as joint.ui.Selection.Options
 }
