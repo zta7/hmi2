@@ -1,5 +1,5 @@
 import * as joint from '@clientio/rappid'
-import iconEs from '../../assets/demoimg/icon-energy_ storage_system.png'
+import iconEs from '../../assets/demoimg/icon-energy-storage-system.png'
 
 /**
  * 电气组件 储能系统（EnergyStorage）

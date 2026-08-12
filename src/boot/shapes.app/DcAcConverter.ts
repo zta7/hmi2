@@ -1,5 +1,5 @@
 import * as joint from '@clientio/rappid'
-import iconDcac from '../../assets/demoimg/icon-bidirectional_ DCAC_converter.png'
+import iconDcac from '../../assets/demoimg/icon-bidirectional-DCAC-converter.png'
 
 /**
  * 电气组件 双向 DC/AC 交换器（DcAcConverter）
