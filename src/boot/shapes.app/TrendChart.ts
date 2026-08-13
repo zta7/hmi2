@@ -20,6 +20,36 @@ export class TrendChart extends joint.dia.Element {
 export const TrendChartView = joint.dia.ElementView.extend({
   initFlag: ['RENDER', 'RESIZE', 'TRANSFORM'],
 
+  // 属性面板手动输入 data 时：单数字 → 追加到历史（滚动显示）；数组 → 整体渲染
+  init () {
+    this.model.on('change:data', this.onDataChange, this)
+  },
+
+  onDataChange (model: any, value: any) {
+    let num: number | null = null
+    if (typeof value === 'number' && !isNaN(value)) {
+      num = value
+    } else if (typeof value === 'string') {
+      let parsed: any
+      try { parsed = JSON.parse(value) } catch (err) { return }
+      if (typeof parsed === 'number' && !isNaN(parsed)) num = parsed
+      // 数组字符串（如 "[1,2,3]"）→ 整体渲染，不干预
+    }
+    if (num === null) return
+    // 单数字 → 追加到历史（previous 为被覆盖前的值）
+    // 注意：不 silent，写入数组后再次触发 change:data 时 value 是数组（上面直接 return），不会死循环；
+    // 同时触发 Inspector 刷新，让属性面板能实时显示完整 data
+    const prev = model.previous('data')
+    let base: number[] = []
+    if (Array.isArray(prev)) base = prev
+    else if (typeof prev === 'string') {
+      try { base = JSON.parse(prev) } catch (err) { base = [] }
+    }
+    if (!Array.isArray(base)) base = []
+    const maxPts = Number(model.get('maxPoints')) || 60
+    model.set('data', base.concat([num]).slice(-maxPts))
+  },
+
   presentationAttributes: {
     size: ['RESIZE'],
     position: ['TRANSFORM'],
@@ -34,7 +64,16 @@ export const TrendChartView = joint.dia.ElementView.extend({
   render () {
     const { model } = this
     const { util } = joint
-    const { data, min, max, lineColor, label } = model.attributes
+    let data = model.attributes.data
+    // 属性面板手动输入的 data 是 JSON 字符串（如 "[1,2,3]"），统一解析为数组后绘制
+    if (typeof data === 'string') {
+      try { data = JSON.parse(data) } catch (err) { data = [] }
+    }
+    if (!Array.isArray(data)) {
+      // 兼容单个数字（如手动输入 "5" 或单值推送），包成单点数组
+      data = (typeof data === 'number' && !isNaN(data)) ? [data] : []
+    }
+    const { min, max, lineColor, label } = model.attributes
     const { width, height } = model.size()
 
     const pad = { top: 8, right: 8, bottom: 20, left: 30 }
@@ -52,6 +91,12 @@ export const TrendChartView = joint.dia.ElementView.extend({
       const baseY = pad.top + h
       areaFill = `<path d="M ${pad.left} ${baseY} L ${pts.join(' L ')} L ${pad.left + w} ${baseY} Z" fill="${lineColor}" fill-opacity="0.12"/>`
       polyline = `<polyline points="${pts.join(' ')}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>`
+    } else if (data.length === 1) {
+      // 单点也显示圆点，让手动输入单个数字时能立即看到更新
+      const v = data[0]
+      const x = pad.left + w / 2
+      const y = pad.top + h - ((v - min) / (max - min)) * h
+      polyline = `<circle cx="${x}" cy="${y}" r="3" fill="${lineColor}"/>`
     }
 
     // Y axis labels

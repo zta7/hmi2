@@ -877,6 +877,7 @@ const inspectorMap = (type: string, bindOptions = {}) => {
         min: inspectorInputs.min,
         max: inspectorInputs.max,
         maxPoints: { type: 'number', label: 'Max Points', group: 'style' },
+        data: { type: 'trend-data', label: 'Data', group: 'style' },
         label: { type: 'content-editable', label: 'Label', group: 'style' },
         lineColor: { type: 'color', label: 'Line Color', group: 'style' },
         bind: {

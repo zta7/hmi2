@@ -183,10 +183,21 @@ onMounted(() => {
               }
             }
           } else if (type === "app.TrendChart") {
-            // 整体覆盖模式：变量值须为 JSON 数组字符串（如 "[1,2,3]"），整体替换 data 后触发重绘
+            // 追加 + 滚动模式（博图式）：新数据追加到已有 data，按 maxPoints 截断只保留最近 N 点。
+            // 变量值可以是 JSON 数组字符串（如 "[1,2,3]"）或单个最新数字（如 "5" / "5.5"）
             if (path === "data") {
+              let pts: number[] = [];
               if (isArray(json) && json.every((e) => isNumber(e))) {
-                cell.prop("data", json);
+                pts = json;
+              } else if (isNumber(json)) {
+                pts = [json];
+              } else if (typeof json === "string" && json.trim() !== "" && !isNaN(Number(json))) {
+                pts = [Number(json)];
+              }
+              if (pts.length) {
+                const current = Array.isArray(cell.prop("data")) ? cell.prop("data") : [];
+                const maxPts = Number(cell.prop("maxPoints")) || 60;
+                cell.prop("data", current.concat(pts).slice(-maxPts));
               }
             }
           }
@@ -272,11 +283,21 @@ onMounted(() => {
             const strValue = String(value);
             cell.prop("value", strValue === "''" ? "" : strValue);
           } else if (type === "app.TrendChart" && path === "data") {
-            // 与 attrs.bind 路径（函数 t）行为一致：整体覆盖模式，变量值须为 JSON 数组字符串
+            // 与 attrs.bind 路径（函数 t）行为一致：追加 + 滚动；支持数组或单个最新数字
             try {
               const json = JSON.parse(String(value));
+              let pts: number[] = [];
               if (isArray(json) && json.every((e) => isNumber(e))) {
-                cell.prop("data", json);
+                pts = json;
+              } else if (isNumber(json)) {
+                pts = [json];
+              } else if (typeof json === "string" && json.trim() !== "" && !isNaN(Number(json))) {
+                pts = [Number(json)];
+              }
+              if (pts.length) {
+                const current = Array.isArray(cell.prop("data")) ? cell.prop("data") : [];
+                const maxPts = Number(cell.prop("maxPoints")) || 60;
+                cell.prop("data", current.concat(pts).slice(-maxPts));
               }
             } catch (err) {
               console.warn("[ScreenPage] TrendChart data 解析失败:", value, err);

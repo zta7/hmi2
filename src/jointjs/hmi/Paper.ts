@@ -30,6 +30,10 @@ export class Paper {
   stencil: joint.ui.Stencil;
   tooltip: joint.ui.Tooltip;
   bindOptions: object;
+  // 当前选中组件的 Inspector 实例（趋势图自定义 data 输入框用）
+  inspector: any = null;
+  // Inspector 容器（事件委托绑定）
+  inspectorEl: HTMLElement | null = null;
   navigator: joint.ui.Navigator | null = null;
   navigatorContainer: HTMLElement | null = null;
   // 画布底层标识线框尺寸（参考设备屏幕，不参与交互）
@@ -637,6 +641,30 @@ export class Paper {
   }
 
   initSelectionEvents(inspectorEl?: HTMLElement) {
+    // 趋势图 data 自定义输入框：回车应用（单数→追加 / 数组→整体替换）
+    this.inspectorEl = inspectorEl || null;
+    if (inspectorEl && !(inspectorEl as any).__trendDataBound) {
+      (inspectorEl as any).__trendDataBound = true;
+      inspectorEl.addEventListener("keydown", (evt: any) => {
+        if (evt.key !== "Enter") return;
+        const input = evt.target;
+        if (!input || !input.classList || !input.classList.contains("trend-data-input")) return;
+        const cell = this.inspector?.getModel?.();
+        if (!cell || cell.get("type") !== "app.TrendChart") return;
+        const raw = String(input.value || "").trim();
+        if (!raw) return;
+        let parsed: any;
+        try {
+          parsed = JSON.parse(raw);
+        } catch (err) {
+          return;
+        }
+        if ((typeof parsed === "number" && !isNaN(parsed)) || Array.isArray(parsed)) {
+          cell.set("data", parsed);
+          input.value = "";
+        }
+      });
+    }
     this.selection.on("action:clone:pointerdown", (evt) => {
       evt.stopPropagation();
       this.clipboard.copyElements(this.selection.collection, this.graph);
@@ -663,9 +691,24 @@ export class Paper {
         );
         console.log(`[HMI2:Paper:inspector] config null? ${inspectorConfig == null}`);
         // ---------- 调试日志结束 ----------
-        inspectorEl &&
-          inspectorConfig &&
-          joint.ui.Inspector.create(inspectorEl, inspectorConfig);
+        if (inspectorEl && inspectorConfig) {
+          this.inspector = joint.ui.Inspector.create(inspectorEl, {
+            ...inspectorConfig,
+            // 趋势图 data 字段自定义渲染：输入框（回车应用）+ 当前完整 data 展示
+            renderFieldContent: (options: any, path: string, value: any) => {
+              if (options && options.type === "trend-data") {
+                const display = Array.isArray(value)
+                  ? JSON.stringify(value)
+                  : String(value ?? "");
+                return `<div class="trend-data-field">
+                  <input class="trend-data-input" type="text" placeholder="输入单数或数组（如 5 或 [1,2,3]）后回车" style="width:100%;box-sizing:border-box;padding:4px 6px;border:1px solid #3d3d60;border-radius:3px;background:#16162a;color:#e5e7eb;font-size:12px;" />
+                  <div class="trend-data-current" style="margin-top:6px;font-size:11px;color:#8888a0;word-break:break-all;">当前 data：<span class="trend-data-value">${display}</span></div>
+                </div>`;
+              }
+              return undefined;
+            },
+          } as any);
+        }
         // this.selection
         if (collection.length === 1) {
           copyTool.enable();
@@ -1329,6 +1372,13 @@ export class Paper {
 
   toJSON() {
     const graph = this.graph.toJSON();
+    // 趋势图 data 属于运行时数据，不随 panel 持久化：
+    // 导出时清空，刷新后从零开始重新累积（手动验证的数据不保存）
+    (graph.cells || []).forEach((cell: any) => {
+      if (cell && cell.type === 'app.TrendChart') {
+        cell.data = [];
+      }
+    });
     // 保存标识线框尺寸（参考设备屏幕），而非 autoResizePaper 后的物理纸面尺寸
     const paper = {
       background: this.paper.options.background,

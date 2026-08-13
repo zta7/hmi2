@@ -111,16 +111,27 @@ onMounted(() => {
         outputEvents: get(e, "data.data.outputEvents"),
         windows: get(e, "data.data.windows"),
       };
-      console.log(paper.bindOptions);
+      // 调试日志：确认绑定变量下拉列表的数据格式（数组变量 / 子变量展开结构）
+      console.log("[HMI2:bindOptions] inputs 数量 =", (paper.bindOptions.inputs || []).length);
+      console.log("[HMI2:bindOptions] outputs 数量 =", (paper.bindOptions.outputs || []).length);
+      console.log("[HMI2:bindOptions] outputEvents 数量 =", (paper.bindOptions.outputEvents || []).length);
+      console.log("[HMI2:bindOptions] windows 数量 =", (paper.bindOptions.windows || []).length);
+      console.log("[HMI2:bindOptions] inputs JSON =", JSON.stringify(paper.bindOptions.inputs, null, 2));
+      console.log("[HMI2:bindOptions] outputs JSON =", JSON.stringify(paper.bindOptions.outputs, null, 2));
+      console.log("[HMI2:bindOptions] outputEvents JSON =", JSON.stringify(paper.bindOptions.outputEvents, null, 2));
+      console.log("[HMI2:bindOptions] windows JSON =", JSON.stringify(paper.bindOptions.windows, null, 2));
     } else if (target === "hmi-bind-inputs") {
       set(paper, "bindOptions.inputs", get(e, "data.data"));
+      console.log("[HMI2:bindOptions] inputs 增量更新 JSON =", JSON.stringify(paper.bindOptions.inputs, null, 2));
     } else if (target === "hmi-bind-outputs") {
       set(paper, "bindOptions.outputs", get(e, "data.data"));
+      console.log("[HMI2:bindOptions] outputs 增量更新 JSON =", JSON.stringify(paper.bindOptions.outputs, null, 2));
     } else if (target === "hmi-bind-outputEvents") {
       set(paper, "bindOptions.outputEvents", get(e, "data.data"));
+      console.log("[HMI2:bindOptions] outputEvents 增量更新 JSON =", JSON.stringify(paper.bindOptions.outputEvents, null, 2));
     } else if (target === "hmi-windows") {
-      console.log(get(e, "data.data"));
       set(paper, "bindOptions.windows", get(e, "data.data"));
+      console.log("[HMI2:bindOptions] windows 增量更新 JSON =", JSON.stringify(paper.bindOptions.windows, null, 2));
     }
   };
 });
