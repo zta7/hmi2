@@ -1,9 +1,9 @@
 import * as joint from '@clientio/rappid'
-import iconAc from '../../assets/demoimg/icon-AC_charging_pile.png'
-import iconDc from '../../assets/demoimg/icon-DC_charging_pile.png'
-import iconDataCenter from '../../assets/demoimg/icon-data_center.png'
+import iconAc from '../../assets/demoimg/icon-AC-charging-pile.png'
+import iconDc from '../../assets/demoimg/icon-DC-charging-pile.png'
+import iconDataCenter from '../../assets/demoimg/icon-data-center.png'
 import iconCompressor from '../../assets/demoimg/icon-compressor.png'
-import iconBuilding from '../../assets/demoimg/icon-residential_building.png'
+import iconBuilding from '../../assets/demoimg/icon-residential-building.png'
 
 /**
  * 电气方案新增的 5 个图片型组件：

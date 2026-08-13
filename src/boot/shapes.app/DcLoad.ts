@@ -1,5 +1,5 @@
 import * as joint from '@clientio/rappid'
-import iconDcLoad from '../../assets/demoimg/icon-DC_load.png'
+import iconDcLoad from '../../assets/demoimg/icon-DC-load.png'
 
 /**
  * 电气组件 直流负载（DcLoad）

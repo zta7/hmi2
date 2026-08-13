@@ -1,5 +1,5 @@
 import * as joint from '@clientio/rappid'
-import iconGrid from '../../assets/demoimg/icon-grid_connection_point.png'
+import iconGrid from '../../assets/demoimg/icon-grid-connection-point.png'
 
 /**
  * 电气组件 并网接入点（GridPoint）
