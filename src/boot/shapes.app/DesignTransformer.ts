@@ -47,12 +47,12 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    // 图形区占节点上部约 65%，底部给标签
-    const gfxH = h * 0.65
+    // 图形区高度：底部固定预留 20px 文字区，放大组件时图形与文字间距不随比例变化
+    const gfxH = h - 20
     const cx = w / 2
     const cy = gfxH / 2
 
-    const arcR = Math.min(w * 0.20, gfxH * 0.22, 18)
+    const arcR = Math.min(w * 0.20, gfxH * 0.22)
     const arcGap = arcR * 0.25 // 上下圆弧间距
     const dotR = 1.5 // 绕组中心点半径
 
@@ -147,9 +147,9 @@ export const DesignTransformerView = joint.dia.ElementView.extend({
     if (labelText) {
       const label = document.createElementNS(svgNS, 'text')
       label.setAttribute('x', String(w / 2))
-      label.setAttribute('y', String(h * 0.88))
+      label.setAttribute('y', String(h - 4))
       label.setAttribute('text-anchor', 'middle')
-      label.setAttribute('dominant-baseline', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
       label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
       label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
       label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))

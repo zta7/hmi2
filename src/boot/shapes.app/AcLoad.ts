@@ -58,6 +58,7 @@ export const AcLoadView = joint.dia.ElementView.extend({
     this.el.appendChild(hitRect)
 
     // 设备图片（代替手绘样式）；按组件类型区分：AcLoad2 用「交流负载#2」图标，AcLoad 用 #1
+    // 图片区域高度 = h - 20：底部固定预留文字区，放大组件时图片与文字间距不随比例变化
     const labelText = model.attr('label/text') || 'AC Load'
     const imgHref = model.get('type') === 'app.AcLoad2' ? iconLoad2 : iconLoad1
     const img = document.createElementNS(svgNS, 'image')
@@ -65,7 +66,7 @@ export const AcLoadView = joint.dia.ElementView.extend({
     img.setAttribute('x', '0')
     img.setAttribute('y', '0')
     img.setAttribute('width', String(w))
-    img.setAttribute('height', String(h))
+    img.setAttribute('height', String(h - 20))
     img.setAttribute('preserveAspectRatio', 'xMidYMid meet')
     this.el.appendChild(img)
 

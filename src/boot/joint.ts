@@ -87,6 +87,7 @@ import * as GridPoint from './shapes.app/GridPoint'
 import * as AcLoad from './shapes.app/AcLoad'
 import * as DcLoad from './shapes.app/DcLoad'
 import * as Transformer from './shapes.app/Transformer'
+import * as IconDevices from './shapes.app/IconDevices'
 
 // Pump
 
@@ -182,7 +183,8 @@ export const shapes = {
     ...GridPoint,
     ...AcLoad,
     ...DcLoad,
-    ...Transformer
+    ...Transformer,
+    ...IconDevices
   }
 }
 

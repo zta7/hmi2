@@ -2,14 +2,13 @@ import * as joint from '@clientio/rappid'
 
 /**
  * 电气组件 变压器（Transformer）
- * 还原 demoimg/变压器.png —— 两个圆相切的简化符号：
- *   - 上面两个独立的圆（不同轴心）作为一次 / 二次绕组（IEEE / ANSI 双绕组表示）
- *   - 上 / 下端口圆点 + 引出线
+ * 双绕组变压器简化符号：
+ *   - 上下两个等大圆环（水平居中、垂直排列，共用同一圆心 x 坐标）作为一次 / 二次绕组
  *   - 底部设备名称（默认 "Transformer"）
  *
  * 与 DesignTransformer 区别：
  *   DesignTransformer 用 IEC 60617 双绕组符号（上下两个半圆 + 铁芯竖线）；
- *   本组件用 ANSI / 简化符号（两个独立的相切圆），与 demoimg/变压器.png 完全一致。
+ *   本组件用两个独立圆环的简化符号。
  *
  * 风格与 DesignMotor / DesignTransformer 保持一致
  */
@@ -42,24 +41,20 @@ export const TransformerView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    const gfxH = h * 0.80
+    // 图形区高度：底部固定预留 20px 文字区，放大组件时图形与文字间距不随比例变化
+    const gfxH = h - 20
     const cx = w / 2
-    const cy = gfxH * 0.55
+    const cy = gfxH * 0.72
 
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 1.5
     const windingStroke = model.attr('winding/stroke') || '#4ade80'
     const windingStrokeW = model.attr('winding/strokeWidth') || 2
 
-    // 圆半径 / 偏移：两个圆等大，半径以 gfxH 比例为基准
-    const r = Math.min(gfxH * 0.30, w * 0.32, 28)
-    // 两个圆沿横向错开，左圆偏左 + 右圆偏右
-    const dx = r * 0.85 // 横向偏移量
-    const dy = r * 0.55 // 纵向偏移量（右圆下移，制造"咬合"感）
-    const leftCx = cx - dx
-    const leftCy = cy - dy * 0.5
-    const rightCx = cx + dx
-    const rightCy = cy + dy * 0.5
+    // 两个圆环上下排列、水平居中：下圆顶部与上圆圆心重合
+    const r = Math.min(w * 0.3, gfxH * 0.14)
+    const topCy = cy - r / 2 // 上圆圆心（整体垂直居中）
+    const botCy = topCy + r // 下圆顶部落在上圆圆心处
 
     // ── 透明点击区 ──
     const hitRect = document.createElementNS(svgNS, 'rect')
@@ -71,35 +66,35 @@ export const TransformerView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // ── 左绕组圆（一次） ──
-    const leftCircle = document.createElementNS(svgNS, 'circle')
-    leftCircle.setAttribute('cx', String(leftCx))
-    leftCircle.setAttribute('cy', String(leftCy))
-    leftCircle.setAttribute('r', String(r))
-    leftCircle.setAttribute('fill', 'transparent')
-    leftCircle.setAttribute('stroke', windingStroke)
-    leftCircle.setAttribute('stroke-width', String(windingStrokeW))
-    leftCircle.setAttribute('class', 'xfmr-winding')
-    this.el.appendChild(leftCircle)
+    // ── 上绕组圆环（一次） ──
+    const topCircle = document.createElementNS(svgNS, 'circle')
+    topCircle.setAttribute('cx', String(cx))
+    topCircle.setAttribute('cy', String(topCy))
+    topCircle.setAttribute('r', String(r))
+    topCircle.setAttribute('fill', 'transparent')
+    topCircle.setAttribute('stroke', windingStroke)
+    topCircle.setAttribute('stroke-width', String(windingStrokeW))
+    topCircle.setAttribute('class', 'xfmr-winding')
+    this.el.appendChild(topCircle)
 
-    // ── 右绕组圆（二次） ──
-    const rightCircle = document.createElementNS(svgNS, 'circle')
-    rightCircle.setAttribute('cx', String(rightCx))
-    rightCircle.setAttribute('cy', String(rightCy))
-    rightCircle.setAttribute('r', String(r))
-    rightCircle.setAttribute('fill', 'transparent')
-    rightCircle.setAttribute('stroke', windingStroke)
-    rightCircle.setAttribute('stroke-width', String(windingStrokeW))
-    rightCircle.setAttribute('class', 'xfmr-winding')
-    this.el.appendChild(rightCircle)
+    // ── 下绕组圆环（二次） ──
+    const botCircle = document.createElementNS(svgNS, 'circle')
+    botCircle.setAttribute('cx', String(cx))
+    botCircle.setAttribute('cy', String(botCy))
+    botCircle.setAttribute('r', String(r))
+    botCircle.setAttribute('fill', 'transparent')
+    botCircle.setAttribute('stroke', windingStroke)
+    botCircle.setAttribute('stroke-width', String(windingStrokeW))
+    botCircle.setAttribute('class', 'xfmr-winding')
+    this.el.appendChild(botCircle)
 
     // ── 设备名称 ──
     const labelText = model.attr('label/text') || 'Transformer'
     const label = document.createElementNS(svgNS, 'text')
     label.setAttribute('x', String(w / 2))
-    label.setAttribute('y', String(h * 0.92))
+    label.setAttribute('y', String(h - 4))
     label.setAttribute('text-anchor', 'middle')
-    label.setAttribute('dominant-baseline', 'middle')
+    label.setAttribute('dominant-baseline', 'baseline')
     label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
     label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
     label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))
@@ -114,10 +109,14 @@ export const TransformerView = joint.dia.ElementView.extend({
   updateAttrs() {
     const bodyStroke = this.model.attr('body/stroke') || '#4ade80'
     const windingStroke = this.model.attr('winding/stroke') || '#4ade80'
+    const windingStrokeW = this.model.attr('winding/strokeWidth') || 2
     const lines = this.el.querySelectorAll('.xfmr-line')
     lines.forEach((el: Element) => el.setAttribute('stroke', bodyStroke))
     const windings = this.el.querySelectorAll('.xfmr-winding')
-    windings.forEach((el: Element) => el.setAttribute('stroke', windingStroke))
+    windings.forEach((el: Element) => {
+      el.setAttribute('stroke', windingStroke)
+      el.setAttribute('stroke-width', String(windingStrokeW))
+    })
     // 更新组件名称
     const label = this.el.querySelector('.xfmr-label') as Element | null
     if (label) {

@@ -44,13 +44,13 @@ export const DesignMotorView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    // 图形区占节点上部约 65%，底部给标签
-    const gfxH = h * 0.65
+    // 图形区高度：底部固定预留 20px 文字区，放大组件时图形与文字间距不随比例变化
+    const gfxH = h - 20
     const cx = w / 2
     const cy = gfxH / 2
 
-    // 主体圆半径
-    const bodyR = Math.min(w * 0.30, gfxH * 0.38, 22)
+    // 主体圆半径（去掉固定上限，随组件放大等比缩放）
+    const bodyR = Math.min(w * 0.30, gfxH * 0.38)
 
     const bodyStroke = model.attr('body/stroke') || '#4ade80'
     const bodyStrokeW = model.attr('body/strokeWidth') || 2
@@ -98,9 +98,9 @@ export const DesignMotorView = joint.dia.ElementView.extend({
     if (labelText) {
       const label = document.createElementNS(svgNS, 'text')
       label.setAttribute('x', String(w / 2))
-      label.setAttribute('y', String(h * 0.88))
+      label.setAttribute('y', String(h - 4))
       label.setAttribute('text-anchor', 'middle')
-      label.setAttribute('dominant-baseline', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
       label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
       label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
       label.setAttribute('font-weight', String(model.attr('label/fontWeight') || 'bold'))

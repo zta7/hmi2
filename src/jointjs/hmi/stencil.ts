@@ -406,15 +406,40 @@ export const getStencilLoad = (lang: string) => {
         ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 28"><circle cx="11" cy="14" r="6" fill="#94a3b8" stroke="#1e293b" stroke-width="1"/><rect x="11" y="9.5" width="36" height="9" rx="0.8" fill="#cbd5e1" stroke="#475569" stroke-width="0.8"/><g stroke="#64748b" stroke-width="0.4"><line x1="16" y1="11" x2="16" y2="17"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="24" y1="11" x2="24" y2="17"/><line x1="28" y1="11" x2="28" y2="17"/><line x1="32" y1="11" x2="32" y2="17"/><line x1="36" y1="11" x2="36" y2="17"/><line x1="40" y1="11" x2="40" y2="17"/></g><circle cx="48" cy="14" r="6" fill="#94a3b8" stroke="#1e293b" stroke-width="1"/><text x="29" y="16.5" text-anchor="middle" font-size="7" font-weight="bold" font-family="sans-serif" fill="#1e293b">#2</text></svg>'), l('AcLoad2', '交流负载#2')),
         shape: new app.AcLoad2({ size: { width: 160, height: 110 }, attrs: { label: { text: '交流负载#2' } } })
       },
-      // 变压器：两个相切圆（ANSI 简化符号）
+      // 变压器：上下两个圆环（水平居中）
       {
-        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 36"><circle cx="15" cy="13" r="8" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="25" cy="21" r="8" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="15" cy="1.5" r="1.6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><line x1="15" y1="5" x2="15" y2="3.2" stroke="#4ade80" stroke-width="1.2"/><circle cx="25" cy="33" r="1.6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><line x1="25" y1="29" x2="25" y2="31.4" stroke="#4ade80" stroke-width="1.2"/></svg>'), l('Transformer', '变压器')),
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 36"><circle cx="20" cy="12" r="8" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="20" cy="24" r="8" fill="none" stroke="#4ade80" stroke-width="2"/></svg>'), l('Transformer', '变压器')),
         shape: new app.Transformer({ size: { width: 100, height: 110 }, attrs: { label: { text: 'Transformer' } } })
       },
       // 直流负载：窄高柜 + DC 铭牌 + 中部显示屏
       {
         ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 40"><rect x="10" y="3" width="16" height="3" rx="0.5" fill="#0ea5e9"/><text x="18" y="5.8" text-anchor="middle" font-size="3" font-weight="bold" font-family="sans-serif" fill="#fff">DC</text><rect x="6" y="7" width="24" height="29" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><line x1="18" y1="7" x2="18" y2="36" stroke="#64748b" stroke-width="0.4" stroke-dasharray="1.5,1"/><rect x="13" y="13" width="10" height="4" rx="0.5" fill="#0f172a"/><line x1="14" y1="15" x2="22" y2="15" stroke="#22d3ee" stroke-width="0.6"/><polygon points="18,24 20,28 16,28" fill="#facc15" stroke="#1f2937" stroke-width="0.4"/></svg>'), l('DcLoad', '直流负载')),
         shape: new app.DcLoad({ size: { width: 90, height: 120 }, attrs: { label: { text: 'DC Load' } } })
+      },
+      // 交流充电桩：蓝色桩体 + AC 标识 + 充电线
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><rect x="13" y="8" width="20" height="24" rx="2" fill="#3b82f6" stroke="#1e3a8a" stroke-width="1.2"/><rect x="19" y="3" width="8" height="7" rx="2" fill="#e2e8f0" stroke="#475569" stroke-width="0.8"/><text x="23" y="23" text-anchor="middle" font-size="7" font-weight="bold" font-family="sans-serif" fill="#fff">AC</text><rect x="16" y="15" width="14" height="3" rx="1" fill="#bfdbfe"/><line x1="23" y1="26" x2="23" y2="31" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/></svg>'), l('AcChargingPile', '交流充电桩')),
+        shape: new app.AcChargingPile({ size: { width: 90, height: 130 }, attrs: { label: { text: 'AC Charging' } } })
+      },
+      // 直流充电桩：红色桩体 + DC 标识 + 充电线
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><rect x="13" y="8" width="20" height="24" rx="2" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.2"/><rect x="19" y="3" width="8" height="7" rx="2" fill="#e2e8f0" stroke="#475569" stroke-width="0.8"/><text x="23" y="23" text-anchor="middle" font-size="7" font-weight="bold" font-family="sans-serif" fill="#fff">DC</text><rect x="16" y="15" width="14" height="3" rx="1" fill="#fecaca"/><line x1="23" y1="26" x2="23" y2="31" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/></svg>'), l('DcChargingPile', '直流充电桩')),
+        shape: new app.DcChargingPile({ size: { width: 90, height: 130 }, attrs: { label: { text: 'DC Charging' } } })
+      },
+      // 数据中心：柜体 + 多行机架
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><rect x="8" y="4" width="30" height="28" rx="1" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/><rect x="11" y="8" width="24" height="4.5" fill="#0f172a"/><rect x="11" y="15" width="24" height="4.5" fill="#334155"/><rect x="11" y="22" width="24" height="4.5" fill="#475569"/><rect x="11" y="29" width="24" height="2" fill="#0f172a"/></svg>'), l('DataCenter', '数据中心')),
+        shape: new app.DataCenter({ size: { width: 150, height: 110 }, attrs: { label: { text: 'Data Center' } } })
+      },
+      // 压缩机：圆筒 + 底部支架
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><circle cx="23" cy="16" r="12" fill="#cbd5e1" stroke="#475569" stroke-width="1.2"/><circle cx="23" cy="16" r="5" fill="#94a3b8" stroke="#475569" stroke-width="0.8"/><line x1="11" y1="22" x2="6" y2="28" stroke="#475569" stroke-width="1.6" stroke-linecap="round"/><line x1="35" y1="22" x2="40" y2="28" stroke="#475569" stroke-width="1.6" stroke-linecap="round"/><rect x="8" y="29" width="30" height="2" rx="0.5" fill="#475569"/></svg>'), l('Compressor', '压缩机')),
+        shape: new app.Compressor({ size: { width: 130, height: 110 }, attrs: { label: { text: 'Compressor' } } })
+      },
+      // 居民楼：屋顶 + 窗户 + 门
+      {
+        ...stencilElement('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 36"><polygon points="4,14 23,3 42,14" fill="#f87171" stroke="#7f1d1d" stroke-width="1"/><rect x="7" y="14" width="32" height="18" fill="#e2e8f0" stroke="#64748b" stroke-width="1"/><rect x="11" y="20" width="7" height="6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><rect x="28" y="20" width="7" height="6" fill="#facc15" stroke="#1f2937" stroke-width="0.6"/><rect x="19" y="25" width="8" height="7" fill="#92400e" stroke="#1f2937" stroke-width="0.6"/></svg>'), l('ResidentialBuilding', '居民楼')),
+        shape: new app.ResidentialBuilding({ size: { width: 150, height: 130 }, attrs: { label: { text: 'Building' } } })
       },
       // 母线：水平绿色粗线 + 上方灰色标签
       {

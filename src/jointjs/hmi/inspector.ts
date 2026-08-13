@@ -1319,9 +1319,34 @@ const inspectorMap = (type: string, bindOptions = {}) => {
       },
       groups: inspectorGroups
     }
+  } else if (type === 'app.Transformer') {
+    // 电气变压器：可编辑设备名称 + 圆环颜色/粗细
+    return {
+      inputs: {
+        ...CommonInputs,
+        attrs: {
+          label: {
+            text: inspectorInputs.text
+          },
+          winding: {
+            stroke: {
+              ...inspectorInputs.stroke,
+              defaultValue: '#4ade80'
+            },
+            strokeWidth: {
+              ...inspectorInputs.strokeWidth,
+              defaultValue: 2
+            }
+          }
+        }
+      },
+      groups: inspectorGroups
+    }
   } else if (
     ['app.DesignMotor', 'app.DesignGroup', 'app.AcLoad', 'app.AcLoad2', 'app.DcLoad', 'app.DcAcConverter',
-      'app.EnergyStorage', 'app.GridPoint', 'app.PvPanel', 'app.Transformer'].includes(type)
+      'app.EnergyStorage', 'app.GridPoint', 'app.PvPanel',
+      'app.AcChargingPile', 'app.DcChargingPile', 'app.DataCenter', 'app.Compressor',
+      'app.ResidentialBuilding'].includes(type)
   ) {
     // 电气方案组件：可编辑组件名称
     return {

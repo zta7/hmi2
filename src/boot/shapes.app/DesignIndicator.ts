@@ -42,14 +42,14 @@ export const DesignIndicatorView = joint.dia.ElementView.extend({
 
     this.el.innerHTML = ''
 
-    // 灯体居中偏上（图形区占上部 60%，底部留空间给标签）
-    const gfxH = h * 0.60
+    // 图形区高度：底部固定预留 20px 文字区，放大组件时图形与文字间距不随比例变化
+    const gfxH = h - 20
     const cx = w / 2
     const cy = gfxH * 0.50
 
     // 尺寸按节点宽度等比例计算
-    const outerR = Math.min(w * 0.22, gfxH * 0.35, 18)
-    const lampR = Math.min(w * 0.16, gfxH * 0.25, 12)
+    const outerR = Math.min(w * 0.22, gfxH * 0.35)
+    const lampR = Math.min(w * 0.16, gfxH * 0.25)
     const highlightR = Math.min(lampR * 0.36, 5)
 
     const outerStroke = model.attr('outer/stroke') || '#4ade80'
@@ -104,9 +104,9 @@ export const DesignIndicatorView = joint.dia.ElementView.extend({
     if (labelText) {
       const label = document.createElementNS(svgNS, 'text')
       label.setAttribute('x', String(w / 2))
-      label.setAttribute('y', String(h * 0.85))
+      label.setAttribute('y', String(h - 4))
       label.setAttribute('text-anchor', 'middle')
-      label.setAttribute('dominant-baseline', 'middle')
+      label.setAttribute('dominant-baseline', 'baseline')
       label.setAttribute('fill', model.attr('label/fill') || '#e5e7eb')
       label.setAttribute('font-size', String(model.attr('label/fontSize') || 11))
       label.setAttribute('font-family', 'sans-serif')

@@ -54,13 +54,13 @@ export const PvPanelView = joint.dia.ElementView.extend({
     hitRect.setAttribute('stroke', 'none')
     this.el.appendChild(hitRect)
 
-    // 设备图片（代替手绘样式）
+    // 设备图片（代替手绘样式）；底部固定预留 20px 文字区，放大组件时间距不随比例变化
     const img = document.createElementNS(svgNS, 'image')
     img.setAttribute('href', iconPv)
     img.setAttribute('x', '0')
     img.setAttribute('y', '0')
     img.setAttribute('width', String(w))
-    img.setAttribute('height', String(h))
+    img.setAttribute('height', String(h - 20))
     img.setAttribute('preserveAspectRatio', 'xMidYMid meet')
     this.el.appendChild(img)
 
